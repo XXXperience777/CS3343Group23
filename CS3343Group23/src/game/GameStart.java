@@ -9,7 +9,7 @@ public class GameStart extends Frame {
 	private int count = 0;
 	private int num = 0;
 	private int score = 0;
-	private int bossTime = 5;
+	private int bossTime = 5; //?
 	private int level = 1;
 	private boolean isOver = false;
 	private java.util.Random ran = new Random();
@@ -45,9 +45,29 @@ public class GameStart extends Frame {
 		// TODO - implement GameStart.SetUp
 		throw new UnsupportedOperationException();
 	}
+	
+	public int getPlane() {
+		return this.plane;
+	}
 
 	public int getScore() {
 		return this.score;
+	}
+	
+	public void addScore() {
+		this.score += 1000;
+	}
+	
+	public void levelUp() {
+		this.level ++;
+	}
+	
+	public void clearCount() {
+		this.count=0;
+	}
+	
+	public void addExplodes(int x, int y) {
+		this.explodes.add(new Explode(x + 212, y + 64, gs, true,true));
 	}
 
 	public void initView() {

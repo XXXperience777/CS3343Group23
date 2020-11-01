@@ -1,6 +1,7 @@
 package game;
 
 import java.util.*;
+import java.awt.Color;
 import java.awt.Rectangle;
 
 public class Boss {
@@ -18,6 +19,7 @@ public class Boss {
 	private Collection<BulletBoss> bullets = new ArrayList<BulletBoss>();
 	private fireAbstract fireMode;
 	GameStart gs;
+	GUISetUp ui;
 
 	/**
 	 * 
@@ -40,22 +42,22 @@ public class Boss {
 	public void isHitted() {
 		// TODO - implement Boss.isHitted
 		//get hit by bullet
-				for (int j = 0; j < gs.plane.bullets.size(); j++) {
-					Bullet pBullet = gs.plane.bullets.get(j);
-					if (alive && pBullet.getRectangle().intersects(getRectangle())) {
-						blood -= 10;
-						checkDead();
-						pBullet.alive = false;
-					}
-				}
-				//get hit by player plane
-				for (int j = 0; j < gs.plane.ults.size(); j++) {
-					Ult ult = gs.plane.ults.get(j);
-					if (alive && ult.getRectangle().intersects(getRectangle())) {
-						blood -= 20;
-						checkDead();
-					}
-				}
+		for (int j = 0; j < gs.getPlane().bullets.size(); j++) {
+			Bullet pBullet = gs.getPlane().bullets.get(j);
+			if (alive && pBullet.getRectangle().intersects(getRectangle())) {
+				blood -= 10;
+				checkDead();
+				pBullet.alive = false;
+			}
+		}
+		//get hit by player plane
+		for (int j = 0; j < gs.getPlane().ults.size(); j++) {
+			Ult ult = gs.getPlane().ults.get(j);
+			if (alive && ult.getRectangle().intersects(getRectangle())) {
+				blood -= 20;
+				checkDead();
+			}
+		}
 		//throw new UnsupportedOperationException();
 	}
 
@@ -63,14 +65,15 @@ public class Boss {
 		// TODO - implement Boss.expolde
 		if (blood <= 0 && alive) {
 			alive = false;
-			gs.score += 1000;
-			gs.explodes.add(new Explode(x + 212, y + 64, gs, true,true));
-			gs.count = 0;
-			gs.level++;
+			gs.addScore();
+			gs.addExplodes(x, y);
+			gs.clearCount();
+			gs.levelUp();
 			gs.bossTime+=10; //?
-			gs.plane.count++;
-			if (gs.plane.count>5) {
-				gs.plane.count=5;
+			//need to modify in class plane
+			gs.getPlane().count++;
+			if (gs.getPlane().count>5) {
+				gs.getPlane().count=5;
 			}
 		}
 		//throw new UnsupportedOperationException();
@@ -88,7 +91,7 @@ public class Boss {
 			g.drawRect(x + 117, y - 17, 200, 11);
 			g.setColor(Color.RED);
 			g.fillRect(x + 118, y - 16, blood - 1, 10);
-			g.drawImage(gs.boosImg, x, y, width, height, null);
+			g.drawImage(ui.getbossImg(), x, y, width, height, null);
 			move();
 			if (random.nextInt(100) > 80) {
 				fire();

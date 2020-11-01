@@ -23,6 +23,10 @@ public class GUISetUp {
 	private Image[] foodImgs;
 	private Background bg = new Background(this);
 
+	public Image getbossImg() {
+		return this.bossImg;
+	}
+	
 	public GUISetUp() {
 		// TODO - implement GUISetUp.GUISetUp
 		throw new UnsupportedOperationException();

@@ -1,6 +1,7 @@
 package game;
 
 import java.util.*;
+import java.awt.Rectangle;
 
 public class Boss {
 
@@ -27,17 +28,52 @@ public class Boss {
 	 */
 	public Boss(int x, int y, GameStart gs, boolean alive) {
 		// TODO - implement Boss.Boss
-		throw new UnsupportedOperationException();
+		this.x = x;
+		this.fx = x;
+		this.y = y;
+		this.gs = gs;
+		this.alive = alive;
+		
+		//throw new UnsupportedOperationException();
 	}
 
 	public void isHitted() {
 		// TODO - implement Boss.isHitted
-		throw new UnsupportedOperationException();
+		//get hit by bullet
+				for (int j = 0; j < gs.plane.bullets.size(); j++) {
+					Bullet pBullet = gs.plane.bullets.get(j);
+					if (alive && pBullet.getRectangle().intersects(getRectangle())) {
+						blood -= 10;
+						checkDead();
+						pBullet.alive = false;
+					}
+				}
+				//get hit by player plane
+				for (int j = 0; j < gs.plane.ults.size(); j++) {
+					Ult ult = gs.plane.ults.get(j);
+					if (alive && ult.getRectangle().intersects(getRectangle())) {
+						blood -= 20;
+						checkDead();
+					}
+				}
+		//throw new UnsupportedOperationException();
 	}
 
-	public void expolde() {
+	public void checkDead() {
 		// TODO - implement Boss.expolde
-		throw new UnsupportedOperationException();
+		if (blood <= 0 && alive) {
+			alive = false;
+			gs.score += 1000;
+			gs.explodes.add(new Explode(x + 212, y + 64, gs, true,true));
+			gs.count = 0;
+			gs.level++;
+			gs.bossTime+=10; //?
+			gs.plane.count++;
+			if (gs.plane.count>5) {
+				gs.plane.count=5;
+			}
+		}
+		//throw new UnsupportedOperationException();
 	}
 
 	/**
@@ -46,17 +82,49 @@ public class Boss {
 	 */
 	public void drawMe(java.awt.Graphics g) {
 		// TODO - implement Boss.drawMe
-		throw new UnsupportedOperationException();
+		isHitted();
+		if (alive) {
+			g.setColor(Color.WHITE);
+			g.drawRect(x + 117, y - 17, 200, 11);
+			g.setColor(Color.RED);
+			g.fillRect(x + 118, y - 16, blood - 1, 10);
+			g.drawImage(gs.boosImg, x, y, width, height, null);
+			move();
+			if (random.nextInt(100) > 80) {
+				fire();
+			}
+		}else {
+			blood=200;
+		}
+		System.out.println("boss bullets:" + bullets.size());
+		for (int i = 0; i < bullets.size(); i++) {
+			BulletBoss bulletBoss = bullets.get(i);
+			if (bulletBoss.alive) {
+				bulletBoss.drawMe(g);
+			} else {
+				bullets.remove(i);
+			}
+		}
+		//throw new UnsupportedOperationException();
+	}
+	
+	private void fire() {
+		// TODO Auto-generated method stub
+		bullets.add(new BulletBoss(true, gs, this));
 	}
 
 	private void move() {
 		// TODO - implement Boss.move
-		throw new UnsupportedOperationException();
+		if (x > 400 || x < -200)
+			k = -k;
+		x += 5 * k;
+		//throw new UnsupportedOperationException();
 	}
 
-	public java.awt.Rectangle getRectangle() {
+	public Rectangle getRectangle() {
 		// TODO - implement Boss.getRectangle
-		throw new UnsupportedOperationException();
+		return new Rectangle(x, y, width, height);
+		//throw new UnsupportedOperationException();
 	}
 
 }

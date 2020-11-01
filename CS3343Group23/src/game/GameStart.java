@@ -46,7 +46,7 @@ public class GameStart extends Frame {
 		throw new UnsupportedOperationException();
 	}
 	
-	public int getPlane() {
+	public Plane getPlane() {
 		return this.plane;
 	}
 
@@ -54,20 +54,28 @@ public class GameStart extends Frame {
 		return this.score;
 	}
 	
-	public void addScore() {
-		this.score += 1000;
+	public void addScore(int points) {
+		this.score += points;
 	}
 	
 	public void levelUp() {
 		this.level ++;
 	}
 	
+	public void addCount() {
+		this.count ++;
+	}
+	
 	public void clearCount() {
 		this.count=0;
 	}
 	
-	public void addExplodes(int x, int y) {
-		this.explodes.add(new Explode(x + 212, y + 64, gs, true,true));
+	public Collection<Explode> getExplodes() {
+		return this.explodes;
+	}
+	
+	public Collection<Enemy> getEnemies() {
+		return this.enemies;
 	}
 
 	public void initView() {

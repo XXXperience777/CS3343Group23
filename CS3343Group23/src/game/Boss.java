@@ -12,10 +12,10 @@ public class Boss {
 	private int width = 424;
 	private int height = 128;
 	private boolean alive;
-	private int k = 1;
+	private int k = 1; //move unit
 	private int count = 0;
 	private int blood = 200;
-	private java.util.Random random = new Random();
+	private Random random = new Random();
 	private Collection<BulletBoss> bullets = new ArrayList<BulletBoss>();
 	private fireAbstract fireMode;
 	GameStart gs;
@@ -45,7 +45,16 @@ public class Boss {
 		for (int j = 0; j < gs.getPlane().bullets.size(); j++) {
 			Bullet pBullet = gs.getPlane().bullets.get(j);
 			if (alive && pBullet.getRectangle().intersects(getRectangle())) {
-				blood -= 10;
+				switch (fireMode.getMode())
+				{
+					case 1: 
+						blood -= 10;
+					case 2: 
+						blood -= 20;
+					default:
+						blood -= 10;
+				}
+				
 				checkDead();
 				pBullet.alive = false;
 			}
@@ -54,7 +63,7 @@ public class Boss {
 		for (int j = 0; j < gs.getPlane().ults.size(); j++) {
 			Ult ult = gs.getPlane().ults.get(j);
 			if (alive && ult.getRectangle().intersects(getRectangle())) {
-				blood -= 20;
+				blood -= 50;
 				checkDead();
 			}
 		}
@@ -65,8 +74,8 @@ public class Boss {
 		// TODO - implement Boss.expolde
 		if (blood <= 0 && alive) {
 			alive = false;
-			gs.addScore();
-			gs.addExplodes(x, y);
+			gs.addScore(1000);
+			gs.getExplodes().add(new Explode(x+212, y+64,gs,true,true));
 			gs.clearCount();
 			gs.levelUp();
 			gs.bossTime+=10; //?

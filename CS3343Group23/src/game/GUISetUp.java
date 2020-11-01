@@ -27,6 +27,12 @@ public class GUISetUp {
 		return this.bossImg;
 	}
 	
+	public Image[] getenemyImg() {
+		return this.enemyImgs;
+	}
+	
+	
+	
 	public GUISetUp() {
 		// TODO - implement GUISetUp.GUISetUp
 		throw new UnsupportedOperationException();

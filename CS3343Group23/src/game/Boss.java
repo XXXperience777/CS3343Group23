@@ -56,7 +56,7 @@ public class Boss {
 				}
 				
 				checkDead();
-				pBullet.alive = false;
+				pBullet.getAlive() = false;
 			}
 		}
 		//get hit by player plane

@@ -2,6 +2,9 @@ package game;
 
 import java.awt.*;
 import java.util.*;
+import java.util.List;
+
+import com.game.BulletEm;
 
 public class GameStart extends Frame {
 
@@ -21,6 +24,7 @@ public class GameStart extends Frame {
 	private Collection<Explode> explodes = new ArrayList<Explode>();
 	private Collection<Food> foods = new ArrayList<Food>();
 	private Background bg = newBackground(this);
+	private ArrayList<BulletEm> bulletEms = new ArrayList<BulletEm>();
 
 	public GameStart() {
 		// TODO - implement GameStart.GameStart
@@ -76,6 +80,10 @@ public class GameStart extends Frame {
 	
 	public Collection<Enemy> getEnemies() {
 		return this.enemies;
+	}
+	
+	public ArrayList<BulletEm> getBulletEm() {
+		return this.bulletEms;
 	}
 
 	public void initView() {

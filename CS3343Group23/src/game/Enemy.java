@@ -63,26 +63,26 @@ public class Enemy {
 	public void fire() {
 		// TODO - implement Enemy.fire
 		BulletEm bulletEm=new BulletEm(true, gs, this);
-		gs.bulletEms.add(bulletEm);
+		gs.getBulletEm().add(bulletEm);
 		//throw new UnsupportedOperationException();
 	}
 
 	public void isHitted() {
 		// TODO - implement Enemy.isHitted
-		for (int j = 0; j < gs.plane.bullets.size(); j++) {
-			Bullet pBullet=gs.plane.bullets.get(j);
+		for (int j = 0; j < gs.getPlane().bullets.size(); j++) {
+			Bullet pBullet=gs.getPlane().bullets.get(j);
 			if (pBullet.getRectangle().intersects(getRectangle())) {
 				alive=false;
 				pBullet.alive=false;
 			}
 		}
-		for (int j = 0; j < gs.plane.ults.size(); j++) {
-			Ult ult=gs.plane.ults.get(j);
+		for (int j = 0; j < gs.getPlane().ults.size(); j++) {
+			Ult ult=gs.getPlane().ults.get(j);
 			if (ult.getRectangle().intersects(getRectangle())) {
 				alive=false;
 			}
 		}
-		Plane plane=gs.plane;
+		Plane plane=gs.getPlane();
 		if(plane.alive&&plane.getRectangle().intersects(getRectangle())){
 			alive=false;
 			plane.count--;

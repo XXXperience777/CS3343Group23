@@ -3,8 +3,10 @@ package game;
 import java.awt.*;
 import java.util.*;
 import java.util.List;
+import java.awt.Toolkit;
+import java.util.Random;
+import java.awt.Graphics;
 
-import com.game.BulletEm;
 
 public class GameStart extends Frame {
 
@@ -15,16 +17,18 @@ public class GameStart extends Frame {
 	private int bossTime = 5; //?
 	private int level = 1;
 	private boolean isOver = false;
-	private java.util.Random ran = new Random();
-	private java.awt.Toolkit toolkit = Toolkit.getDefaultToolkit();
+	private Random ran = new Random();
+	private Toolkit toolkit = Toolkit.getDefaultToolkit();
 	private Plane plane = new Plane(250, 500, false, this);
 	private Boss boss = new Boss(30, 50, this, true);
-	private Collection<Enemy> enemies = new ArrayList<Enemy>();
-	private Collection<BulletEm> be = new ArrayList<BulletEm>();
-	private Collection<Explode> explodes = new ArrayList<Explode>();
-	private Collection<Food> foods = new ArrayList<Food>();
+	private ArrayList<Enemy> enemies = new ArrayList<Enemy>();
+	private ArrayList<BulletEm> be = new ArrayList<BulletEm>();
+	private ArrayList<Explode> explodes = new ArrayList<Explode>();
+	private ArrayList<Food> foods = new ArrayList<Food>();
 	private Background bg = newBackground(this);
 	private ArrayList<BulletEm> bulletEms = new ArrayList<BulletEm>();
+	private ArrayList<BulletBoss> bulletBoss = new ArrayList<BulletBoss>();
+	private ArrayList<BulletPlayer> bulletPl = new ArrayList<BulletPlayer>();
 
 	public GameStart() {
 		// TODO - implement GameStart.GameStart
@@ -36,7 +40,7 @@ public class GameStart extends Frame {
 	 * @param g
 	 */
 	@Override
-	public void update(java.awt.Graphics g) {
+	public void update(Graphics g) {
 		// TODO - implement GameStart.update
 		throw new UnsupportedOperationException();
 	}
@@ -74,16 +78,24 @@ public class GameStart extends Frame {
 		this.count=0;
 	}
 	
-	public Collection<Explode> getExplodes() {
+	public ArrayList<Explode> getExplodes() {
 		return this.explodes;
 	}
 	
-	public Collection<Enemy> getEnemies() {
+	public ArrayList<Enemy> getEnemies() {
 		return this.enemies;
 	}
 	
 	public ArrayList<BulletEm> getBulletEm() {
 		return this.bulletEms;
+	}
+	
+	public ArrayList<BulletBoss> getBulletBoss() {
+		return this.bulletBoss;
+	}
+	
+	public ArrayList<BulletPlayer> getBulletPl() {
+		return this.bulletPl;
 	}
 
 	public void initView() {

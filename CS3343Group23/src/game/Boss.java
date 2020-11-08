@@ -3,6 +3,7 @@ package game;
 import java.util.*;
 import java.awt.Color;
 import java.awt.Rectangle;
+import java.awt.Graphics;
 
 public class Boss {
 
@@ -16,10 +17,10 @@ public class Boss {
 	private int count = 0;
 	private int blood = 200;
 	private Random random = new Random();
-	private Collection<BulletBoss> bullets = new ArrayList<BulletBoss>();
 	private fireAbstract fireMode;
-	GameStart gs;
-	GUISetUp ui;
+	private GameStart gs;
+	private GUISetUp ui;
+	private ArrayList<BulletBoss> myBullets=gs.getBulletBoss();
 
 	/**
 	 * 
@@ -38,12 +39,20 @@ public class Boss {
 		
 		//throw new UnsupportedOperationException();
 	}
+	
+	public int getX() {
+		return x;
+	}
+	
+	public int getY() {
+		return y;
+	}
 
 	public void isHitted() {
 		// TODO - implement Boss.isHitted
 		//get hit by bullet
-		for (int j = 0; j < gs.getPlane().bullets.size(); j++) {
-			Bullet pBullet = gs.getPlane().bullets.get(j);
+		for (int j = 0; j < gs.getBulletPl().size(); j++) {
+			BulletPlayer pBullet = gs.getBulletPl().get(j);
 			if (alive && pBullet.getRectangle().intersects(getRectangle())) {
 				switch (fireMode.getMode())
 				{
@@ -92,7 +101,7 @@ public class Boss {
 	 * 
 	 * @param g
 	 */
-	public void drawMe(java.awt.Graphics g) {
+	public void drawMe(Graphics g) {
 		// TODO - implement Boss.drawMe
 		isHitted();
 		if (alive) {
@@ -108,13 +117,13 @@ public class Boss {
 		}else {
 			blood=200;
 		}
-		System.out.println("boss bullets:" + bullets.size());
-		for (int i = 0; i < bullets.size(); i++) {
-			BulletBoss bulletBoss = bullets.get(i);
+		System.out.println("boss bullets:" + myBullets.size());
+		for (int i = 0; i < myBullets.size(); i++) {
+			BulletBoss bulletBoss = myBullets.get(i);
 			if (bulletBoss.alive) {
 				bulletBoss.drawMe(g);
 			} else {
-				bullets.remove(i);
+				myBullets.remove(i);
 			}
 		}
 		//throw new UnsupportedOperationException();
@@ -122,7 +131,9 @@ public class Boss {
 	
 	private void fire() {
 		// TODO Auto-generated method stub
-		bullets.add(new BulletBoss(true, gs, this));
+		//check alive or not?
+		BulletBoss bulletBoss=new BulletBoss(true, gs, this);
+		gs.getBulletBoss().add(bulletBoss);
 	}
 
 	private void move() {

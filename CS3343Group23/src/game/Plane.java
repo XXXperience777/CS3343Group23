@@ -1,31 +1,47 @@
 package game;
 
 import java.util.*;
+import java.awt.Rectangle;
 
 public class Plane {
 
-	int x;
-	int y;
-	int width = 88;
-	int height = 102;
-	boolean alive;
-	boolean isUp;
-	boolean isDown;
-	boolean isLeft;
-	boolean isRight;
-	int blood = 100;
-	int count = 5;
-	boolean isFirst = true;
-	boolean canL;
-	boolean canK;
-	GameStart gs;
-	LifePlane[] lives = new LifePlane[10];
-	public Collection<Bullet> bullets = new ArrayList<Bullet>();
-	public Collection<Ult> ults = new ArrayList<Ult>();
+	private int x;
+	private int y;
+	private int width = 88;
+	private int height = 102;
+	private boolean alive;
+	private boolean isUp;
+	private boolean isDown;
+	private boolean isLeft;
+	private boolean isRight;
+	private int blood = 100;
+	private int count = 5;
+	private boolean isFirst = true;
+	private boolean canL;
+	private boolean canK;
+	private GameStart gs;
+	private LifePlane[] lives = new LifePlane[10];
+	private ArrayList<Ult> ults = new ArrayList<Ult>();
 
 	private Plane() {
 		// TODO - implement Plane.Plane
 		throw new UnsupportedOperationException();
+	}
+	
+	public boolean getAlive() {
+		return alive;
+	}
+	
+	public void setDead() {
+		alive=false;
+	}
+	
+	public int getCount() {
+		return count;
+	}
+	
+	public void minusCount() {
+		count--;
 	}
 
 	/**
@@ -80,7 +96,7 @@ public class Plane {
 		throw new UnsupportedOperationException();
 	}
 
-	public java.awt.Rectangle getRectangle() {
+	public Rectangle getRectangle() {
 		// TODO - implement Plane.getRectangle
 		throw new UnsupportedOperationException();
 	}

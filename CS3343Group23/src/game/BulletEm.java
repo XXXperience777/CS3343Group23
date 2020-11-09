@@ -1,42 +1,74 @@
 package game;
 
-public class BulletEm implements BulletState {
+import java.awt.Graphics;
+import java.awt.Rectangle;
 
+import game.Enemy;
+import game.Explode;
+import game.GameStart;
+import game.Plane;
+
+
+public class BulletEm extends Bullet {
+	
+	private int x;
+	private int y;
+	private int width=3;
+	private int height=4;
+	private boolean alive;
+	private GameStart gs;
 	private Enemy enemy;
+	private Graphics g;
+	
+	public BulletEm(boolean alive,GameStart gs,Enemy enemy) {
+		super();
+		this.y = enemy.y+80;
+		this.x=enemy.x+34;
+		this.alive = alive;
+		this.gs = gs;
+		this.enemy=enemy;
+	}
 
 	/**
 	 * 
 	 * @param g
 	 */
-	public void drawMe(java.awt.Graphics g) {
-		// TODO - implement BulletEm.drawMe
-		throw new UnsupportedOperationException();
+	public void drawMe(Graphics g) {
+		isHitted();
+		if (alive) {
+			g.drawImage(gs.bulletEm1Img, x,y, width, height, null);
+		}
+		move();
 	}
 
-	public void isHitted() {
-		// TODO - implement BulletEm.isHitted
-		throw new UnsupportedOperationException();
+	public void isHitted(){
+		Plane plane=gs.plane;
+		if (plane.alive&&plane.getRectangle().intersects(getRectangle())) {
+			alive=false;
+			plane.count--;
+			plane.canK=false;
+			plane.canL=false;
+			if (plane.count==0) {
+				gs.explodes.add(new Explode(plane.x, plane.y, gs,true));
+				plane.alive=false;
+			}
+			
+		}
 	}
 
-	public void move() {
-		// TODO - implement BulletEm.move
-		throw new UnsupportedOperationException();
+	public void move(){
+		y+=8;
+		if(y>700){
+			alive=false;
+		}
 	}
-
-	public void ult() {
-		// TODO - implement BulletEm.ult
-		throw new UnsupportedOperationException();
-	}
-
-	public java.awt.Rectangle getRectangle() {
-		// TODO - implement BulletEm.getRectangle
-		throw new UnsupportedOperationException();
-	}
-
-	@Override
-	public void traceMove() {
-		// TODO Auto-generated method stub
+	public void ult(){
 		
 	}
+	public Rectangle getRectangle(){
+		return new Rectangle(x, y, width, height);
+	}
+
+	
 
 }

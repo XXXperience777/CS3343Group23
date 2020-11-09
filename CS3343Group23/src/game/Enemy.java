@@ -16,8 +16,8 @@ public class Enemy {
 	private Image enemyImg;
 	private int k = 1;
 	private Random random = new Random();
-	GameStart gs;
-	GUISetUp ui;
+	private GameStart gs;
+	private GUISetUp ui;
 
 	/**
 	 * 
@@ -69,8 +69,8 @@ public class Enemy {
 
 	public void isHitted() {
 		// TODO - implement Enemy.isHitted
-		for (int j = 0; j < gs.getPlane().bullets.size(); j++) {
-			Bullet pBullet=gs.getPlane().bullets.get(j);
+		for (int j = 0; j < gs.getBulletPl().size(); j++) {
+			BulletPlayer pBullet=gs.getBulletPl().get(j);
 			if (pBullet.getRectangle().intersects(getRectangle())) {
 				alive=false;
 				pBullet.alive=false;
@@ -83,11 +83,11 @@ public class Enemy {
 			}
 		}
 		Plane plane=gs.getPlane();
-		if(plane.alive&&plane.getRectangle().intersects(getRectangle())){
+		if(plane.getAlive() && plane.getRectangle().intersects(getRectangle())){
 			alive=false;
-			plane.count--;
-			if (plane.count==0) {
-				plane.alive=false;
+			plane.minusCount();
+			if (plane.getCount()==0) {
+				plane.setDead();
 			}
 			
 		}

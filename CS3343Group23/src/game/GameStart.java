@@ -160,6 +160,14 @@ public class GameStart extends Frame {
 	public ArrayList<BulletEm> getBulletEm() {
 		return this.bulletEms;
 	}
+	
+	public ArrayList<BulletBoss> getBulletBoss() {
+		return this.bulletBoss;
+	}
+	
+	public ArrayList<BulletPlayer> getBulletPl() {
+		return this.bulletPl;
+	}
 
 	public void initView() {
 		bgImg = toolkit.getImage(GameStart.class.getResource("/imgs/bg01.jpg"));
@@ -189,29 +197,29 @@ public class GameStart extends Frame {
 				toolkit.getImage(GameStart.class.getResource("/imgs/5.png")),
 				toolkit.getImage(GameStart.class.getResource("/imgs/21.png")),
 				toolkit.getImage(GameStart.class.getResource("/imgs/15.png")),
-				toolkit.getImage(GameStart.class.getResource("/imgs/µÐ»ú2.png")) };
+				toolkit.getImage(GameStart.class.getResource("/imgs/ï¿½Ð»ï¿½2.png")) };
 		bulletImgs = new Image[] {
-				toolkit.getImage(GameStart.class.getResource("/imgs/×Óµ¯1.png")),
-				toolkit.getImage(GameStart.class.getResource("/imgs/Ì¹¿Ë.png"))
+				toolkit.getImage(GameStart.class.getResource("/imgs/ï¿½Óµï¿½1.png")),
+				toolkit.getImage(GameStart.class.getResource("/imgs/Ì¹ï¿½ï¿½.png"))
 				};
 		bulletEmImg = toolkit.getImage(GameStart.class
-				.getResource("/imgs/µÐ¾ü×Óµ¯.png"));
+				.getResource("/imgs/ï¿½Ð¾ï¿½ï¿½Óµï¿½.png"));
 		bulletEm1Img = toolkit.getImage(GameStart.class
-				.getResource("/imgs/µÐ¾ü×Óµ¯1.png"));
+				.getResource("/imgs/ï¿½Ð¾ï¿½ï¿½Óµï¿½1.png"));
 		boosImg = toolkit.getImage(GameStart.class
 				.getResource("/imgs/BossA.png"));
 		bulletBossImgs = new Image[] {
 				toolkit.getImage(GameStart.class
-						.getResource("/imgs/BOSS×Óµ¯.png")),
-				toolkit.getImage(GameStart.class.getResource("/imgs/×Óµ¯2.png")) };
+						.getResource("/imgs/BOSSï¿½Óµï¿½.png")),
+				toolkit.getImage(GameStart.class.getResource("/imgs/ï¿½Óµï¿½2.png")) };
 		ult = toolkit.getImage(GameStart.class.getResource("/imgs/BKILL.png"));
 		continueImg = toolkit.getImage(GameStart.class
 				.getResource("/imgs/continue.png"));
 		foodImgs = new Image[] {
-				toolkit.getImage(GameStart.class.getResource("/imgs/Ê³Îï1.jpg")),
+				toolkit.getImage(GameStart.class.getResource("/imgs/Ê³ï¿½ï¿½1.jpg")),
 				toolkit.getImage(GameStart.class.getResource("/imgs/22.png")) };
 		lifePlane = toolkit.getImage(GameStart.class
-				.getResource("/imgs/·ÉÖíboss×Óµ¯.png"));
+				.getResource("/imgs/ï¿½ï¿½ï¿½ï¿½bossï¿½Óµï¿½.png"));
 		startImg = toolkit.getImage(GameStart.class
 				.getResource("/imgs/gamebegin1.gif"));
 	}
@@ -276,8 +284,8 @@ public class GameStart extends Frame {
 				g.setColor(Color.RED);
 				g.drawString("WARNNING", 250, 100);
 			}
-			g.drawString("µÚ"+level+"¹Ø", 500, 50);
-			g.drawString("µÃ·Ö£º" + score, 500, 80);
+			g.drawString("ï¿½ï¿½"+level+"ï¿½ï¿½", 500, 50);
+			g.drawString("ï¿½Ã·Ö£ï¿½" + score, 500, 80);
 		}
 		plane.drawMe(g);
 	}

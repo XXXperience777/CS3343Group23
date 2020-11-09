@@ -7,7 +7,7 @@ import java.util.Random;
 
 
 
-public class BulletBoss implements BulletState {
+public class BulletBoss extends Bullet {
 
 	private int x;
 	private int y;

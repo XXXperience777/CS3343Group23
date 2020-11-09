@@ -18,6 +18,7 @@ public class GUISetUp {
 	private Image lifePlaneImg;
 	private Image startImg;
 	private Image[] bulletImgs;
+	private Image[] bulletBossImgs;
 	private Image[] enemyImgs;
 	private Image[] boomImgs;
 	private Image[] foodImgs;
@@ -29,6 +30,14 @@ public class GUISetUp {
 	
 	public Image[] getenemyImg() {
 		return this.enemyImgs;
+	}
+	
+	public Image[] getbulletImgs() {
+		return this.bulletImgs;
+	}
+	
+	public Image[] getbulletBossImgs() {
+		return this.bulletBossImgs;
 	}
 	
 	

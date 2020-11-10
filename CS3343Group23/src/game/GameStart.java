@@ -24,7 +24,7 @@ import com.game.GameStart;
 import com.game.GameStart.MyThread;
 
 
-
+bulletEms
 public class GameStart extends Frame {
 
 	private Background gs;
@@ -41,11 +41,10 @@ public class GameStart extends Frame {
 	private Plane plane = new Plane(250, 500, false, this);
 	private Boss boss = new Boss(30, 50, this, true);
 	private ArrayList<Enemy> enemies = new ArrayList<Enemy>();
-	private ArrayList<BulletEm> be = new ArrayList<BulletEm>();
+	private ArrayList<BulletEm> bulletEms = new ArrayList<BulletEm>();
 	private ArrayList<Explode> explodes = new ArrayList<Explode>();
 	private ArrayList<Food> foods = new ArrayList<Food>();
 	private Background bg = newBackground(this);
-	private ArrayList<BulletEm> bulletEms = new ArrayList<BulletEm>();
 	private Image img, bulletImg,bgImg, planeImg, bulletEmImg, bulletEm1Img, boosImg,
 	ult, continueImg, lifePlane, startImg;
     private Image[]  bulletImgs,enemyImgs, boomImgs, bulletBossImgs, foodImgs;
@@ -284,8 +283,8 @@ public class GameStart extends Frame {
 				g.setColor(Color.RED);
 				g.drawString("WARNNING", 250, 100);
 			}
-			g.drawString("��"+level+"��", 500, 50);
-			g.drawString("�÷֣�" + score, 500, 80);
+			g.drawString("Level："+level, 500, 50);
+			g.drawString("Score:" + score, 500, 80);
 		}
 		plane.drawMe(g);
 	}

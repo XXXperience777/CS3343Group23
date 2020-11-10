@@ -1,5 +1,10 @@
 package game;
 
+import java.awt.Graphics;
+import java.awt.Rectangle;
+
+import game.GameStart;
+
 public class Ult {
 
 	private int x;
@@ -15,27 +20,24 @@ public class Ult {
 	 * @param alive
 	 */
 	public Ult(GameStart gs, boolean alive) {
-		// TODO - implement Ult.Ult
-		throw new UnsupportedOperationException();
+		super();
+		this.x=0;
+		this.y=gs.height;
+		this.gs = gs;
+		this.alive = alive;
 	}
-
-	/**
-	 * 
-	 * @param g
-	 */
-	public void drawMe(java.awt.Graphics g) {
-		// TODO - implement Ult.drawMe
-		throw new UnsupportedOperationException();
+	public void drawMe(Graphics g){
+		if(alive){
+			g.drawImage(gs.ult, x, y, width, height, null);
+		}
+		move();
 	}
-
-	public void move() {
-		// TODO - implement Ult.move
-		throw new UnsupportedOperationException();
+	public void move(){
+		y-=10;
+		if(y<0)alive=false;
 	}
-
-	public java.awt.Rectangle getRectangle() {
-		// TODO - implement Ult.getRectangle
-		throw new UnsupportedOperationException();
+	public Rectangle getRectangle(){
+		return new Rectangle(x, y, width, height);
 	}
 
 }

@@ -1,20 +1,24 @@
 package game;
 
+import java.awt.Graphics;
+import java.awt.Rectangle;
 import java.util.Random;
+
+import game.GameStart;
 
 public class Food {
 
-	int x;
-	int y;
-	int width = 34;
-	int height = 36;
-	boolean alive;
-	int index;
-	int k = 1;
-	int fx1;
-	int fx2;
-	java.util.Random random = new Random();
-	GameStart gs;
+	private int x;
+	private int y;
+	private int width = 34;
+	private int height = 36;
+	private boolean alive;
+	private int index;
+	private int k = 1;
+	private int fx1;
+	private int fx2;
+	private Random random = new Random();
+	private GameStart gs;
 
 	/**
 	 * 
@@ -24,32 +28,42 @@ public class Food {
 	 * @param alive
 	 */
 	public Food(int x, int y, GameStart gs, boolean alive) {
-		// TODO - implement Food.Food
-		throw new UnsupportedOperationException();
+		super();
+		this.x = x;
+		this.y = y;
+		this.fx1=x-100;
+		this.fx2=x+100;
+		this.gs = gs;
+		this.alive = alive;
+		index=random.nextInt(2);
 	}
-
-	/**
-	 * 
-	 * @param g
-	 */
-	public void drawMe(java.awt.Graphics g) {
-		// TODO - implement Food.drawMe
-		throw new UnsupportedOperationException();
+	public void drawMe(Graphics g){
+		
+		g.drawImage(gs.foodImgs[index], x, y, width, height, null);
+		move();
+		isEaten();
 	}
-
 	public void move() {
-		// TODO - implement Food.move
-		throw new UnsupportedOperationException();
+		// TODO Auto-generated method stub
+		if(x<fx1||x>fx2)k=-k;
+		x+=5*k;
+		y+=6;
+		if(y>700){
+			alive=false;
+		}
 	}
-
-	public void isEaten() {
-		// TODO - implement Food.isEaten
-		throw new UnsupportedOperationException();
+	public void isEaten(){
+		if(gs.plane.getRectangle().intersects(getRectangle())){
+			alive=false;
+			if(index==0){
+				gs.plane.canL=true;
+			}else {
+				gs.plane.canK=true;
+			}
+		}
 	}
-
-	public java.awt.Rectangle getRectangle() {
-		// TODO - implement Food.getRectangle
-		throw new UnsupportedOperationException();
+	public Rectangle getRectangle() {
+		return new Rectangle(x, y, width, height);
 	}
 
 }

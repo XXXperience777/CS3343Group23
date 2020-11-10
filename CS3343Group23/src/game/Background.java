@@ -1,34 +1,38 @@
 package game;
 
+import java.awt.Graphics;
+
+import game.GameStart;
+
 public class Background {
 
-	GameStart bg;
+	private GameStart bg;
 	private int x = 0;
 	private int y = 0;
 	private int y1 = 700;
-	GameStart gs;
+	private GameStart gs;
 
 	/**
 	 * 
 	 * @param gs
 	 */
 	public Background(GameStart gs) {
-		// TODO - implement Background.Background
-		throw new UnsupportedOperationException();
+		super();
+		this.gs = gs;
 	}
-
-	/**
-	 * 
-	 * @param g
-	 */
-	public void drawMe(java.awt.Graphics g) {
-		// TODO - implement Background.drawMe
-		throw new UnsupportedOperationException();
+	public void drawMe(Graphics g){
+		g.drawImage(gs.bgImg,x, y, gs.width, gs.height,  null);
+		g.drawImage(gs.bgImg, x, y1, gs.width, gs.height, null);
+		move();
 	}
-
-	public void move() {
-		// TODO - implement Background.move
-		throw new UnsupportedOperationException();
+	public void move(){
+		y+=3;
+		y1+=3;
+		if(y>700){
+			y=y1-700;
+		}else if(y1>700){
+			y1=y-700;
+		}
 	}
 
 }

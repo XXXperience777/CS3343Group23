@@ -14,7 +14,7 @@ public class BulletPlayer extends Bullet {
 	private int height = 8;
 	private boolean alive;
 	private int bType;
-	private double π = Math.PI;
+	private double pi = Math.PI;
 	private java.util.Random ran = new Random();
 	private double delta;
 	private GameStart gs;
@@ -84,32 +84,32 @@ public class BulletPlayer extends Bullet {
 	}
 
 	private void traceMove() {
-		// TODO Auto-generated method stub
+	
 				int eSize = gs.enemies.size();
 				if (eSize > 0) {
 					Enemy enemy = gs.enemies.get(0);
 					double deltax = enemy.x - x;
 					double deltay = enemy.y - y;
 					if (deltax == 0) {
-						if (enemy.y>=y ) // 子弹需要下移
+						if (enemy.y>=y ) 
 							deltax = 0.0000001;
 						else
-							deltax = -0.0000001;// 子弹需要上移
+							deltax = -0.0000001;
 					}
 					if (deltay == 0) {
-						if (enemy.x>=x) // 子弹需要右移
+						if (enemy.x>=x) 
 							deltay = 0.0000001;
 						else
-							deltay = -0.0000001;// 子弹需要左移
+							deltay = -0.0000001;
 					}
 					if( deltax>0 && deltay>0 )
-						delta = Math.atan(fabs(deltay / deltax)); // 第一项限
+						delta = Math.atan(fabs(deltay / deltax)); 
 					else if( deltax<0 && deltay>0 )
-						delta = π - Math.atan(fabs(deltay / deltax)); // 第二项限
+						delta = pi - Math.atan(fabs(deltay / deltax)); 
 					else if( deltax<0 && deltay<0 )  
-						delta = π + Math.atan(fabs(deltay/deltax)); // 第三项限
+						delta = pi + Math.atan(fabs(deltay/deltax)); 
 					else
-						delta = 2*π - Math.atan(fabs(deltay/deltax));
+						delta = 2*pi - Math.atan(fabs(deltay/deltax));
 					System.out.println("delta:"+delta);
 					x += speed * Math.cos(delta);
 					y += speed * Math.sin(delta);

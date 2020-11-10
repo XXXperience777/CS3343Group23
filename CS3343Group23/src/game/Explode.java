@@ -1,5 +1,9 @@
 package game;
 
+import java.awt.Graphics;
+
+import com.game.GameStart;
+
 public class Explode {
 
 	private int x;
@@ -9,7 +13,7 @@ public class Explode {
 	private int index = 0;
 	private boolean alive;
 	private boolean isBoss;
-	GameStart gs;
+	private GameStart gs;
 
 	/**
 	 * 
@@ -18,9 +22,12 @@ public class Explode {
 	 * @param gs
 	 * @param alive
 	 */
-	public Explode(int x, int y, GameStart gs, boolean alive) {
-		// TODO - implement Explode.Explode
-		throw new UnsupportedOperationException();
+	public Explode(int x, int y, GameStart gs,boolean alive) {
+		super();
+		this.x = x;
+		this.y = y;
+		this.gs = gs;
+		this.alive=alive;
 	}
 
 	/**
@@ -32,17 +39,30 @@ public class Explode {
 	 * @param isBoss
 	 */
 	public Explode(int x, int y, GameStart gs, boolean alive, boolean isBoss) {
-		// TODO - implement Explode.Explode
-		throw new UnsupportedOperationException();
+		super();
+		this.x = x;
+		this.y = y;
+		this.gs = gs;
+		this.alive = alive;
+		this.isBoss = isBoss;
 	}
 
 	/**
 	 * 
 	 * @param g
 	 */
-	public void drawMe(java.awt.Graphics g) {
-		// TODO - implement Explode.drawMe
-		throw new UnsupportedOperationException();
+	public void drawMe(Graphics g) {
+		if (index>=10)
+			alive = false;
+		if (isBoss) {
+			g.drawImage(gs.boomImgs[index], x-96, y-96, width*2, height*2, null);
+		}else {
+			g.drawImage(gs.boomImgs[index], x, y, width, height, null);
+		}
+		
+		index++;
+		
+		
 	}
 
 }

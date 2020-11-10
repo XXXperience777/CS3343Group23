@@ -2,9 +2,8 @@ package game;
 
 public class U implements Command {
 
-	public void execute() {
-		// TODO - implement U.execute
-		throw new UnsupportedOperationException();
+	public void execute(Plane plane) {
+		plane.ult();
 	}
 
 }

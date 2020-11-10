@@ -2,6 +2,6 @@ package game;
 
 public interface Command {
 
-	void execute();
+	void execute(Plane plane);
 
 }

@@ -34,21 +34,21 @@ public class Plane {
 	
 	public Plane(int x, int y, boolean alive, GameStart gs) {
 		super();
-		this.x = x;
-		this.y = y;
-		this.alive = alive;
+		this.setX(x);
+		this.setY(y);
+		this.setAlive(alive);
 		this.gs = gs;
 	}
 	public Plane(boolean alive) {
 		super();
-		this.alive = alive;
+		this.setAlive(alive);
 	}
 
 	public void drawMe(Graphics g) {
-		if (alive) {
+		if (isAlive()) {
 			int index=0;
-			System.out.println("count:"+count);
-			for (int i = 0; i < count; i++) {
+			System.out.println("count:"+getCount());
+			for (int i = 0; i < getCount(); i++) {
 				lives[i]=new LifePlane(index, 40, gs, true);
 				index+=30;
 			}
@@ -59,21 +59,21 @@ public class Plane {
 				g.drawImage(gs.foodImgs[0], 60, 620, 29, 26, null);
 			}
 			if (canK&&canL) {
-				g.drawString("����׼������", 20, 600);
+				g.drawString("U", 20, 600);
 			}
-			g.drawImage(gs.planeImg, x, y, width, height, null);
+			g.drawImage(gs.planeImg, getX(), getY(), width, height, null);
 		}else {
-			if(isFirst){
+			if(isFirst()){
 				g.drawImage(gs.startImg, 0, 0, 600, 700, null);
 				return;
 			}
 			g.drawImage(gs.continueImg, 150,250, 300, 200, null);
 		}
 		
-		System.out.println("ǰ��" + bullets.size());
+		//System.out.println("size:" + bullets.size());
 		for (int i = 0; i < bullets.size(); i++) {
 			Bullet bullet = bullets.get(i);
-			if (bullet.alive&&alive) {
+			if (bullet.alive&&isAlive()) {
 				bullet.drawMe(g);
 			} else {
 				bullets.remove(i);
@@ -88,9 +88,9 @@ public class Plane {
 				ults.remove(i);
 			}
 		}
-		for (int i = 0; i < count; i++) {
+		for (int i = 0; i < getCount(); i++) {
 			LifePlane life=lives[i];
-			if (alive) {
+			if (isAlive()) {
 				life.drawMe(g);
 			}
 		}
@@ -99,7 +99,7 @@ public class Plane {
 
 	public void keyPressed(KeyEvent e) {
 	
-		if (alive) {
+		if (isAlive()) {
 			switch (e.getKeyCode()) {
 			case KeyEvent.VK_W:
 				isUp = true;
@@ -108,27 +108,27 @@ public class Plane {
 				isDown = true;
 				break;
 			case KeyEvent.VK_A:
-				isLeft = true;
+				setLeft(true);
 				break;
 			case KeyEvent.VK_D:
-				isRight = true;
+				setRight(true);
 				break;
 			case KeyEvent.VK_J:
-				if (alive)
+				if (isAlive())
 					fire();
 				break;
 			case KeyEvent.VK_U:
-				if(alive&&canK&&canL){
+				if(isAlive()&&canK&&canL){
 					ult();
 				}
 				break;
 			case KeyEvent.VK_L:
-				if (alive&&canL) {
+				if (isAlive()&&canL) {
 					grapeShot();
 				}
 				break;
 			case KeyEvent.VK_K:
-				if (alive&&canK) {
+				if (isAlive()&&canK) {
 					traceShot();
 				}
 			}
@@ -137,25 +137,26 @@ public class Plane {
 
 
 	}
-	private void traceShot() {
-		
-		bullets.add(new BulletPlayer(x+44, y-20, true, gs,4) );
-	}
-	private void grapeShot() {
 	
-		bullets.add(new BulletPlayer(x+22, y-20, true, gs, 1) );
-		bullets.add(new BulletPlayer(x+12, y-20, true, gs, 1) );
-		bullets.add(new BulletPlayer(x+40, y-20, true, gs, 2));
-		bullets.add(new BulletPlayer(x+50, y-20, true, gs, 2));
-		bullets.add(new BulletPlayer(x+66, y-20, true, gs, 3));
-		bullets.add(new BulletPlayer(x+76, y-20, true, gs, 3));
+	public void traceShot() {
+		
+		bullets.add(new BulletPlayer(getX()+44, getY()-20, true, gs,4) );
 	}
-	private void ult() {
-		// TODO Auto-generated method stub
+	public void grapeShot() {
+	
+		bullets.add(new BulletPlayer(getX()+22, getY()-20, true, gs, 1) );
+		bullets.add(new BulletPlayer(getX()+12, getY()-20, true, gs, 1) );
+		bullets.add(new BulletPlayer(getX()+40, getY()-20, true, gs, 2));
+		bullets.add(new BulletPlayer(getX()+50, getY()-20, true, gs, 2));
+		bullets.add(new BulletPlayer(getX()+66, getY()-20, true, gs, 3));
+		bullets.add(new BulletPlayer(getX()+76, getY()-20, true, gs, 3));
+	}
+	public  void ult() {
+		
 		ults.add(new Ult(gs, true));
 		canL=canK=false;
 	}
-	private void fire() {
+	public void fire() {
 	
 		bullets.add(new BulletPlayer(true, gs));
 	}
@@ -172,76 +173,118 @@ public class Plane {
 
 			break;
 		case KeyEvent.VK_A:
-			isLeft = false;
+			setLeft(false);
 			break;
 		case KeyEvent.VK_D:
-			isRight = false;
+			setRight(false);
 			break;
 		}
 	}
 
 	public void move() {
-		if (isUp && !isDown && !isLeft && !isRight) {
-			y -= 8;
-			if (y < 25) {
-				y = 25;
+		if (isUp && !isDown && !isLeft() && !isRight()) {
+			setY(getY() - 8);
+			if (getY() < 25) {
+				setY(25);
 			}
-		} else if (!isUp && isDown && !isLeft && !isRight) {
-			y += 8;
-			if (y > 600) {
-				y = 600;
+		} else if (!isUp && isDown && !isLeft() && !isRight()) {
+			setY(getY() + 8);
+			if (getY() > 600) {
+				setY(600);
 			}
-		} else if (!isUp && !isDown && isLeft && !isRight) {
-			x -= 5;
-			if (x < 0) {
-				x = 0;
+		} else if (!isUp && !isDown && isLeft() && !isRight()) {
+			setX(getX() - 5);
+			if (getX() < 0) {
+				setX(0);
 			}
-		} else if (!isUp && !isDown && !isLeft && isRight) {
-			x += 8;
-			if (x > 512) {
-				x = 512;
+		} else if (!isUp && !isDown && !isLeft() && isRight()) {
+			setX(getX() + 8);
+			if (getX() > 512) {
+				setX(512);
 			}
-		} else if (isUp && !isDown && isLeft && !isRight) {
-			x -= 5;
-			y -= 8;
-			if (x < 0) {
-				x = 0;
+		} else if (isUp && !isDown && isLeft() && !isRight()) {
+			setX(getX() - 5);
+			setY(getY() - 8);
+			if (getX() < 0) {
+				setX(0);
 			}
-			if (y < 25) {
-				y = 25;
+			if (getY() < 25) {
+				setY(25);
 			}
-		} else if (isUp && !isDown && !isLeft && isRight) {
-			x += 5;
-			y -= 5;
-			if (x > 512) {
-				x = 512;
+		} else if (isUp && !isDown && !isLeft() && isRight()) {
+			setX(getX() + 5);
+			setY(getY() - 5);
+			if (getX() > 512) {
+				setX(512);
 			}
-			if (y < 25) {
-				y = 25;
+			if (getY() < 25) {
+				setY(25);
 			}
-		} else if (!isUp && isDown && isLeft && !isRight) {
-			x -= 5;
-			y += 8;
-			if (x < 0) {
-				x = 0;
+		} else if (!isUp && isDown && isLeft() && !isRight()) {
+			setX(getX() - 5);
+			setY(getY() + 8);
+			if (getX() < 0) {
+				setX(0);
 			}
-			if (y > 600) {
-				y = 600;
+			if (getY() > 600) {
+				setY(600);
 			}
-		} else if (!isUp && isDown && !isLeft && isRight) {
-			x += 5;
-			y += 8;
-			if (x > 512) {
-				x = 512;
+		} else if (!isUp && isDown && !isLeft() && isRight()) {
+			setX(getX() + 5);
+			setY(getY() + 8);
+			if (getX() > 512) {
+				setX(512);
 			}
-			if (y > 600) {
-				y = 600;
+			if (getY() > 600) {
+				setY(600);
 			}
 		}
 	}
 
 	public Rectangle getRectangle() {
-		return new Rectangle(x, y, width, height);
+		return new Rectangle(getX(), getY(), width, height);
+	}
+	public boolean isAlive() {
+		return alive;
+	}
+	public void setAlive(boolean alive) {
+		this.alive = alive;
+	}
+	public boolean isFirst() {
+		return isFirst;
+	}
+	public void setFirst(boolean isFirst) {
+		this.isFirst = isFirst;
+	}
+	public int getCount() {
+		return count;
+	}
+	public void setCount(int count) {
+		this.count = count;
+	}
+	public int getX() {
+		return x;
+	}
+	public void setX(int x) {
+		this.x = x;
+	}
+	public int getY() {
+		return y;
+	}
+	public void setY(int y) {
+		this.y = y;
+	}
+	public boolean isLeft() {
+		return isLeft;
+	}
+	public void setLeft(boolean isLeft) {
+		this.isLeft = isLeft;
+	}
+	public boolean isRight() {
+		return isRight;
+	}
+	public void setRight(boolean isRight) {
+		this.isRight = isRight;
 	}
 
 }

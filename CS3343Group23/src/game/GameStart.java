@@ -16,15 +16,15 @@ import java.util.Random;
 
 import javax.swing.JOptionPane;
 
-import com.game.BulletEm;
-import com.game.Enemy;
-import com.game.Explode;
-import com.game.Food;
-import com.game.GameStart;
-import com.game.GameStart.MyThread;
+import game.BulletEm;
+import game.Enemy;
+import game.Explode;
+import game.Food;
+import game.GameStart;
+import game.GameStart.MyThread;
 
 
-bulletEms
+
 public class GameStart extends Frame {
 
 	private Background gs;
@@ -44,7 +44,7 @@ public class GameStart extends Frame {
 	private ArrayList<BulletEm> bulletEms = new ArrayList<BulletEm>();
 	private ArrayList<Explode> explodes = new ArrayList<Explode>();
 	private ArrayList<Food> foods = new ArrayList<Food>();
-	private Background bg = newBackground(this);
+	private Background bg = new Background(this);
 	private Image img, bulletImg,bgImg, planeImg, bulletEmImg, bulletEm1Img, boosImg,
 	ult, continueImg, lifePlane, startImg;
     private Image[]  bulletImgs,enemyImgs, boomImgs, bulletBossImgs, foodImgs;
@@ -72,15 +72,15 @@ public class GameStart extends Frame {
 			{
 		
 				plane.keyPressed(e);
-				if (!plane.alive && e.getKeyCode() == KeyEvent.VK_ENTER) 
+				if (!plane.isAlive()&& e.getKeyCode() == KeyEvent.VK_ENTER) 
 				{
-					plane.alive = true;
-					plane.isFirst = false;
-					plane.count = 5;
-					plane.x = 250;
-					plane.y = 500;
+					plane.setAlive(true);
+					plane.setFirst(false);
+					plane.setCount(5);
+					plane.setX(250);
+					plane.setY(500);
 				}
-				if (!plane.alive &&e.getKeyCode()==KeyEvent.VK_ESCAPE) 
+				if (!plane.isAlive() &&e.getKeyCode()==KeyEvent.VK_ESCAPE) 
 				{
 					int n = JOptionPane.showConfirmDialog(null, "Exit Game?", "Plane War",JOptionPane.YES_NO_OPTION);
 					System.out.println("n:"+n);
@@ -170,10 +170,10 @@ public class GameStart extends Frame {
 
 	public void initView() {
 		bgImg = toolkit.getImage(GameStart.class.getResource("/imgs/bg01.jpg"));
-		if (plane.isLeft) {
+		if (plane.isLeft()) {
 			planeImg = toolkit.getImage(GameStart.class
 					.getResource("/imgs/51.png"));
-		} else if (plane.isRight) {
+		} else if (plane.isRight()) {
 			planeImg = toolkit.getImage(GameStart.class
 					.getResource("/imgs/61.png"));
 		} else {
@@ -230,7 +230,8 @@ public class GameStart extends Frame {
 	@Override
 	public void paint(Graphics g) {
 		// TODO - implement GameStart.paint
-		throw new UnsupportedOperationException();if (!plane.isFirst) {
+		throw new UnsupportedOperationException();
+		if (!plane.isFirst()) {
 			bg.drawMe(g);
 			System.out.println(count);
 			if (ran.nextInt(100) > 97) {
@@ -243,7 +244,7 @@ public class GameStart extends Frame {
 			}
 			for (int i = 0; i < enemies.size(); i++) {
 				Enemy enemy = enemies.get(i);
-				if (enemy.alive) {
+				if (enemy.isAlive()) {
 					enemy.drawMe(g);
 				} else {
 					enemies.remove(i);

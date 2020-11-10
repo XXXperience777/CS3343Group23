@@ -39,14 +39,14 @@ public class BulletBoss extends Bullet {
 				height=width=34;
 				g.drawImage(gs.bulletBossImgs[1], fx, y, width, height, null);
 				y += 8;
-				if (plane.alive&&plane.getRectangle().intersects(getRectangle(fx,y,34,34))) {
+				if (plane.isAlive()&&plane.getRectangle().intersects(getRectangle(fx,y,34,34))) {
 					alive = false;
-					plane.count--;
-					System.out.println("plane count:"+plane.count);
+					plane.setCount(plane.getCount() - 1);
+					System.out.println("plane count:"+plane.getCount());
 					plane.canK=false;
-					if (plane.count==0) {
-						gs.explodes.add(new Explode(plane.x, plane.y, gs, true));
-						plane.alive = false;
+					if (plane.getCount()==0) {
+						gs.explodes.add(new Explode(plane.getX(), plane.getY(), gs, true));
+						plane.setAlive(false);
 					}
 				}
 			}else if(index<=3){
@@ -55,14 +55,14 @@ public class BulletBoss extends Bullet {
 				fx=x+400;
 				g.drawImage(gs.bulletBossImgs[0], x+400, y+100, height, width, null);
 				move();
-				if (plane.alive&&plane.getRectangle().intersects(getRectangle(fx,y+100,15,13))) {
+				if (plane.isAlive()&&plane.getRectangle().intersects(getRectangle(fx,y+100,15,13))) {
 					alive = false;
-					plane.count--;
-					System.out.println("plane count:"+plane.count);
+					plane.setCount(plane.getCount() - 1);
+					System.out.println("plane count:"+plane.getCount());
 					plane.canL=false;
-					if (plane.count==0) {
-						gs.explodes.add(new Explode(plane.x, plane.y, gs, true));
-						plane.alive = false;
+					if (plane.getCount()==0) {
+						gs.explodes.add(new Explode(plane.getX(), plane.getY(), gs, true));
+						plane.setAlive(false);
 					}
 				}
 			}

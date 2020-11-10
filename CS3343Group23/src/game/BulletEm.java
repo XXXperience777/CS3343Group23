@@ -43,14 +43,14 @@ public class BulletEm extends Bullet {
 
 	public void isHitted(){
 		Plane plane=gs.plane;
-		if (plane.alive&&plane.getRectangle().intersects(getRectangle())) {
+		if (plane.isAlive()&&plane.getRectangle().intersects(getRectangle())) {
 			alive=false;
-			plane.count--;
+			plane.setCount(plane.getCount() - 1);
 			plane.canK=false;
 			plane.canL=false;
-			if (plane.count==0) {
-				gs.explodes.add(new Explode(plane.x, plane.y, gs,true));
-				plane.alive=false;
+			if (plane.getCount()==0) {
+				gs.explodes.add(new Explode(plane.getX(), plane.getY(), gs,true));
+				plane.setAlive(false);
 			}
 			
 		}

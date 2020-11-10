@@ -31,7 +31,7 @@ public class Enemy {
 		this.x = x;
 		this.y = y;
 		this.fx=x;
-		this.alive = alive;
+		this.setAlive(alive);
 		this.gs = gs;
 		this.enemyImg=ui.getenemyImg()[random.nextInt(4)];
 		//throw new UnsupportedOperationException();
@@ -44,7 +44,7 @@ public class Enemy {
 	public void drawMe(java.awt.Graphics g) {
 		// TODO - implement Enemy.drawMe
 		isHitted();
-		if(alive){
+		if(isAlive()){
 			g.drawImage(enemyImg, x, y, width, height, null);
 		}else {
 			gs.getExplodes().add(new Explode(x, y, gs,true));
@@ -72,19 +72,19 @@ public class Enemy {
 		for (int j = 0; j < gs.getBulletPl().size(); j++) {
 			BulletPlayer pBullet=gs.getBulletPl().get(j);
 			if (pBullet.getRectangle().intersects(getRectangle())) {
-				alive=false;
+				setAlive(false);
 				pBullet.alive=false;
 			}
 		}
 		for (int j = 0; j < gs.getPlane().ults.size(); j++) {
 			Ult ult=gs.getPlane().ults.get(j);
 			if (ult.getRectangle().intersects(getRectangle())) {
-				alive=false;
+				setAlive(false);
 			}
 		}
 		Plane plane=gs.getPlane();
 		if(plane.getAlive() && plane.getRectangle().intersects(getRectangle())){
-			alive=false;
+			setAlive(false);
 			plane.minusCount();
 			if (plane.getCount()==0) {
 				plane.setDead();
@@ -109,8 +109,16 @@ public class Enemy {
 			x+=3;
 		}
 		y+=5;
-		if(y>700)alive=false;
+		if(y>700)setAlive(false);
 		//throw new UnsupportedOperationException();
+	}
+
+	public boolean isAlive() {
+		return alive;
+	}
+
+	public void setAlive(boolean alive) {
+		this.alive = alive;
 	}
 
 }

@@ -37,7 +37,7 @@ public class Boss {
 		this.gs = gs;
 		this.alive = alive;
 		
-		//throw new UnsupportedOperationException();
+	
 	}
 	
 	public int getX() {
@@ -49,8 +49,7 @@ public class Boss {
 	}
 
 	public void isHitted() {
-		// TODO - implement Boss.isHitted
-		//get hit by bullet
+		
 		for (int j = 0; j < gs.getBulletPl().size(); j++) {
 			BulletPlayer pBullet = gs.getBulletPl().get(j);
 			if (alive && pBullet.getRectangle().intersects(getRectangle())) {
@@ -76,25 +75,25 @@ public class Boss {
 				checkDead();
 			}
 		}
-		//throw new UnsupportedOperationException();
+		
 	}
 
 	public void checkDead() {
-		// TODO - implement Boss.expolde
+	
 		if (blood <= 0 && alive) {
 			alive = false;
 			gs.addScore(1000);
 			gs.getExplodes().add(new Explode(x+212, y+64,gs,true,true));
 			gs.clearCount();
 			gs.levelUp();
-			gs.bossTime+=10; //?
+			gs.bossTime+=10; 
 			//need to modify in class plane
-			gs.getPlane().count++;
-			if (gs.getPlane().count>5) {
-				gs.getPlane().count=5;
+			gs.getPlane().setCount(gs.getPlane().getCount() + 1);
+			if (gs.getPlane().getCount()>5) {
+				gs.getPlane().setCount(5);
 			}
 		}
-		//throw new UnsupportedOperationException();
+		
 	}
 
 	/**
@@ -102,7 +101,7 @@ public class Boss {
 	 * @param g
 	 */
 	public void drawMe(Graphics g) {
-		// TODO - implement Boss.drawMe
+	
 		isHitted();
 		if (alive) {
 			g.setColor(Color.WHITE);
@@ -126,28 +125,28 @@ public class Boss {
 				myBullets.remove(i);
 			}
 		}
-		//throw new UnsupportedOperationException();
+		
 	}
 	
 	private void fire() {
-		// TODO Auto-generated method stub
+	
 		//check alive or not?
 		BulletBoss bulletBoss=new BulletBoss(true, gs, this);
 		gs.getBulletBoss().add(bulletBoss);
 	}
 
 	private void move() {
-		// TODO - implement Boss.move
+	
 		if (x > 400 || x < -200)
 			k = -k;
 		x += 5 * k;
-		//throw new UnsupportedOperationException();
+
 	}
 
 	public Rectangle getRectangle() {
-		// TODO - implement Boss.getRectangle
+	
 		return new Rectangle(x, y, width, height);
-		//throw new UnsupportedOperationException();
+	
 	}
 
 }

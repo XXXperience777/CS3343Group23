@@ -180,48 +180,60 @@ public class GameStart extends Frame {
 			planeImg = toolkit.getImage(GameStart.class
 					.getResource("/imgs/7.png"));
 		}
-		boomImgs = new Image[] {
-				toolkit.getImage(GameStart.class.getResource("/imgs/b1.gif")),
-				toolkit.getImage(GameStart.class.getResource("/imgs/b2.gif")),
-				toolkit.getImage(GameStart.class.getResource("/imgs/b3.gif")),
-				toolkit.getImage(GameStart.class.getResource("/imgs/b4.gif")),
-				toolkit.getImage(GameStart.class.getResource("/imgs/b5.gif")),
-				toolkit.getImage(GameStart.class.getResource("/imgs/b6.gif")),
-				toolkit.getImage(GameStart.class.getResource("/imgs/b7.gif")),
-				toolkit.getImage(GameStart.class.getResource("/imgs/b8.gif")),
-				toolkit.getImage(GameStart.class.getResource("/imgs/b9.gif")),
-				toolkit.getImage(GameStart.class.getResource("/imgs/b10.gif")),
-				toolkit.getImage(GameStart.class.getResource("/imgs/b11.gif")) };
-		enemyImgs = new Image[] {
-				toolkit.getImage(GameStart.class.getResource("/imgs/5.png")),
-				toolkit.getImage(GameStart.class.getResource("/imgs/21.png")),
-				toolkit.getImage(GameStart.class.getResource("/imgs/15.png")),
-				toolkit.getImage(GameStart.class.getResource("/imgs/�л�2.png")) };
-		bulletImgs = new Image[] {
-				toolkit.getImage(GameStart.class.getResource("/imgs/�ӵ�1.png")),
-				toolkit.getImage(GameStart.class.getResource("/imgs/̹��.png"))
-				};
-		bulletEmImg = toolkit.getImage(GameStart.class
-				.getResource("/imgs/�о��ӵ�.png"));
-		bulletEm1Img = toolkit.getImage(GameStart.class
-				.getResource("/imgs/�о��ӵ�1.png"));
-		boosImg = toolkit.getImage(GameStart.class
-				.getResource("/imgs/BossA.png"));
-		bulletBossImgs = new Image[] {
-				toolkit.getImage(GameStart.class
-						.getResource("/imgs/BOSS�ӵ�.png")),
-				toolkit.getImage(GameStart.class.getResource("/imgs/�ӵ�2.png")) };
-		ult = toolkit.getImage(GameStart.class.getResource("/imgs/BKILL.png"));
-		continueImg = toolkit.getImage(GameStart.class
-				.getResource("/imgs/continue.png"));
-		foodImgs = new Image[] {
-				toolkit.getImage(GameStart.class.getResource("/imgs/ʳ��1.jpg")),
-				toolkit.getImage(GameStart.class.getResource("/imgs/22.png")) };
-		lifePlane = toolkit.getImage(GameStart.class
-				.getResource("/imgs/����boss�ӵ�.png"));
-		startImg = toolkit.getImage(GameStart.class
-				.getResource("/imgs/gamebegin1.gif"));
-	}
+		public void initView() {
+			bgImg = toolkit.getImage(GameStart.class.getResource("/imgs/bg1.jpg"));
+			if (plane.isLeft) {
+				planeImg = toolkit.getImage(GameStart.class
+						.getResource("/imgs/7.png"));
+			} else if (plane.isRight) {
+				planeImg = toolkit.getImage(GameStart.class
+						.getResource("/imgs/7.png"));
+			} else {
+				planeImg = toolkit.getImage(GameStart.class
+						.getResource("/imgs/7.png"));
+			}
+			boomImgs = new Image[] {
+					toolkit.getImage(GameStart.class.getResource("/imgs/b1.gif")),
+					toolkit.getImage(GameStart.class.getResource("/imgs/b2.gif")),
+					toolkit.getImage(GameStart.class.getResource("/imgs/b3.gif")),
+					toolkit.getImage(GameStart.class.getResource("/imgs/b4.gif")),
+					toolkit.getImage(GameStart.class.getResource("/imgs/b5.gif")),
+					toolkit.getImage(GameStart.class.getResource("/imgs/b6.gif")),
+					toolkit.getImage(GameStart.class.getResource("/imgs/b7.gif")),
+					toolkit.getImage(GameStart.class.getResource("/imgs/b8.gif")),
+					toolkit.getImage(GameStart.class.getResource("/imgs/b9.gif")),
+					toolkit.getImage(GameStart.class.getResource("/imgs/b10.gif")),
+					toolkit.getImage(GameStart.class.getResource("/imgs/b11.gif")) };
+			enemyImgs = new Image[] {
+					toolkit.getImage(GameStart.class.getResource("/imgs/enemy1.png")),
+					toolkit.getImage(GameStart.class.getResource("/imgs/enemy2.png")),
+					toolkit.getImage(GameStart.class.getResource("/imgs/enemy3.png")),
+					toolkit.getImage(GameStart.class.getResource("/imgs/enemy4.png")) };
+			bulletImgs = new Image[] {
+					toolkit.getImage(GameStart.class.getResource("/imgs/bullet_p.png")),
+					toolkit.getImage(GameStart.class.getResource("/imgs/坦克.png"))
+					};
+			bulletEmImg = toolkit.getImage(GameStart.class
+					.getResource("/imgs/敌军子弹.png"));
+			bulletEm1Img = toolkit.getImage(GameStart.class
+					.getResource("/imgs/敌军子弹1.png"));
+			boosImg = toolkit.getImage(GameStart.class
+					.getResource("/imgs/sel_boss0.png"));
+			bulletBossImgs = new Image[] {
+					toolkit.getImage(GameStart.class
+							.getResource("/imgs/BOSS子弹.png")),
+					toolkit.getImage(GameStart.class.getResource("/imgs/子弹2.png")) };
+			ult = toolkit.getImage(GameStart.class.getResource("/imgs/BKILL.png"));
+			continueImg = toolkit.getImage(GameStart.class
+					.getResource("/imgs/continue.png"));
+			foodImgs = new Image[] {
+					toolkit.getImage(GameStart.class.getResource("/imgs/食物1.jpg")),
+					toolkit.getImage(GameStart.class.getResource("/imgs/22.png")) };
+			lifePlane = toolkit.getImage(GameStart.class
+					.getResource("/imgs/life.png"));
+			startImg = toolkit.getImage(GameStart.class
+					.getResource("/imgs/gamebegin1.gif"));
+		}
 
 	/**
 	 * 
@@ -284,7 +296,7 @@ public class GameStart extends Frame {
 				g.setColor(Color.RED);
 				g.drawString("WARNNING", 250, 100);
 			}
-			g.drawString("Level："+level, 500, 50);
+			g.drawString("Level锛�"+level, 500, 50);
 			g.drawString("Score:" + score, 500, 80);
 		}
 		plane.drawMe(g);

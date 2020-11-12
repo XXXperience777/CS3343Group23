@@ -73,7 +73,7 @@ public class Enemy {
 			BulletPlayer pBullet=gs.getBulletPl().get(j);
 			if (pBullet.getRectangle().intersects(getRectangle())) {
 				setAlive(false);
-				pBullet.alive=false;
+				pBullet.setAlive(false);
 			}
 		}
 		for (int j = 0; j < gs.getPlane().ults.size(); j++) {

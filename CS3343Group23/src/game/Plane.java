@@ -30,7 +30,7 @@ public class Plane {
 	private GameStart gs;
 	private LifePlane[] lives = new LifePlane[10];
 	private ArrayList<Ult> ults = new ArrayList<Ult>();
-	private List<Bullet> bullets = new ArrayList<Bullet>();
+	private List<BulletPlayer> bullets = new ArrayList<BulletPlayer>();
 	private Command a=new A();
 	private Command w=new W();
 	private Command s=new S();
@@ -81,8 +81,8 @@ public class Plane {
 		
 		//System.out.println("size:" + bullets.size());
 		for (int i = 0; i < bullets.size(); i++) {
-			Bullet bullet = bullets.get(i);
-			if (bullet.alive&&isAlive()) {
+			BulletPlayer bullet = bullets.get(i);
+			if (bullet.isAlive()&&isAlive()) {
 				bullet.drawMe(g);
 			} else {
 				bullets.remove(i);
@@ -91,7 +91,7 @@ public class Plane {
 		for (int i = 0; i < ults.size(); i++) {
 			Ult ult=ults.get(i);
 
-			if (ult.alive) {
+			if (ult.isAlive()) {
 				ult.drawMe(g);
 			} else {
 				ults.remove(i);
@@ -111,16 +111,16 @@ public class Plane {
 		if (isAlive()) {
 			switch (e.getKeyCode()) {
 			case KeyEvent.VK_W:
-				isUp = true;
+				this.w.pressKey(this);
 				break;
 			case KeyEvent.VK_S:
-				isDown = true;
+				this.s.pressKey(this);
 				break;
 			case KeyEvent.VK_A:
-				setLeft(true);
+				this.a.pressKey(this);
 				break;
 			case KeyEvent.VK_D:
-				setRight(true);
+				this.d.pressKey(this);
 				break;
 			case KeyEvent.VK_J:
 				if (isAlive())
@@ -166,17 +166,17 @@ public class Plane {
 		switch (e.getKeyCode()) {
 
 		case KeyEvent.VK_W:
-			isUp = false;
+			this.w.releaseKey(this);
 			break;
 		case KeyEvent.VK_S:
-			isDown = false;
+			this.s.releaseKey(this);
 
 			break;
 		case KeyEvent.VK_A:
-			setLeft(false);
+			this.a.releaseKey(this);
 			break;
 		case KeyEvent.VK_D:
-			setRight(false);
+			this.d.releaseKey(this);
 			break;
 		case KeyEvent.VK_J:
 			if (isAlive())
@@ -309,6 +309,12 @@ public class Plane {
 	}
 	public GameStart getGs() {
 		return gs;
+	}
+	public void setDown(boolean isDown) {
+		this.isDown = isDown;
+	}
+	public void setUp(boolean isUp) {
+		this.isUp = isUp;
 	}
 
 }

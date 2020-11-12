@@ -28,7 +28,7 @@ public class BulletPlayer extends Bullet {
 		super();
 		this.x = gs.plane.x + 44;
 		this.y = gs.plane.y - 10;
-		this.alive = alive;
+		this.setAlive(alive);
 		this.gs = gs;
 	}
 
@@ -44,7 +44,7 @@ public class BulletPlayer extends Bullet {
 		super();
 		this.x = x;
 		this.y = y;
-		this.alive = alive;
+		this.setAlive(alive);
 		this.gs = gs;
 		this.bType = isGrape;
 	}
@@ -79,7 +79,7 @@ public class BulletPlayer extends Bullet {
 			break;
 		}
 		if (y < 0||y>=700) {
-			alive = false;
+			setAlive(false);
 		}
 	}
 
@@ -131,6 +131,14 @@ public class BulletPlayer extends Bullet {
 
 	public Rectangle getRectangle() {
 		return new Rectangle(x, y, width, height);
+	}
+
+	public boolean isAlive() {
+		return alive;
+	}
+
+	public void setAlive(boolean alive) {
+		this.alive = alive;
 	}
 
 }

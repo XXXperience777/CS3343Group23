@@ -24,20 +24,26 @@ public class Ult {
 		this.x=0;
 		this.y=gs.height;
 		this.gs = gs;
-		this.alive = alive;
+		this.setAlive(alive);
 	}
 	public void drawMe(Graphics g){
-		if(alive){
+		if(isAlive()){
 			g.drawImage(gs.ult, x, y, width, height, null);
 		}
 		move();
 	}
 	public void move(){
 		y-=10;
-		if(y<0)alive=false;
+		if(y<0)setAlive(false);
 	}
 	public Rectangle getRectangle(){
 		return new Rectangle(x, y, width, height);
+	}
+	public boolean isAlive() {
+		return alive;
+	}
+	public void setAlive(boolean alive) {
+		this.alive = alive;
 	}
 
 }

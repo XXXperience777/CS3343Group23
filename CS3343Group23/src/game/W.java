@@ -3,13 +3,12 @@ package game;
 public class W implements Command {
 
 	public void pressKey(Plane plane) {
-		// TODO - implement W.execute
-		throw new UnsupportedOperationException();
+		plane.setUp(true);
 	}
 
 	@Override
 	public void releaseKey(Plane plane) {
-		// TODO Auto-generated method stub
+		plane.setUp(false);
 		
 	}
 

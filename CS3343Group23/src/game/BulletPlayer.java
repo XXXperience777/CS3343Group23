@@ -26,8 +26,8 @@ public class BulletPlayer extends Bullet {
 	 */
 	public BulletPlayer(boolean alive, GameStart gs) {
 		super();
-		this.x = gs.plane.x + 44;
-		this.y = gs.plane.y - 10;
+		this.x = gs.getPlane().getX() + 44;
+		this.y = gs.getPlane().getY() - 10;
 		this.setAlive(alive);
 		this.gs = gs;
 	}
@@ -54,7 +54,7 @@ public class BulletPlayer extends Bullet {
 	 * @param g
 	 */
 	public void drawMe(Graphics g) {
-		g.drawImage(gs.bulletImgs[0], x, y, width, height, null);
+		g.drawImage(gs.getUi().getBulletImgs()[0], x, y, width, height, null);
 		move();
 	}
 
@@ -85,19 +85,19 @@ public class BulletPlayer extends Bullet {
 
 	private void traceMove() {
 	
-				int eSize = gs.enemies.size();
+				int eSize = gs.getEnemies().size();
 				if (eSize > 0) {
-					Enemy enemy = gs.enemies.get(0);
-					double deltax = enemy.x - x;
-					double deltay = enemy.y - y;
+					Enemy enemy = gs.getEnemies().get(0);
+					double deltax = enemy.getX() - x;
+					double deltay = enemy.getY() - y;
 					if (deltax == 0) {
-						if (enemy.y>=y ) 
+						if (enemy.getY()>=y ) 
 							deltax = 0.0000001;
 						else
 							deltax = -0.0000001;
 					}
 					if (deltay == 0) {
-						if (enemy.x>=x) 
+						if (enemy.getX()>=x) 
 							deltay = 0.0000001;
 						else
 							deltay = -0.0000001;

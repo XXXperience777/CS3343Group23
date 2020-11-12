@@ -35,7 +35,7 @@ public class Boss {
 		this.fx = x;
 		this.y = y;
 		this.gs = gs;
-		this.alive = alive;
+		this.setAlive(alive);
 		
 	
 	}
@@ -52,7 +52,7 @@ public class Boss {
 		
 		for (int j = 0; j < gs.getBulletPl().size(); j++) {
 			BulletPlayer pBullet = gs.getBulletPl().get(j);
-			if (alive && pBullet.getRectangle().intersects(getRectangle())) {
+			if (isAlive() && pBullet.getRectangle().intersects(getRectangle())) {
 				switch (fireMode.getMode())
 				{
 					case 1: 
@@ -70,7 +70,7 @@ public class Boss {
 		//get hit by player plane
 		for (int j = 0; j < gs.getPlane().ults.size(); j++) {
 			Ult ult = gs.getPlane().ults.get(j);
-			if (alive && ult.getRectangle().intersects(getRectangle())) {
+			if (isAlive() && ult.getRectangle().intersects(getRectangle())) {
 				blood -= 50;
 				checkDead();
 			}
@@ -80,8 +80,8 @@ public class Boss {
 
 	public void checkDead() {
 	
-		if (blood <= 0 && alive) {
-			alive = false;
+		if (blood <= 0 && isAlive()) {
+			setAlive(false);
 			gs.addScore(1000);
 			gs.getExplodes().add(new Explode(x+212, y+64,gs,true,true));
 			gs.clearCount();
@@ -103,7 +103,7 @@ public class Boss {
 	public void drawMe(Graphics g) {
 	
 		isHitted();
-		if (alive) {
+		if (isAlive()) {
 			g.setColor(Color.WHITE);
 			g.drawRect(x + 117, y - 17, 200, 11);
 			g.setColor(Color.RED);
@@ -147,6 +147,14 @@ public class Boss {
 	
 		return new Rectangle(x, y, width, height);
 	
+	}
+
+	public boolean isAlive() {
+		return alive;
+	}
+
+	public void setAlive(boolean alive) {
+		this.alive = alive;
 	}
 
 }

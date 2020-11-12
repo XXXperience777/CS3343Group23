@@ -6,23 +6,23 @@ import game.GameStart;
 
 public class Background {
 
-	private GameStart bg;
+	
 	private int x = 0;
 	private int y = 0;
 	private int y1 = 700;
-	private GameStart gs;
+	private GUISetUp gs;
 
 	/**
 	 * 
 	 * @param gs
 	 */
-	public Background(GameStart gs) {
+	public Background(GUISetUp gs) {
 		super();
 		this.gs = gs;
 	}
 	public void drawMe(Graphics g){
-		g.drawImage(gs.bgImg,x, y, gs.width, gs.height,  null);
-		g.drawImage(gs.bgImg, x, y1, gs.width, gs.height, null);
+		g.drawImage(gs.getBgImg(),x, y, gs.getWidth(), gs.getHeight(),  null);
+		g.drawImage(gs.getBgImg(), x, y1, gs.getWidth(), gs.getHeight(), null);
 		move();
 	}
 	public void move(){

@@ -22,9 +22,9 @@ public class BulletEm extends Bullet {
 	
 	public BulletEm(boolean alive,GameStart gs,Enemy enemy) {
 		super();
-		this.y = enemy.y+80;
-		this.x=enemy.x+34;
-		this.alive = alive;
+		this.y = enemy.getY()+80;
+		this.x=enemy.getX()+34;
+		this.setAlive(alive);
 		this.gs = gs;
 		this.enemy=enemy;
 	}
@@ -35,21 +35,21 @@ public class BulletEm extends Bullet {
 	 */
 	public void drawMe(Graphics g) {
 		isHitted();
-		if (alive) {
-			g.drawImage(gs.bulletEm1Img, x,y, width, height, null);
+		if (isAlive()) {
+			g.drawImage(gs.getUi().getBulletEm1Img(), x,y, width, height, null);
 		}
 		move();
 	}
 
 	public void isHitted(){
-		Plane plane=gs.plane;
+		Plane plane=gs.getPlane();
 		if (plane.isAlive()&&plane.getRectangle().intersects(getRectangle())) {
-			alive=false;
+			setAlive(false);
 			plane.setCount(plane.getCount() - 1);
-			plane.canK=false;
-			plane.canL=false;
+			plane.setCanK(false);
+			plane.setCanL(false);
 			if (plane.getCount()==0) {
-				gs.explodes.add(new Explode(plane.getX(), plane.getY(), gs,true));
+				gs.addExplode(new Explode(plane.getX(), plane.getY(), gs,true));
 				plane.setAlive(false);
 			}
 			
@@ -59,7 +59,7 @@ public class BulletEm extends Bullet {
 	public void move(){
 		y+=8;
 		if(y>700){
-			alive=false;
+			setAlive(false);
 		}
 	}
 	public void ult(){
@@ -67,6 +67,14 @@ public class BulletEm extends Bullet {
 	}
 	public Rectangle getRectangle(){
 		return new Rectangle(x, y, width, height);
+	}
+
+	public boolean isAlive() {
+		return this.alive;
+	}
+
+	public void setAlive(boolean alive) {
+		this.alive = alive;
 	}
 
 	

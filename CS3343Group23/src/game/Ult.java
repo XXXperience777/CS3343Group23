@@ -22,13 +22,13 @@ public class Ult {
 	public Ult(GameStart gs, boolean alive) {
 		super();
 		this.x=0;
-		this.y=gs.height;
+		this.y=gs.getHeight();
 		this.gs = gs;
 		this.setAlive(alive);
 	}
 	public void drawMe(Graphics g){
 		if(isAlive()){
-			g.drawImage(gs.ult, x, y, width, height, null);
+			g.drawImage(gs.getUi().getUlt(), x, y, width, height, null);
 		}
 		move();
 	}

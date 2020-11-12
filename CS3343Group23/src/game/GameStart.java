@@ -41,13 +41,14 @@ public class GameStart extends Frame {
 	private Plane plane = new Plane(250, 500, false, this);
 	private Boss boss = new Boss(30, 50, this, true);
 	private ArrayList<Enemy> enemies = new ArrayList<Enemy>();
+	private ArrayList<BulletPlayer> bulletPl = new ArrayList<BulletPlayer>();
 	private ArrayList<BulletEm> bulletEms = new ArrayList<BulletEm>();
+	private ArrayList<BulletBoss> bulletBs = new ArrayList<BulletBoss>();
 	private ArrayList<Explode> explodes = new ArrayList<Explode>();
 	private ArrayList<Food> foods = new ArrayList<Food>();
-	private Background bg = new Background(this);
-	private Image img, bulletImg,bgImg, planeImg, bulletEmImg, bulletEm1Img, boosImg,
-	ult, continueImg, lifePlane, startImg;
-    private Image[]  bulletImgs,enemyImgs, boomImgs, bulletBossImgs, foodImgs;
+	private Background bg ;
+	private Image img;
+	private GUISetUp ui;
 	public GameStart() 
 	{
 		this.setTitle("Plane War");
@@ -56,6 +57,10 @@ public class GameStart extends Frame {
 		this.setResizable(false);
 		this.setVisible(true);
 		this.setFont(new Font("Arial", Font.PLAIN, 16));
+		
+		this.ui=GUISetUp.Instance;
+		this.bg=new Background(getUi());
+		
 		this.addWindowListener(new WindowAdapter() 
 		{
 			@Override
@@ -104,7 +109,7 @@ public class GameStart extends Frame {
 	 * @param g
 	 */
 	@Override
-	public void update(java.awt.Graphics g) {
+	public void update(Graphics g) {
 		if (img == null) {
 			img = this.createImage(width, height);
 		}
@@ -115,14 +120,12 @@ public class GameStart extends Frame {
 		g.drawImage(img, 0, 0, null);
 	}
 
-	/**
-	 * 
-	 * @param ui
-	 */
-	public void SetUp(GUISetUp ui) {
-		// TODO - implement GameStart.SetUp
-		throw new UnsupportedOperationException();
+	public void addExplode(Explode explode)
+	{
+		explodes.add(explode);
 	}
+	
+	
 	
 	public Plane getPlane() {
 		return this.plane;
@@ -161,67 +164,14 @@ public class GameStart extends Frame {
 	}
 	
 	public ArrayList<BulletBoss> getBulletBoss() {
-		return this.bulletBoss;
+		return this.bulletBs;
 	}
 	
 	public ArrayList<BulletPlayer> getBulletPl() {
 		return this.bulletPl;
 	}
 
-	public void initView() {
-		bgImg = toolkit.getImage(GameStart.class.getResource("/imgs/bg01.jpg"));
-		if (plane.isLeft()) {
-			planeImg = toolkit.getImage(GameStart.class
-					.getResource("/imgs/51.png"));
-		} else if (plane.isRight()) {
-			planeImg = toolkit.getImage(GameStart.class
-					.getResource("/imgs/61.png"));
-		} else {
-			planeImg = toolkit.getImage(GameStart.class
-					.getResource("/imgs/7.png"));
-		}
-		boomImgs = new Image[] {
-				toolkit.getImage(GameStart.class.getResource("/imgs/b1.gif")),
-				toolkit.getImage(GameStart.class.getResource("/imgs/b2.gif")),
-				toolkit.getImage(GameStart.class.getResource("/imgs/b3.gif")),
-				toolkit.getImage(GameStart.class.getResource("/imgs/b4.gif")),
-				toolkit.getImage(GameStart.class.getResource("/imgs/b5.gif")),
-				toolkit.getImage(GameStart.class.getResource("/imgs/b6.gif")),
-				toolkit.getImage(GameStart.class.getResource("/imgs/b7.gif")),
-				toolkit.getImage(GameStart.class.getResource("/imgs/b8.gif")),
-				toolkit.getImage(GameStart.class.getResource("/imgs/b9.gif")),
-				toolkit.getImage(GameStart.class.getResource("/imgs/b10.gif")),
-				toolkit.getImage(GameStart.class.getResource("/imgs/b11.gif")) };
-		enemyImgs = new Image[] {
-				toolkit.getImage(GameStart.class.getResource("/imgs/5.png")),
-				toolkit.getImage(GameStart.class.getResource("/imgs/21.png")),
-				toolkit.getImage(GameStart.class.getResource("/imgs/15.png")),
-				toolkit.getImage(GameStart.class.getResource("/imgs/�л�2.png")) };
-		bulletImgs = new Image[] {
-				toolkit.getImage(GameStart.class.getResource("/imgs/�ӵ�1.png")),
-				toolkit.getImage(GameStart.class.getResource("/imgs/̹��.png"))
-				};
-		bulletEmImg = toolkit.getImage(GameStart.class
-				.getResource("/imgs/�о��ӵ�.png"));
-		bulletEm1Img = toolkit.getImage(GameStart.class
-				.getResource("/imgs/�о��ӵ�1.png"));
-		boosImg = toolkit.getImage(GameStart.class
-				.getResource("/imgs/BossA.png"));
-		bulletBossImgs = new Image[] {
-				toolkit.getImage(GameStart.class
-						.getResource("/imgs/BOSS�ӵ�.png")),
-				toolkit.getImage(GameStart.class.getResource("/imgs/�ӵ�2.png")) };
-		ult = toolkit.getImage(GameStart.class.getResource("/imgs/BKILL.png"));
-		continueImg = toolkit.getImage(GameStart.class
-				.getResource("/imgs/continue.png"));
-		foodImgs = new Image[] {
-				toolkit.getImage(GameStart.class.getResource("/imgs/ʳ��1.jpg")),
-				toolkit.getImage(GameStart.class.getResource("/imgs/22.png")) };
-		lifePlane = toolkit.getImage(GameStart.class
-				.getResource("/imgs/����boss�ӵ�.png"));
-		startImg = toolkit.getImage(GameStart.class
-				.getResource("/imgs/gamebegin1.gif"));
-	}
+	
 
 	/**
 	 * 
@@ -229,8 +179,7 @@ public class GameStart extends Frame {
 	 */
 	@Override
 	public void paint(Graphics g) {
-		// TODO - implement GameStart.paint
-		throw new UnsupportedOperationException();
+		
 		if (!plane.isFirst()) {
 			bg.drawMe(g);
 			System.out.println(count);
@@ -252,7 +201,7 @@ public class GameStart extends Frame {
 			}
 			for (int i = 0; i < bulletEms.size(); i++) {
 				BulletEm bullet = bulletEms.get(i);
-				if (bullet.alive) {
+				if (bullet.isAlive()) {
 					bullet.drawMe(g);
 				} else {
 					bulletEms.remove(i);
@@ -261,7 +210,7 @@ public class GameStart extends Frame {
 
 			for (int i = 0; i < explodes.size(); i++) {
 				Explode explode = explodes.get(i);
-				if (explode.alive) {
+				if (explode.isAlive()) {
 					explode.drawMe(g);
 				} else {
 					explodes.remove(explode);
@@ -269,7 +218,7 @@ public class GameStart extends Frame {
 			}
 			if (foods.size()>0) {
 				Food food=foods.get(0);
-				if (food.alive) {
+				if (food.isAlive()) {
 					food.drawMe(g);
 				}else {
 					foods.remove(food);
@@ -278,7 +227,7 @@ public class GameStart extends Frame {
 			System.out.println("explode.size:" + explodes.size());
 			System.out.println("boostime:"+bossTime+"count:"+count);
 			if (count >= bossTime) {
-				boss.alive=true;
+				boss.setAlive(true);
 				boss.drawMe(g);
 			}else if (bossTime-count<=3) {
 				g.setColor(Color.RED);
@@ -299,6 +248,15 @@ public class GameStart extends Frame {
 	}
 
 
+
+
+	public GUISetUp getUi() {
+		return ui;
+	}
+
+
+
+
 	class MyThread extends Thread {
 		@Override
 		public void run() {
@@ -309,7 +267,7 @@ public class GameStart extends Frame {
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
-				initView();
+				
 				repaint();
 			}
 		}

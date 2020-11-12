@@ -139,6 +139,10 @@ public class GameStart extends Frame {
 		this.score += points;
 	}
 	
+	public int addBossTime() {
+		return this.bossTime+=10;
+	}
+	
 	public void levelUp() {
 		this.level ++;
 	}
@@ -171,6 +175,9 @@ public class GameStart extends Frame {
 		return this.bulletPl;
 	}
 
+	public ArrayList<Ult> getPlaneults() {
+		return plane.getults();
+	}
 	
 
 	/**
@@ -233,7 +240,7 @@ public class GameStart extends Frame {
 				g.setColor(Color.RED);
 				g.drawString("WARNNING", 250, 100);
 			}
-			g.drawString("Level："+level, 500, 50);
+			g.drawString("Level:"+level, 500, 50);
 			g.drawString("Score:" + score, 500, 80);
 		}
 		plane.drawMe(g);

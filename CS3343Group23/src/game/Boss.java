@@ -53,12 +53,14 @@ public class Boss {
 		for (int j = 0; j < gs.getBulletPl().size(); j++) {
 			BulletPlayer pBullet = gs.getBulletPl().get(j);
 			if (isAlive() && pBullet.getRectangle().intersects(getRectangle())) {
-				switch (fireMode.getMode())
+				switch (fireMode.getFireMode())
 				{
-					case 1: 
+					case "Normal": 
 						blood -= 10;
-					case 2: 
+					case "Angry": 
 						blood -= 20;
+					case "Crazy": 
+						blood -= 30;
 					default:
 						blood -= 10;
 				}

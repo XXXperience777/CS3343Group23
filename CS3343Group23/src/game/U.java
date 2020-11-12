@@ -2,8 +2,14 @@ package game;
 
 public class U implements Command {
 
-	public void execute(Plane plane) {
+	public void pressKey(Plane plane) {
 		plane.ult();
+	}
+
+	@Override
+	public void releaseKey(Plane plane) {
+		
+		
 	}
 
 }

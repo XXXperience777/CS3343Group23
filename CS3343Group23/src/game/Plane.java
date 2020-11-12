@@ -31,6 +31,14 @@ public class Plane {
 	private LifePlane[] lives = new LifePlane[10];
 	private ArrayList<Ult> ults = new ArrayList<Ult>();
 	private List<Bullet> bullets = new ArrayList<Bullet>();
+	private Command a=new A();
+	private Command w=new W();
+	private Command s=new S();
+	private Command d=new D();
+	private Command j=new J();
+	private Command k=new K();
+	private Command l=new L();
+	private Command u=new U();
 	
 	public Plane(int x, int y, boolean alive, GameStart gs) {
 		super();
@@ -38,6 +46,7 @@ public class Plane {
 		this.setY(y);
 		this.setAlive(alive);
 		this.gs = gs;
+		
 	}
 	public Plane(boolean alive) {
 		super();
@@ -49,25 +58,25 @@ public class Plane {
 			int index=0;
 			System.out.println("count:"+getCount());
 			for (int i = 0; i < getCount(); i++) {
-				lives[i]=new LifePlane(index, 40, gs, true);
+				lives[i]=new LifePlane(index, 40, getGs(), true);
 				index+=30;
 			}
 			if(canK){
-				g.drawImage(gs.foodImgs[1], 20, 620, 29, 26, null);
+				g.drawImage(getGs().foodImgs[1], 20, 620, 29, 26, null);
 			}
 			if (canL) {
-				g.drawImage(gs.foodImgs[0], 60, 620, 29, 26, null);
+				g.drawImage(getGs().foodImgs[0], 60, 620, 29, 26, null);
 			}
 			if (canK&&canL) {
 				g.drawString("U", 20, 600);
 			}
-			g.drawImage(gs.planeImg, getX(), getY(), width, height, null);
+			g.drawImage(getGs().planeImg, getX(), getY(), width, height, null);
 		}else {
 			if(isFirst()){
-				g.drawImage(gs.startImg, 0, 0, 600, 700, null);
+				g.drawImage(getGs().startImg, 0, 0, 600, 700, null);
 				return;
 			}
-			g.drawImage(gs.continueImg, 150,250, 300, 200, null);
+			g.drawImage(getGs().continueImg, 150,250, 300, 200, null);
 		}
 		
 		//System.out.println("size:" + bullets.size());
@@ -115,22 +124,25 @@ public class Plane {
 				break;
 			case KeyEvent.VK_J:
 				if (isAlive())
-					fire();
+					this.j.pressKey(this);
 				break;
 			case KeyEvent.VK_U:
 				if(isAlive()&&canK&&canL){
-					ult();
+					
+					this.u.pressKey(this);
 				}
 				break;
 			case KeyEvent.VK_L:
 				if (isAlive()&&canL) {
-					grapeShot();
+					this.l.pressKey(this);
 				}
 				break;
 			case KeyEvent.VK_K:
 				if (isAlive()&&canK) {
-					traceShot();
+					this.k.pressKey(this);
+					
 				}
+				break;
 			}
 		}
 
@@ -138,29 +150,17 @@ public class Plane {
 
 	}
 	
-	public void traceShot() {
-		
-		bullets.add(new BulletPlayer(getX()+44, getY()-20, true, gs,4) );
+	public void addBullet(BulletPlayer bullet)
+	{
+		this.bullets.add(bullet);
 	}
-	public void grapeShot() {
 	
-		bullets.add(new BulletPlayer(getX()+22, getY()-20, true, gs, 1) );
-		bullets.add(new BulletPlayer(getX()+12, getY()-20, true, gs, 1) );
-		bullets.add(new BulletPlayer(getX()+40, getY()-20, true, gs, 2));
-		bullets.add(new BulletPlayer(getX()+50, getY()-20, true, gs, 2));
-		bullets.add(new BulletPlayer(getX()+66, getY()-20, true, gs, 3));
-		bullets.add(new BulletPlayer(getX()+76, getY()-20, true, gs, 3));
-	}
 	public  void ult() {
 		
-		ults.add(new Ult(gs, true));
+		ults.add(new Ult(getGs(), true));
 		canL=canK=false;
 	}
-	public void fire() {
 	
-		bullets.add(new BulletPlayer(true, gs));
-	}
-
 	public void keyReleased(KeyEvent e) {
 		
 		switch (e.getKeyCode()) {
@@ -177,6 +177,27 @@ public class Plane {
 			break;
 		case KeyEvent.VK_D:
 			setRight(false);
+			break;
+		case KeyEvent.VK_J:
+			if (isAlive())
+				this.j.releaseKey(this);
+			break;
+		case KeyEvent.VK_U:
+			if(isAlive()&&canK&&canL){
+				
+				this.u.releaseKey(this);
+			}
+			break;
+		case KeyEvent.VK_L:
+			if (isAlive()&&canL) {
+				this.l.releaseKey(this);
+			}
+			break;
+		case KeyEvent.VK_K:
+			if (isAlive()&&canK) {
+				this.k.releaseKey(this);
+				
+			}
 			break;
 		}
 	}
@@ -285,6 +306,9 @@ public class Plane {
 	}
 	public void setRight(boolean isRight) {
 		this.isRight = isRight;
+	}
+	public GameStart getGs() {
+		return gs;
 	}
 
 }

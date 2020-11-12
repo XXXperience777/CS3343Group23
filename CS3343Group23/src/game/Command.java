@@ -2,6 +2,7 @@ package game;
 
 public interface Command {
 
-	void execute(Plane plane);
+	void pressKey(Plane plane);
+	void releaseKey(Plane plane);
 
 }

@@ -3,6 +3,8 @@ package game;
 import java.awt.Image;
 import java.awt.Toolkit;
 
+import com.game.GameStart;
+
 public class GUISetUp {
 
 	private int height = 700;
@@ -56,32 +58,32 @@ public class GUISetUp {
 				toolkit.getImage(GameStart.class.getResource("/imgs/b10.gif")),
 				toolkit.getImage(GameStart.class.getResource("/imgs/b11.gif")) };
 		enemyImgs = new Image[] {
-				toolkit.getImage(GameStart.class.getResource("/imgs/5.png")),
-				toolkit.getImage(GameStart.class.getResource("/imgs/21.png")),
-				toolkit.getImage(GameStart.class.getResource("/imgs/15.png")),
-				toolkit.getImage(GameStart.class.getResource("/imgs/�л�2.png")) };
+				toolkit.getImage(GameStart.class.getResource("/imgs/enemy1.png")),
+				toolkit.getImage(GameStart.class.getResource("/imgs/enemy2.png")),
+				toolkit.getImage(GameStart.class.getResource("/imgs/enemy3.png")),
+				toolkit.getImage(GameStart.class.getResource("/imgs/enemy4.png")) };
 		bulletImgs = new Image[] {
-				toolkit.getImage(GameStart.class.getResource("/imgs/�ӵ�1.png")),
-				toolkit.getImage(GameStart.class.getResource("/imgs/̹��.png"))
+				toolkit.getImage(GameStart.class.getResource("/imgs/bullet_p.png")),
+				toolkit.getImage(GameStart.class.getResource("/imgs/̹��.png"))
 				};
 		bulletEmImg = toolkit.getImage(GameStart.class
-				.getResource("/imgs/�о��ӵ�.png"));
+				.getResource("/imgs/bullet_e0.png"));
 		bulletEm1Img = toolkit.getImage(GameStart.class
-				.getResource("/imgs/�о��ӵ�1.png"));
+				.getResource("/imgs/bullet_e1.png"));
 		bossImg = toolkit.getImage(GameStart.class
-				.getResource("/imgs/BossA.png"));
+				.getResource("/imgs/sel_boss0.png"));
 		bulletBossImgs = new Image[] {
 				toolkit.getImage(GameStart.class
-						.getResource("/imgs/BOSS�ӵ�.png")),
-				toolkit.getImage(GameStart.class.getResource("/imgs/�ӵ�2.png")) };
+						.getResource("/imgs/bullet_b.png")),
+				toolkit.getImage(GameStart.class.getResource("/imgs/bullet_b1.png")) };
 		ult = toolkit.getImage(GameStart.class.getResource("/imgs/BKILL.png"));
 		continueImg = toolkit.getImage(GameStart.class
 				.getResource("/imgs/continue.png"));
 		foodImgs = new Image[] {
-				toolkit.getImage(GameStart.class.getResource("/imgs/ʳ��1.jpg")),
-				toolkit.getImage(GameStart.class.getResource("/imgs/22.png")) };
+				toolkit.getImage(GameStart.class.getResource("/imgs/buff0.png")),
+				toolkit.getImage(GameStart.class.getResource("/imgs/buff1.png")) };
 		lifePlaneImg = toolkit.getImage(GameStart.class
-				.getResource("/imgs/����boss�ӵ�.png"));
+				.getResource("/imgs/life.png"));
 		startImg = toolkit.getImage(GameStart.class
 				.getResource("/imgs/gamebegin1.gif"));
 	}

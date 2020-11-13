@@ -175,19 +175,6 @@ public class GameStart extends Frame {
 		return this.bulletPl;
 	}
 
-<<<<<<< HEAD
-	public void initView() {
-		bgImg = toolkit.getImage(GameStart.class.getResource("/imgs/bg01.jpg"));
-		if (plane.isLeft()) {
-			planeImg = toolkit.getImage(GameStart.class
-					.getResource("/imgs/51.png"));
-		} else if (plane.isRight()) {
-			planeImg = toolkit.getImage(GameStart.class
-					.getResource("/imgs/61.png"));
-		} else {
-			planeImg = toolkit.getImage(GameStart.class
-					.getResource("/imgs/7.png"));
-		}
 		public void initView() {
 			bgImg = toolkit.getImage(GameStart.class.getResource("/imgs/bg1.jpg"));
 			if (plane.isLeft) {
@@ -242,12 +229,12 @@ public class GameStart extends Frame {
 			startImg = toolkit.getImage(GameStart.class
 					.getResource("/imgs/gamebegin1.gif"));
 		}
-=======
+
 	public ArrayList<Ult> getPlaneults() {
 		return plane.getults();
 	}
 	
->>>>>>> 5a1802e2ce7ce7cf60bf16b62f46e53dd71c67d9
+
 
 	/**
 	 * 

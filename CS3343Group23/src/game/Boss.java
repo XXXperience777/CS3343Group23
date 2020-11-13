@@ -35,6 +35,7 @@ public class Boss {
 		this.fx = x;
 		this.y = y;
 		this.gs = gs;
+		this.ui=gs.getUi();
 		this.setAlive(alive);
 		myBullets=gs.getBulletBoss();
 	

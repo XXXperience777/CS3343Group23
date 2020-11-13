@@ -60,7 +60,7 @@ public class Plane {
 			int index=0;
 			System.out.println("count:"+getCount());
 			for (int i = 0; i < getCount(); i++) {
-				lives[i]=new LifePlane(index, 40, this.gs, true);
+				lives[i]=new LifePlane(index, 40, ui, true);
 				index+=30;
 			}
 			if(isCanK()){

@@ -33,6 +33,7 @@ public class Enemy {
 		this.fx=x;
 		this.setAlive(alive);
 		this.gs = gs;
+		this.ui = gs.getUi();
 		this.enemyImg=ui.getenemyImg()[random.nextInt(4)];
 		
 	}

@@ -1,5 +1,7 @@
 package game;
 
+import java.awt.Graphics;
+
 public class LifePlane {
 
 	private int x;
@@ -7,7 +9,7 @@ public class LifePlane {
 	private int width = 25;
 	private int height = 21;
 	private boolean alive;
-	public GameStart gs;
+	public GUISetUp ui;
 
 	/**
 	 * 
@@ -16,18 +18,20 @@ public class LifePlane {
 	 * @param gs
 	 * @param alive
 	 */
-	public LifePlane(int x, int y, GameStart gs, boolean alive) {
-		// TODO - implement LifePlane.LifePlane
-		throw new UnsupportedOperationException();
+	public LifePlane(int x, int y, GUISetUp ui, boolean alive) {
+		super();
+		this.x = x;
+		this.y = y;
+		this.ui = ui;
+		this.alive = alive;
 	}
 
 	/**
 	 * 
 	 * @param g
 	 */
-	public void drawMe(java.awt.Graphics g) {
-		// TODO - implement LifePlane.drawMe
-		throw new UnsupportedOperationException();
+	public void drawMe(Graphics g) {
+		g.drawImage(ui.getLifePlaneImg(), x, y, width, height, null);
 	}
 
 }

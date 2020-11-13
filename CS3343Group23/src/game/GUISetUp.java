@@ -58,7 +58,7 @@ public class GUISetUp {
 		enemyImgs = new Image[] {
 				toolkit.getImage(GameStart.class.getResource("/imgs/enemy1.png")),
 				toolkit.getImage(GameStart.class.getResource("/imgs/enemy2.png")),
-				toolkit.getImage(GameStart.class.getResource("/imgs/enenmy3.png")),
+				toolkit.getImage(GameStart.class.getResource("/imgs/enemy3.png")),
 				toolkit.getImage(GameStart.class.getResource("/imgs/enemy4.png")) };
 		bulletImgs = new Image[] {
 				toolkit.getImage(GameStart.class.getResource("/imgs/bullet_p.png")),
@@ -69,7 +69,7 @@ public class GUISetUp {
 		bulletEm1Img = toolkit.getImage(GameStart.class
 				.getResource("/imgs/bullet_e1.png"));
 		bossImg = toolkit.getImage(GameStart.class
-				.getResource("/imgs/Boss.png"));
+				.getResource("/imgs/BossA.png"));
 		bulletBossImgs = new Image[] {
 				toolkit.getImage(GameStart.class
 						.getResource("/imgs/bullet_b.png")),
@@ -78,7 +78,7 @@ public class GUISetUp {
 		continueImg = toolkit.getImage(GameStart.class
 				.getResource("/imgs/continue.png"));
 		foodImgs = new Image[] {
-				toolkit.getImage(GameStart.class.getResource("/imgs/buff0.jpg")),
+				toolkit.getImage(GameStart.class.getResource("/imgs/buff0.png")),
 				toolkit.getImage(GameStart.class.getResource("/imgs/buff1.png")) };
 		lifePlaneImg = toolkit.getImage(GameStart.class
 				.getResource("/imgs/life.png"));
@@ -170,6 +170,11 @@ public class GUISetUp {
 
 	public Image[] getBulletImgs() {
 		return bulletImgs;
+	}
+
+
+	public Image getLifePlaneImg() {
+		return lifePlaneImg;
 	}
 
 }

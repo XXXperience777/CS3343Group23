@@ -15,12 +15,12 @@ public class Boss {
 	private boolean alive;
 	private int k = 1; //move unit
 	private int count = 0;
-	private int blood = 200;
+	private int blood = 1000;
 	private Random random = new Random();
 	private fireAbstract fireMode;
 	private GameStart gs;
 	private GUISetUp ui;
-	private ArrayList<BulletBoss> myBullets;
+	//private ArrayList<BulletBoss> myBullets;
 
 	/**
 	 * 
@@ -37,7 +37,7 @@ public class Boss {
 		this.gs = gs;
 		this.ui=gs.getUi();
 		this.setAlive(alive);
-		myBullets=gs.getBulletBoss();
+		this.fireMode=new Normal();
 	
 	}
 	
@@ -54,17 +54,8 @@ public class Boss {
 		for (int j = 0; j < gs.getBulletPl().size(); j++) {
 			BulletPlayer pBullet = gs.getBulletPl().get(j);
 			if (isAlive() && pBullet.getRectangle().intersects(getRectangle())) {
-				switch (fireMode.getFireMode())
-				{
-					case "Normal": 
-						blood -= 10;
-					case "Angry": 
-						blood -= 20;
-					case "Crazy": 
-						blood -= 30;
-					default:
-						blood -= 10;
-				}
+				
+				blood-=10;
 				
 				checkDead();
 				pBullet.setAlive(false);
@@ -113,19 +104,36 @@ public class Boss {
 			g.fillRect(x + 118, y - 16, blood - 1, 10);
 			g.drawImage(ui.getbossImg(), x, y, width, height, null);
 			move();
-			if (random.nextInt(100) > 80) {
-				fire();
+
+			switch (fireMode.getFireMode())
+			{
+				case "Normal": 
+					if (random.nextInt(100) > 90) {
+						fire();
+					}
+				case "Angry": 
+					if (random.nextInt(100) > 80) {
+						fire();
+					}
+				case "Crazy": 
+					if (random.nextInt(100) > 70) {
+						fire();
+					}
+				default:
+					if (random.nextInt(100) > 90) {
+						fire();
+					}
 			}
 		}else {
 			blood=200;
 		}
-		System.out.println("boss bullets:" + myBullets.size());
-		for (int i = 0; i < myBullets.size(); i++) {
-			BulletBoss bulletBoss = myBullets.get(i);
+		System.out.println("boss bullets:" + gs.getBulletBoss().size());
+		for (int i = 0; i < gs.getBulletBoss().size(); i++) {
+			BulletBoss bulletBoss = gs.getBulletBoss().get(i);
 			if (bulletBoss.getAlive()) {
 				bulletBoss.drawMe(g);
 			} else {
-				myBullets.remove(i);
+				gs.getBulletBoss().remove(i);
 			}
 		}
 		
@@ -133,9 +141,8 @@ public class Boss {
 	
 	private void fire() {
 	
-		//check alive or not?
-		BulletBoss bulletBoss=new BulletBoss(true, gs, this);
-		gs.getBulletBoss().add(bulletBoss);
+		
+		gs.addBulletBoss(alive);
 	}
 
 	private void move() {

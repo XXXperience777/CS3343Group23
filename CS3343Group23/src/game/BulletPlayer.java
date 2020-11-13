@@ -10,8 +10,8 @@ public class BulletPlayer extends Bullet {
 	private int x;
 	private int y;
 	private double speed = 10;
-	private int width = 6;
-	private int height = 8;
+	private int width = 15;
+	private int height = 20;
 	private boolean alive;
 	private int bType;
 	private double pi = Math.PI;

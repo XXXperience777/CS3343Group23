@@ -39,7 +39,7 @@ public class GameStart extends Frame {
 	private Random ran = new Random();
 	private Toolkit toolkit = Toolkit.getDefaultToolkit();
 	private Plane plane = new Plane(250, 500, false, this);
-	private Boss boss = new Boss(30, 50, this, true);
+	private Boss boss;
 	private ArrayList<Enemy> enemies = new ArrayList<Enemy>();
 	private ArrayList<BulletPlayer> bulletPl = new ArrayList<BulletPlayer>();
 	private ArrayList<BulletEm> bulletEms = new ArrayList<BulletEm>();
@@ -60,6 +60,7 @@ public class GameStart extends Frame {
 		
 		this.ui=GUISetUp.Instance;
 		this.bg=new Background(getUi());
+		this.boss = new Boss(30, 50, this, true);
 		
 		this.addWindowListener(new WindowAdapter() 
 		{
@@ -167,17 +168,30 @@ public class GameStart extends Frame {
 		return this.bulletEms;
 	}
 	
+	public void addBulletEm(boolean alive, Enemy thisEm) {
+		bulletEms.add(new BulletEm(alive, this, thisEm));
+	}
+	
 	public ArrayList<BulletBoss> getBulletBoss() {
 		return this.bulletBs;
+	}
+	
+	public void addBulletBoss(boolean alive) {
+		bulletBs.add(new BulletBoss(alive, this, this.boss));
 	}
 	
 	public ArrayList<BulletPlayer> getBulletPl() {
 		return this.bulletPl;
 	}
+	
+	public void addBulletPl(boolean alive) {
+		bulletPl.add(new BulletPlayer(alive, this));
+	}
 
 	public ArrayList<Ult> getPlaneults() {
 		return plane.getults();
 	}
+	
 	
 
 	/**

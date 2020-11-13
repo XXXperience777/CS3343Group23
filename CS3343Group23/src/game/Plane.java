@@ -31,7 +31,7 @@ public class Plane {
 	private GameStart gs;
 	private LifePlane[] lives = new LifePlane[10];
 	private ArrayList<Ult> ults = new ArrayList<Ult>();
-	private List<BulletPlayer> bullets = new ArrayList<BulletPlayer>();
+	//private List<BulletPlayer> bullets = new ArrayList<BulletPlayer>();
 	private Command a=new A();
 	private Command w=new W();
 	private Command s=new S();
@@ -92,12 +92,12 @@ public class Plane {
 		}
 		
 		//System.out.println("size:" + bullets.size());
-		for (int i = 0; i < bullets.size(); i++) {
-			BulletPlayer bullet = bullets.get(i);
+		for (int i = 0; i < gs.getBulletPl().size(); i++) {
+			BulletPlayer bullet = gs.getBulletPl().get(i);
 			if (bullet.isAlive()&&isAlive()) {
 				bullet.drawMe(g);
 			} else {
-				bullets.remove(i);
+				gs.getBulletPl().remove(i);
 			}
 		}
 		for (int i = 0; i < ults.size(); i++) {
@@ -164,7 +164,7 @@ public class Plane {
 	
 	public void addBullet(BulletPlayer bullet)
 	{
-		this.bullets.add(bullet);
+		gs.addBulletPl(this.alive);
 	}
 	
 	public  void ult() {

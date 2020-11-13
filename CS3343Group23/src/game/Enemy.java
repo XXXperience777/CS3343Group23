@@ -62,16 +62,17 @@ public class Enemy {
 
 	public void fire() {
 	
-		BulletEm bulletEm=new BulletEm(true, gs, this);
-		gs.getBulletEm().add(bulletEm);
+		gs.addBulletEm(this.alive, this);
 		
 	}
 
 	public void isHitted() {
 	
+		System.out.println(gs.getBulletPl().size());
 		for (int j = 0; j < gs.getBulletPl().size(); j++) {
 			BulletPlayer pBullet=gs.getBulletPl().get(j);
-			if (pBullet.getRectangle().intersects(getRectangle())) {
+			System.out.println(pBullet.getRectangle().intersects(this.getRectangle()));
+			if (pBullet.getRectangle().intersects(this.getRectangle())) {
 				setAlive(false);
 				pBullet.setAlive(false);
 			}
@@ -80,6 +81,7 @@ public class Enemy {
 			Ult ult=gs.getPlaneults().get(j);
 			if (ult.getRectangle().intersects(getRectangle())) {
 				setAlive(false);
+				
 			}
 		}
 		Plane plane=gs.getPlane();
@@ -96,7 +98,7 @@ public class Enemy {
 
 	public Rectangle getRectangle() {
 		
-		return new Rectangle(getX(), getY(), width, height);
+		return new Rectangle(x, y, width, height);
 		
 	
 	}

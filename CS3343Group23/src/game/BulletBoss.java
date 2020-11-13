@@ -81,6 +81,10 @@ public class BulletBoss extends Bullet {
 			alive = false;
 		}
 	}
+	
+	public boolean getAlive() {
+		return alive;
+	}
 
 	public Rectangle getRectangle(int... a) {
 		return new Rectangle(a[0],a[1],a[2],a[3]);

@@ -20,7 +20,7 @@ public class Boss {
 	private fireAbstract fireMode;
 	private GameStart gs;
 	private GUISetUp ui;
-	private ArrayList<BulletBoss> myBullets=gs.getBulletBoss();
+	private ArrayList<BulletBoss> myBullets;
 
 	/**
 	 * 
@@ -36,7 +36,7 @@ public class Boss {
 		this.y = y;
 		this.gs = gs;
 		this.setAlive(alive);
-		
+		myBullets=gs.getBulletBoss();
 	
 	}
 	
@@ -66,12 +66,12 @@ public class Boss {
 				}
 				
 				checkDead();
-				pBullet.getAlive() = false;
+				pBullet.setAlive(false);
 			}
 		}
 		//get hit by player plane
-		for (int j = 0; j < gs.getPlane().ults.size(); j++) {
-			Ult ult = gs.getPlane().ults.get(j);
+		for (int j = 0; j < gs.getPlaneults().size(); j++) {
+			Ult ult = gs.getPlaneults().get(j);
 			if (isAlive() && ult.getRectangle().intersects(getRectangle())) {
 				blood -= 50;
 				checkDead();
@@ -88,7 +88,7 @@ public class Boss {
 			gs.getExplodes().add(new Explode(x+212, y+64,gs,true,true));
 			gs.clearCount();
 			gs.levelUp();
-			gs.bossTime+=10; 
+			gs.addBossTime(); 
 			//need to modify in class plane
 			gs.getPlane().setCount(gs.getPlane().getCount() + 1);
 			if (gs.getPlane().getCount()>5) {
@@ -121,7 +121,7 @@ public class Boss {
 		System.out.println("boss bullets:" + myBullets.size());
 		for (int i = 0; i < myBullets.size(); i++) {
 			BulletBoss bulletBoss = myBullets.get(i);
-			if (bulletBoss.alive) {
+			if (bulletBoss.getAlive()) {
 				bulletBoss.drawMe(g);
 			} else {
 				myBullets.remove(i);

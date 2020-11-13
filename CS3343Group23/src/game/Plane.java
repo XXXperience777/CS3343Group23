@@ -173,6 +173,10 @@ public class Plane {
 		setCanL(setCanK(false));
 	}
 	
+	public ArrayList<Ult> getults() {
+		return this.ults;
+	}
+	
 	public void keyReleased(KeyEvent e) {
 		
 		switch (e.getKeyCode()) {

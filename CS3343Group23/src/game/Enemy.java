@@ -75,8 +75,8 @@ public class Enemy {
 				pBullet.setAlive(false);
 			}
 		}
-		for (int j = 0; j < gs.getPlane().ults.size(); j++) {
-			Ult ult=gs.getPlane().ults.get(j);
+		for (int j = 0; j < gs.getPlaneults().size(); j++) {
+			Ult ult=gs.getPlaneults().get(j);
 			if (ult.getRectangle().intersects(getRectangle())) {
 				setAlive(false);
 			}
@@ -84,9 +84,9 @@ public class Enemy {
 		Plane plane=gs.getPlane();
 		if(plane.isAlive() && plane.getRectangle().intersects(getRectangle())){
 			setAlive(false);
-			plane.minusCount();
+			plane.setCount(plane.getCount()-1);
 			if (plane.getCount()==0) {
-				plane.setDead();
+				plane.setAlive(false);
 			}
 			
 		}

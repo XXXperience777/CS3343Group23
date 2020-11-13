@@ -139,10 +139,6 @@ public class GameStart extends Frame {
 		this.score += points;
 	}
 	
-	public int addBossTime() {
-		return this.bossTime+=10;
-	}
-	
 	public void levelUp() {
 		this.level ++;
 	}
@@ -175,27 +171,7 @@ public class GameStart extends Frame {
 		return this.bulletPl;
 	}
 
-
-		public void initView() {
-			bgImg = toolkit.getImage(GameStart.class.getResource("/imgs/bg1.jpg"));
-			if (plane.isLeft) {
-				planeImg = toolkit.getImage(GameStart.class
-						.getResource("/imgs/7.png"));
-			} else if (plane.isRight) {
-				planeImg = toolkit.getImage(GameStart.class
-						.getResource("/imgs/7.png"));
-			} else {
-				planeImg = toolkit.getImage(GameStart.class
-						.getResource("/imgs/7.png"));
-			}
-			
-		}
-
-	public ArrayList<Ult> getPlaneults() {
-		return plane.getults();
-	}
 	
-
 
 	/**
 	 * 
@@ -257,11 +233,7 @@ public class GameStart extends Frame {
 				g.setColor(Color.RED);
 				g.drawString("WARNNING", 250, 100);
 			}
-<<<<<<< HEAD
-			g.drawString("Level锛�"+level, 500, 50);
-=======
-			g.drawString("Level:"+level, 500, 50);
->>>>>>> 5a1802e2ce7ce7cf60bf16b62f46e53dd71c67d9
+			g.drawString("Level："+level, 500, 50);
 			g.drawString("Score:" + score, 500, 80);
 		}
 		plane.drawMe(g);

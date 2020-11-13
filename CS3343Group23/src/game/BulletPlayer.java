@@ -140,7 +140,5 @@ public class BulletPlayer extends Bullet {
 	public void setAlive(boolean alive) {
 		this.alive = alive;
 	}
-	
-
 
 }

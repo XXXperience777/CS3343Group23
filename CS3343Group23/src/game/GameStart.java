@@ -41,13 +41,14 @@ public class GameStart extends Frame {
 	private Plane plane = new Plane(250, 500, false, this);
 	private Boss boss = new Boss(30, 50, this, true);
 	private ArrayList<Enemy> enemies = new ArrayList<Enemy>();
+	private ArrayList<BulletPlayer> bulletPl = new ArrayList<BulletPlayer>();
 	private ArrayList<BulletEm> bulletEms = new ArrayList<BulletEm>();
+	private ArrayList<BulletBoss> bulletBs = new ArrayList<BulletBoss>();
 	private ArrayList<Explode> explodes = new ArrayList<Explode>();
 	private ArrayList<Food> foods = new ArrayList<Food>();
-	private Background bg = new Background(this);
-	private Image img, bulletImg,bgImg, planeImg, bulletEmImg, bulletEm1Img, boosImg,
-	ult, continueImg, lifePlane, startImg;
-    private Image[]  bulletImgs,enemyImgs, boomImgs, bulletBossImgs, foodImgs;
+	private Background bg ;
+	private Image img;
+	private GUISetUp ui;
 	public GameStart() 
 	{
 		this.setTitle("Plane War");
@@ -56,6 +57,10 @@ public class GameStart extends Frame {
 		this.setResizable(false);
 		this.setVisible(true);
 		this.setFont(new Font("Arial", Font.PLAIN, 16));
+		
+		this.ui=GUISetUp.Instance;
+		this.bg=new Background(getUi());
+		
 		this.addWindowListener(new WindowAdapter() 
 		{
 			@Override
@@ -104,7 +109,7 @@ public class GameStart extends Frame {
 	 * @param g
 	 */
 	@Override
-	public void update(java.awt.Graphics g) {
+	public void update(Graphics g) {
 		if (img == null) {
 			img = this.createImage(width, height);
 		}
@@ -115,14 +120,12 @@ public class GameStart extends Frame {
 		g.drawImage(img, 0, 0, null);
 	}
 
-	/**
-	 * 
-	 * @param ui
-	 */
-	public void SetUp(GUISetUp ui) {
-		// TODO - implement GameStart.SetUp
-		throw new UnsupportedOperationException();
+	public void addExplode(Explode explode)
+	{
+		explodes.add(explode);
 	}
+	
+	
 	
 	public Plane getPlane() {
 		return this.plane;
@@ -134,6 +137,10 @@ public class GameStart extends Frame {
 	
 	public void addScore(int points) {
 		this.score += points;
+	}
+	
+	public int addBossTime() {
+		return this.bossTime+=10;
 	}
 	
 	public void levelUp() {
@@ -161,13 +168,14 @@ public class GameStart extends Frame {
 	}
 	
 	public ArrayList<BulletBoss> getBulletBoss() {
-		return this.bulletBoss;
+		return this.bulletBs;
 	}
 	
 	public ArrayList<BulletPlayer> getBulletPl() {
 		return this.bulletPl;
 	}
 
+<<<<<<< HEAD
 	public void initView() {
 		bgImg = toolkit.getImage(GameStart.class.getResource("/imgs/bg01.jpg"));
 		if (plane.isLeft()) {
@@ -234,6 +242,12 @@ public class GameStart extends Frame {
 			startImg = toolkit.getImage(GameStart.class
 					.getResource("/imgs/gamebegin1.gif"));
 		}
+=======
+	public ArrayList<Ult> getPlaneults() {
+		return plane.getults();
+	}
+	
+>>>>>>> 5a1802e2ce7ce7cf60bf16b62f46e53dd71c67d9
 
 	/**
 	 * 
@@ -241,8 +255,7 @@ public class GameStart extends Frame {
 	 */
 	@Override
 	public void paint(Graphics g) {
-		// TODO - implement GameStart.paint
-		throw new UnsupportedOperationException();
+		
 		if (!plane.isFirst()) {
 			bg.drawMe(g);
 			System.out.println(count);
@@ -264,7 +277,7 @@ public class GameStart extends Frame {
 			}
 			for (int i = 0; i < bulletEms.size(); i++) {
 				BulletEm bullet = bulletEms.get(i);
-				if (bullet.alive) {
+				if (bullet.isAlive()) {
 					bullet.drawMe(g);
 				} else {
 					bulletEms.remove(i);
@@ -273,7 +286,7 @@ public class GameStart extends Frame {
 
 			for (int i = 0; i < explodes.size(); i++) {
 				Explode explode = explodes.get(i);
-				if (explode.alive) {
+				if (explode.isAlive()) {
 					explode.drawMe(g);
 				} else {
 					explodes.remove(explode);
@@ -281,7 +294,7 @@ public class GameStart extends Frame {
 			}
 			if (foods.size()>0) {
 				Food food=foods.get(0);
-				if (food.alive) {
+				if (food.isAlive()) {
 					food.drawMe(g);
 				}else {
 					foods.remove(food);
@@ -290,13 +303,17 @@ public class GameStart extends Frame {
 			System.out.println("explode.size:" + explodes.size());
 			System.out.println("boostime:"+bossTime+"count:"+count);
 			if (count >= bossTime) {
-				boss.alive=true;
+				boss.setAlive(true);
 				boss.drawMe(g);
 			}else if (bossTime-count<=3) {
 				g.setColor(Color.RED);
 				g.drawString("WARNNING", 250, 100);
 			}
+<<<<<<< HEAD
 			g.drawString("Level锛�"+level, 500, 50);
+=======
+			g.drawString("Level:"+level, 500, 50);
+>>>>>>> 5a1802e2ce7ce7cf60bf16b62f46e53dd71c67d9
 			g.drawString("Score:" + score, 500, 80);
 		}
 		plane.drawMe(g);
@@ -311,6 +328,15 @@ public class GameStart extends Frame {
 	}
 
 
+
+
+	public GUISetUp getUi() {
+		return ui;
+	}
+
+
+
+
 	class MyThread extends Thread {
 		@Override
 		public void run() {
@@ -321,7 +347,7 @@ public class GameStart extends Frame {
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
-				initView();
+				
 				repaint();
 			}
 		}

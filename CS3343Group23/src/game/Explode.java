@@ -1,8 +1,9 @@
 package game;
 
 import java.awt.Graphics;
+import java.awt.Image;
 
-import com.game.GameStart;
+import game.GameStart;
 
 public class Explode {
 
@@ -27,7 +28,7 @@ public class Explode {
 		this.x = x;
 		this.y = y;
 		this.gs = gs;
-		this.alive=alive;
+		this.setAlive(alive);
 	}
 
 	/**
@@ -43,7 +44,7 @@ public class Explode {
 		this.x = x;
 		this.y = y;
 		this.gs = gs;
-		this.alive = alive;
+		this.setAlive(alive);
 		this.isBoss = isBoss;
 	}
 
@@ -52,17 +53,26 @@ public class Explode {
 	 * @param g
 	 */
 	public void drawMe(Graphics g) {
+		Image[] images=gs.getUi().getBoomImgs();
 		if (index>=10)
-			alive = false;
+			setAlive(false);
 		if (isBoss) {
-			g.drawImage(gs.boomImgs[index], x-96, y-96, width*2, height*2, null);
+			g.drawImage(images[index], x-96, y-96, width*2, height*2, null);
 		}else {
-			g.drawImage(gs.boomImgs[index], x, y, width, height, null);
+			g.drawImage(images[index], x, y, width, height, null);
 		}
 		
 		index++;
 		
 		
+	}
+
+	public boolean isAlive() {
+		return alive;
+	}
+
+	public void setAlive(boolean alive) {
+		this.alive = alive;
 	}
 
 }

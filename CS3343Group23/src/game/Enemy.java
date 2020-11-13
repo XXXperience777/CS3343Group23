@@ -27,14 +27,14 @@ public class Enemy {
 	 * @param gs
 	 */
 	public Enemy(int x, int y, boolean alive, GameStart gs) {
-		// TODO - implement Enemy.Enemy
-		this.x = x;
-		this.y = y;
+		
+		this.setX(x);
+		this.setY(y);
 		this.fx=x;
 		this.setAlive(alive);
 		this.gs = gs;
 		this.enemyImg=ui.getenemyImg()[random.nextInt(4)];
-		//throw new UnsupportedOperationException();
+		
 	}
 
 	/**
@@ -42,12 +42,12 @@ public class Enemy {
 	 * @param g
 	 */
 	public void drawMe(java.awt.Graphics g) {
-		// TODO - implement Enemy.drawMe
+	
 		isHitted();
 		if(isAlive()){
-			g.drawImage(enemyImg, x, y, width, height, null);
+			g.drawImage(enemyImg, getX(), getY(), width, height, null);
 		}else {
-			gs.getExplodes().add(new Explode(x, y, gs,true));
+			gs.getExplodes().add(new Explode(getX(), getY(), gs,true));
 			gs.addCount();
 			gs.addScore(100);
 			gs.getEnemies().remove(this);
@@ -57,18 +57,17 @@ public class Enemy {
 		if(random.nextInt(100)>97)
 			fire();
 		
-		//throw new UnsupportedOperationException();
 	}
 
 	public void fire() {
-		// TODO - implement Enemy.fire
+	
 		BulletEm bulletEm=new BulletEm(true, gs, this);
 		gs.getBulletEm().add(bulletEm);
-		//throw new UnsupportedOperationException();
+		
 	}
 
 	public void isHitted() {
-		// TODO - implement Enemy.isHitted
+	
 		for (int j = 0; j < gs.getBulletPl().size(); j++) {
 			BulletPlayer pBullet=gs.getBulletPl().get(j);
 			if (pBullet.getRectangle().intersects(getRectangle())) {
@@ -76,41 +75,41 @@ public class Enemy {
 				pBullet.setAlive(false);
 			}
 		}
-		for (int j = 0; j < gs.getPlane().ults.size(); j++) {
-			Ult ult=gs.getPlane().ults.get(j);
+		for (int j = 0; j < gs.getPlaneults().size(); j++) {
+			Ult ult=gs.getPlaneults().get(j);
 			if (ult.getRectangle().intersects(getRectangle())) {
 				setAlive(false);
 			}
 		}
 		Plane plane=gs.getPlane();
-		if(plane.getAlive() && plane.getRectangle().intersects(getRectangle())){
+		if(plane.isAlive() && plane.getRectangle().intersects(getRectangle())){
 			setAlive(false);
-			plane.minusCount();
+			plane.setCount(plane.getCount()-1);
 			if (plane.getCount()==0) {
-				plane.setDead();
+				plane.setAlive(false);
 			}
 			
 		}
-		//throw new UnsupportedOperationException();
+	
 	}
 
 	public Rectangle getRectangle() {
-		// TODO - implement Enemy.getRectangle
-		return new Rectangle(x, y, width, height);
 		
-		//throw new UnsupportedOperationException();
+		return new Rectangle(getX(), getY(), width, height);
+		
+	
 	}
 
 	public void move() {
-		// TODO - implement Enemy.move
+	
 		if(fx>=500){
-			x-=3;
+			setX(getX() - 3);
 		}else if (fx<=100){
-			x+=3;
+			setX(getX() + 3);
 		}
-		y+=5;
-		if(y>700)setAlive(false);
-		//throw new UnsupportedOperationException();
+		setY(getY() + 5);
+		if(getY()>700)setAlive(false);
+	
 	}
 
 	public boolean isAlive() {
@@ -119,6 +118,22 @@ public class Enemy {
 
 	public void setAlive(boolean alive) {
 		this.alive = alive;
+	}
+
+	public int getY() {
+		return y;
+	}
+
+	public void setY(int y) {
+		this.y = y;
+	}
+
+	public int getX() {
+		return x;
+	}
+
+	public void setX(int x) {
+		this.x = x;
 	}
 
 }

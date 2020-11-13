@@ -34,12 +34,12 @@ public class Food {
 		this.fx1=x-100;
 		this.fx2=x+100;
 		this.gs = gs;
-		this.alive = alive;
+		this.setAlive(alive);
 		index=random.nextInt(2);
 	}
 	public void drawMe(Graphics g){
 		
-		g.drawImage(gs.foodImgs[index], x, y, width, height, null);
+		g.drawImage(gs.getUi().getFoodImgs()[index], x, y, width, height, null);
 		move();
 		isEaten();
 	}
@@ -49,21 +49,27 @@ public class Food {
 		x+=5*k;
 		y+=6;
 		if(y>700){
-			alive=false;
+			setAlive(false);
 		}
 	}
 	public void isEaten(){
-		if(gs.plane.getRectangle().intersects(getRectangle())){
-			alive=false;
+		if(gs.getPlane().getRectangle().intersects(getRectangle())){
+			setAlive(false);
 			if(index==0){
-				gs.plane.canL=true;
+				gs.getPlane().setCanL(true);
 			}else {
-				gs.plane.canK=true;
+				gs.getPlane().setCanK(true);
 			}
 		}
 	}
 	public Rectangle getRectangle() {
 		return new Rectangle(x, y, width, height);
+	}
+	public boolean isAlive() {
+		return alive;
+	}
+	public void setAlive(boolean alive) {
+		this.alive = alive;
 	}
 
 }

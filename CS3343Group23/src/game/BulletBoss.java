@@ -16,19 +16,19 @@ public class BulletBoss extends Bullet {
 	private int fx;
 	private boolean alive;
 	private GameStart gs;
-	private Boss boos;
+	private Boss boss;
 	private Plane plane;
 	private Random random = new Random();
 	private int index = random.nextInt(10);
 
-	public BulletBoss(boolean alive, GameStart gs, Boss boos) {
+	public BulletBoss(boolean alive, GameStart gs, Boss boss) {
 		super();
-		this.y = boos.y+50;
-		this.x = boos.x;
+		this.y = boss.getY()+50;
+		this.x = boss.getX();
 		this.alive = alive;
 		this.gs = gs;
-		this.boos = boos;
-		this.plane = gs.plane;
+		this.boss = boss;
+		this.plane = gs.getPlane();
 	}
 
 	public void drawMe(Graphics g) {
@@ -37,15 +37,15 @@ public class BulletBoss extends Bullet {
 			if(index >= 9){
 				fx=x+20;
 				height=width=34;
-				g.drawImage(gs.bulletBossImgs[1], fx, y, width, height, null);
+				g.drawImage(gs.getUi().getBulletBossImgs()[1], fx, y, width, height, null);
 				y += 8;
 				if (plane.isAlive()&&plane.getRectangle().intersects(getRectangle(fx,y,34,34))) {
 					alive = false;
 					plane.setCount(plane.getCount() - 1);
 					System.out.println("plane count:"+plane.getCount());
-					plane.canK=false;
+					plane.setCanK(false);
 					if (plane.getCount()==0) {
-						gs.explodes.add(new Explode(plane.getX(), plane.getY(), gs, true));
+						gs.addExplode(new Explode(plane.getX(), plane.getY(), gs, true));
 						plane.setAlive(false);
 					}
 				}
@@ -53,15 +53,15 @@ public class BulletBoss extends Bullet {
 				height=11;
 				width=13;
 				fx=x+400;
-				g.drawImage(gs.bulletBossImgs[0], x+400, y+100, height, width, null);
+				g.drawImage(gs.getUi().getBulletBossImgs()[0], x+400, y+100, height, width, null);
 				move();
 				if (plane.isAlive()&&plane.getRectangle().intersects(getRectangle(fx,y+100,15,13))) {
 					alive = false;
 					plane.setCount(plane.getCount() - 1);
 					System.out.println("plane count:"+plane.getCount());
-					plane.canL=false;
+					plane.setCanL(false);
 					if (plane.getCount()==0) {
-						gs.explodes.add(new Explode(plane.getX(), plane.getY(), gs, true));
+						gs.addExplode(new Explode(plane.getX(), plane.getY(), gs, true));
 						plane.setAlive(false);
 					}
 				}
@@ -80,6 +80,10 @@ public class BulletBoss extends Bullet {
 		if (y > 700) {
 			alive = false;
 		}
+	}
+	
+	public boolean getAlive() {
+		return alive;
 	}
 
 	public Rectangle getRectangle(int... a) {

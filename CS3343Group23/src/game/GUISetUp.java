@@ -64,7 +64,7 @@ public class GUISetUp {
 				toolkit.getImage(GameStart.class.getResource("/imgs/enemy4.png")) };
 		bulletImgs = new Image[] {
 				toolkit.getImage(GameStart.class.getResource("/imgs/bullet_p.png")),
-				toolkit.getImage(GameStart.class.getResource("/imgs/Ì¹¿Ë.png"))
+				//toolkit.getImage(GameStart.class.getResource("/imgs/Ì¹¿Ë.png"))
 				};
 		bulletEmImg = toolkit.getImage(GameStart.class
 				.getResource("/imgs/bullet_e0.png"));

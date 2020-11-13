@@ -175,6 +175,7 @@ public class GameStart extends Frame {
 		return this.bulletPl;
 	}
 
+
 		public void initView() {
 			bgImg = toolkit.getImage(GameStart.class.getResource("/imgs/bg1.jpg"));
 			if (plane.isLeft) {
@@ -187,47 +188,7 @@ public class GameStart extends Frame {
 				planeImg = toolkit.getImage(GameStart.class
 						.getResource("/imgs/7.png"));
 			}
-			boomImgs = new Image[] {
-					toolkit.getImage(GameStart.class.getResource("/imgs/b1.gif")),
-					toolkit.getImage(GameStart.class.getResource("/imgs/b2.gif")),
-					toolkit.getImage(GameStart.class.getResource("/imgs/b3.gif")),
-					toolkit.getImage(GameStart.class.getResource("/imgs/b4.gif")),
-					toolkit.getImage(GameStart.class.getResource("/imgs/b5.gif")),
-					toolkit.getImage(GameStart.class.getResource("/imgs/b6.gif")),
-					toolkit.getImage(GameStart.class.getResource("/imgs/b7.gif")),
-					toolkit.getImage(GameStart.class.getResource("/imgs/b8.gif")),
-					toolkit.getImage(GameStart.class.getResource("/imgs/b9.gif")),
-					toolkit.getImage(GameStart.class.getResource("/imgs/b10.gif")),
-					toolkit.getImage(GameStart.class.getResource("/imgs/b11.gif")) };
-			enemyImgs = new Image[] {
-					toolkit.getImage(GameStart.class.getResource("/imgs/enemy1.png")),
-					toolkit.getImage(GameStart.class.getResource("/imgs/enemy2.png")),
-					toolkit.getImage(GameStart.class.getResource("/imgs/enemy3.png")),
-					toolkit.getImage(GameStart.class.getResource("/imgs/enemy4.png")) };
-			bulletImgs = new Image[] {
-					toolkit.getImage(GameStart.class.getResource("/imgs/bullet_p.png")),
-					toolkit.getImage(GameStart.class.getResource("/imgs/坦克.png"))
-					};
-			bulletEmImg = toolkit.getImage(GameStart.class
-					.getResource("/imgs/敌军子弹.png"));
-			bulletEm1Img = toolkit.getImage(GameStart.class
-					.getResource("/imgs/敌军子弹1.png"));
-			boosImg = toolkit.getImage(GameStart.class
-					.getResource("/imgs/sel_boss0.png"));
-			bulletBossImgs = new Image[] {
-					toolkit.getImage(GameStart.class
-							.getResource("/imgs/BOSS子弹.png")),
-					toolkit.getImage(GameStart.class.getResource("/imgs/子弹2.png")) };
-			ult = toolkit.getImage(GameStart.class.getResource("/imgs/BKILL.png"));
-			continueImg = toolkit.getImage(GameStart.class
-					.getResource("/imgs/continue.png"));
-			foodImgs = new Image[] {
-					toolkit.getImage(GameStart.class.getResource("/imgs/食物1.jpg")),
-					toolkit.getImage(GameStart.class.getResource("/imgs/22.png")) };
-			lifePlane = toolkit.getImage(GameStart.class
-					.getResource("/imgs/life.png"));
-			startImg = toolkit.getImage(GameStart.class
-					.getResource("/imgs/gamebegin1.gif"));
+			
 		}
 
 	public ArrayList<Ult> getPlaneults() {

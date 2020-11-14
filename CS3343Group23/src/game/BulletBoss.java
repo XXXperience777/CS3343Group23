@@ -20,7 +20,8 @@ public class BulletBoss extends Bullet {
 	private Plane plane;
 	private Random random = new Random();
 	private int index = random.nextInt(10);
-
+    private int[] a=new int[4];
+	
 	public BulletBoss(boolean alive, GameStart gs, Boss boss) {
 		super();
 		
@@ -39,7 +40,11 @@ public class BulletBoss extends Bullet {
 				height=width=25;
 				g.drawImage(gs.getUi().getBulletBossImgs()[1], fx, y, width, height, null);
 				y += 8;
-				if (plane.isAlive()&&plane.getRectangle().intersects(getRectangle(fx,y,34,34))) {
+				a[0]=fx;
+				a[1]=y;
+				a[2]=height;
+				a[3]=width;
+				if (plane.isAlive()&&plane.getRectangle().intersects(getRectangle())) {
 					alive = false;
 					plane.setLife(plane.getLife() - 1);
 
@@ -53,9 +58,13 @@ public class BulletBoss extends Bullet {
 				height=10;
 				width=15;
 				fx=x+400;
+				a[0]=fx;
+				a[1]=y+100;
+				a[2]=height;
+				a[3]=width;
 				g.drawImage(gs.getUi().getBulletBossImgs()[0], x+400, y+100, height, width, null);
 				move();
-				if (plane.isAlive()&&plane.getRectangle().intersects(getRectangle(fx,y+100,15,13))) {
+				if (plane.isAlive()&&plane.getRectangle().intersects(getRectangle())) {
 					alive = false;
 					plane.setLife(plane.getLife() - 1);
 
@@ -86,7 +95,7 @@ public class BulletBoss extends Bullet {
 		return alive;
 	}
 
-	public Rectangle getRectangle(int... a) {
+	public Rectangle getRectangle() {
 		return new Rectangle(a[0],a[1],a[2],a[3]);
 	}
 

@@ -1,24 +1,24 @@
 package game;
 
 import java.awt.Graphics;
+import java.awt.Rectangle;
 
 
-public class Bullet
+
+public abstract class Bullet
 {
-   public Bullet()
+public Bullet()
   {
 	
   }
 
-   public void drawMe(Graphics g)
-	{
+  public abstract void drawMe(Graphics g);
+	
 
-	}
-
-	public void move()
-	{
-
-	}
+  public abstract void move();
+  
+  public abstract Rectangle getRectangle();
+ 
 
 
 

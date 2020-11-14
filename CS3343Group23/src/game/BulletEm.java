@@ -13,8 +13,8 @@ public class BulletEm extends Bullet {
 	
 	private int x;
 	private int y;
-	private int width=3;
-	private int height=4;
+	private int width=18;
+	private int height=24;
 	private boolean alive;
 	private GameStart gs;
 	private Enemy enemy;
@@ -22,11 +22,12 @@ public class BulletEm extends Bullet {
 	
 	public BulletEm(boolean alive,GameStart gs,Enemy enemy) {
 		super();
+		this.enemy=enemy;
 		this.y = enemy.getY()+80;
 		this.x=enemy.getX()+34;
 		this.setAlive(alive);
 		this.gs = gs;
-		this.enemy=enemy;
+		
 	}
 
 	/**

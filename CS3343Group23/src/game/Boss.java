@@ -15,7 +15,7 @@ public class Boss {
 	private boolean alive;
 	private int k = 1; //move unit
 	private int count = 0;
-	private int blood = 400;
+	private int blood = 200;
 	private Random random = new Random();
 	private fireAbstract fireMode;
 	private GameStart gs;
@@ -55,7 +55,7 @@ public class Boss {
 			BulletPlayer pBullet = gs.getBulletPl().get(j);
 			if (isAlive() && pBullet.getRectangle().intersects(getRectangle())) {
 				
-				blood-=10;
+				blood-=3;
 				
 				checkDead();
 				pBullet.setAlive(false);
@@ -65,7 +65,7 @@ public class Boss {
 		for (int j = 0; j < gs.getPlaneults().size(); j++) {
 			Ult ult = gs.getPlaneults().get(j);
 			if (isAlive() && ult.getRectangle().intersects(getRectangle())) {
-				blood -= 50;
+				blood -= 20;
 				checkDead();
 			}
 		}
@@ -113,11 +113,11 @@ public class Boss {
 						fire();
 					}
 				case "Angry": 
-					if (random.nextInt(100) > 80) {
+					if (random.nextInt(100) > 85) {
 						fire();
 					}
 				case "Crazy": 
-					if (random.nextInt(100) > 70) {
+					if (random.nextInt(100) > 75) {
 						fire();
 					}
 				default:

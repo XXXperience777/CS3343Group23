@@ -165,7 +165,7 @@ public class GUISetUp {
 
 
 	public Image getBulletEm1Img() {
-		return bulletEm1Img;
+		return bulletEmImg;
 	}
 
 

@@ -23,11 +23,11 @@ public class BulletBoss extends Bullet {
 
 	public BulletBoss(boolean alive, GameStart gs, Boss boss) {
 		super();
+		this.boss = boss;
 		this.y = boss.getY()+50;
 		this.x = boss.getX();
 		this.alive = alive;
 		this.gs = gs;
-		this.boss = boss;
 		this.plane = gs.getPlane();
 	}
 
@@ -36,7 +36,7 @@ public class BulletBoss extends Bullet {
 		if (alive) {
 			if(index >= 9){
 				fx=x+20;
-				height=width=34;
+				height=width=25;
 				g.drawImage(gs.getUi().getBulletBossImgs()[1], fx, y, width, height, null);
 				y += 8;
 				if (plane.isAlive()&&plane.getRectangle().intersects(getRectangle(fx,y,34,34))) {
@@ -50,8 +50,8 @@ public class BulletBoss extends Bullet {
 					}
 				}
 			}else if(index<=3){
-				height=11;
-				width=13;
+				height=10;
+				width=15;
 				fx=x+400;
 				g.drawImage(gs.getUi().getBulletBossImgs()[0], x+400, y+100, height, width, null);
 				move();

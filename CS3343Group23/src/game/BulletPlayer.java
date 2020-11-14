@@ -9,13 +9,13 @@ import java.util.Random;
 public class BulletPlayer extends Bullet {
 	private int x;
 	private int y;
-	private double speed = 10;
+	private double speed = 18;
 	private int width = 20;
 	private int height = 25;
 	private boolean alive;
 	private int bType;
 	private double pi = Math.PI;
-	private java.util.Random ran = new Random();
+	private Random ran = new Random();
 	private double delta;
 	private GameStart gs;
 

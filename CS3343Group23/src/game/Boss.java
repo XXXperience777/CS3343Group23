@@ -20,7 +20,6 @@ public class Boss {
 	private fireAbstract fireMode;
 	private GameStart gs;
 	private GUISetUp ui;
-	//private ArrayList<BulletBoss> myBullets;
 
 	/**
 	 *

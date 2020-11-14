@@ -1,10 +1,8 @@
 package game;
 
-public abstract class EnemyFactory {
+import java.util.Random;
 
-	public void factoryEnemy() {
-		// TODO - implement EnemyFactory.factoryEnemy
-		throw new UnsupportedOperationException();
-	}
+public abstract class EnemyFactory {
+	public abstract Enemy factoryEnemy();
 
 }

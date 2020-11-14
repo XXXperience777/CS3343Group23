@@ -58,7 +58,7 @@ public class BulletEm extends Bullet {
 	}
 
 	public void move(){
-		y+=8;
+		y+=10;
 		if(y>700){
 			setAlive(false);
 		}

@@ -206,8 +206,9 @@ public class GameStart extends Frame {
 			bg.drawMe(g);
 
 			if (ran.nextInt(100) > 97) {
-				enemies.add(new Enemy(ran.nextInt(500) + 10, 0, true,
-						GameStart.this));
+				EnemyFactory EnFactory=new ConcreteEnemyFactory(this);
+				enemies.add(EnFactory.factoryEnemy());
+
 			}
 			if (foods.size() <3&&count==5) {
 				foods.add(new Food(ran.nextInt(500) + 10, 0, GameStart.this,

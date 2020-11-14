@@ -146,6 +146,7 @@ public class GameStart extends Frame {
 	
 	public void levelUp() {
 		this.level ++;
+		this.plane.recover();
 	}
 	
 	public void addCount() {
@@ -245,8 +246,7 @@ public class GameStart extends Frame {
 					foods.remove(food);
 				}
 			}
-			System.out.println("explode.size:" + explodes.size());
-			System.out.println("boostime:"+bossTime+"count:"+count);
+		
 			if (count >= bossTime) {
 				boss.setAlive(true);
 				boss.drawMe(g);

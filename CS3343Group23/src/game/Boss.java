@@ -15,7 +15,7 @@ public class Boss {
 	private boolean alive;
 	private int k = 1; //move unit
 	private int count = 0;
-	private int blood = 1000;
+	private int blood = 400;
 	private Random random = new Random();
 	private fireAbstract fireMode;
 	private GameStart gs;
@@ -81,7 +81,8 @@ public class Boss {
 			gs.clearCount();
 			gs.levelUp();
 			gs.addBossTime(); 
-			//need to modify in class plane
+			
+			
 			gs.getPlane().setCount(gs.getPlane().getCount() + 1);
 			if (gs.getPlane().getCount()>5) {
 				gs.getPlane().setCount(5);

@@ -14,7 +14,6 @@ public class Enemy {
 	private int height = 68;
 	private boolean alive;
 	private Image enemyImg;
-	private int k = 1;
 	private Random random = new Random();
 	private GameStart gs;
 	private GUISetUp ui;

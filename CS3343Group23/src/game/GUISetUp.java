@@ -7,14 +7,12 @@ public class GUISetUp {
 
 	private int height = 700;
 	private int width = 600;
-	private Image img;
-	private Image bulletImg;
 	private Image bgImg;
 	private Image planeImg_1;
 	private Image planeImg_2;
 	private Image planeImg_3;
 	private Image bulletEmImg;
-	private Image bulletEm1Img;
+	//private Image bulletEm1Img;
 	private Image bossImg;
 	private Image ult;
 	private Image continueImg;
@@ -25,7 +23,7 @@ public class GUISetUp {
 	private Image[] enemyImgs;
 	private Image[] boomImgs;
 	private Image[] foodImgs;
-	private Background bg = new Background(this);
+	
 	private Toolkit toolkit = Toolkit.getDefaultToolkit();
 
 
@@ -67,8 +65,8 @@ public class GUISetUp {
 				};
 		bulletEmImg = toolkit.getImage(GameStart.class
 				.getResource("/imgs/bullet_e0.png"));
-		bulletEm1Img = toolkit.getImage(GameStart.class
-				.getResource("/imgs/bullet_e1.png"));
+		//bulletEm1Img = toolkit.getImage(GameStart.class
+		//		.getResource("/imgs/bullet_e1.png"));
 		bossImg = toolkit.getImage(GameStart.class
 				.getResource("/imgs/Boss.png"));
 		bulletBossImgs = new Image[] {

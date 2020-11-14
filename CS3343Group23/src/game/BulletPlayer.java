@@ -1,21 +1,19 @@
 package game;
 
 import java.awt.Graphics;
-import java.awt.Image;
 import java.awt.Rectangle;
-import java.util.Random;
+
 
 
 public class BulletPlayer extends Bullet {
 	private int x;
 	private int y;
-	private double speed = 18;
+	private double speed = 10;
 	private int width = 20;
 	private int height = 25;
 	private boolean alive;
 	private int bType;
 	private double pi = Math.PI;
-	private Random ran = new Random();
 	private double delta;
 	private GameStart gs;
 
@@ -110,7 +108,7 @@ public class BulletPlayer extends Bullet {
 						delta = pi + Math.atan(fabs(deltay/deltax));
 					else
 						delta = 2*pi - Math.atan(fabs(deltay/deltax));
-					System.out.println("delta:"+delta);
+
 					x += speed * Math.cos(delta);
 					y += speed * Math.sin(delta);
 				}else {

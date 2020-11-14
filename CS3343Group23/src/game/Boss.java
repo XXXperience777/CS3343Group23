@@ -9,12 +9,12 @@ public class Boss {
 
 	private int x;
 	private int y;
-	private int fx;
+	
 	private int width = 424;
 	private int height = 128;
 	private boolean alive;
 	private int k = 1; //move unit
-	private int count = 0;
+	
 	private int blood = 200;
 	private Random random = new Random();
 	private fireAbstract fireMode;
@@ -30,7 +30,7 @@ public class Boss {
 	 */
 	public Boss(int x, int y, GameStart gs, boolean alive) {
 		this.x = x;
-		this.fx = x;
+		
 		this.y = y;
 		this.gs = gs;
 		this.ui=gs.getUi();

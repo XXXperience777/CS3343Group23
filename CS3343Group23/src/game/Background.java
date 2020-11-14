@@ -2,7 +2,6 @@ package game;
 
 import java.awt.Graphics;
 
-import game.GameStart;
 
 public class Background {
 

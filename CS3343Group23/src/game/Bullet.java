@@ -1,33 +1,24 @@
 package game;
 
 import java.awt.Graphics;
-import java.awt.Image;
 import java.awt.Rectangle;
-import java.util.Random;
 
-public class Bullet
+
+
+public abstract class Bullet
 {
+public Bullet()
+  {
+	
+  }
 
+  public abstract void drawMe(Graphics g);
+	
 
-
-	public Bullet()
-	{
-
-    }
-
-
-
-	public void drawMe(Graphics g)
-	{
-
-	}
-
-	public void move()
-	{
-
-	}
-
-
+  public abstract void move();
+  
+  public abstract Rectangle getRectangle();
+ 
 
 
 

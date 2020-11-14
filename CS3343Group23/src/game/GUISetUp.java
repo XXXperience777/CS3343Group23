@@ -29,10 +29,11 @@ public class GUISetUp {
 	private Toolkit toolkit = Toolkit.getDefaultToolkit();
 	
 	
-	public static GUISetUp Instance=new GUISetUp();
+	private static GUISetUp Instance=new GUISetUp();
+	public static GUISetUp getInstance() {return Instance;}
     private GUISetUp() {
 		
-		bgImg = toolkit.getImage(GameStart.class.getResource("/imgs/bg01.jpg"));
+		bgImg = toolkit.getImage(GameStart.class.getResource("/imgs/bg1.jpg"));
 		
 	    planeImg_1 = toolkit.getImage(GameStart.class
 				.getResource("/imgs/7.png"));

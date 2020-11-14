@@ -37,7 +37,7 @@ public class GameStart extends Frame {
 	private int level = 1;
 	private boolean isOver = false;
 	private Random ran = new Random();
-	private Toolkit toolkit = Toolkit.getDefaultToolkit();
+	private GUISetUp ui=GUISetUp.getInstance();
 	private Plane plane = new Plane(250, 500, false, this);
 	private Boss boss;
 	private ArrayList<Enemy> enemies = new ArrayList<Enemy>();
@@ -48,7 +48,7 @@ public class GameStart extends Frame {
 	private ArrayList<Food> foods = new ArrayList<Food>();
 	private Background bg ;
 	private Image img;
-	private GUISetUp ui;
+	
 	public GameStart() 
 	{
 		this.setTitle("Plane War");
@@ -58,8 +58,8 @@ public class GameStart extends Frame {
 		this.setVisible(true);
 		this.setFont(new Font("Arial", Font.PLAIN, 16));
 		
-		this.ui=GUISetUp.Instance;
-		this.bg=new Background(getUi());
+		//this.ui=GUISetUp.getInstance();
+		this.bg=new Background(this.ui);
 		this.boss = new Boss(30, 50, this, true);
 		
 		this.addWindowListener(new WindowAdapter() 

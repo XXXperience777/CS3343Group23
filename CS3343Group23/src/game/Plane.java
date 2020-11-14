@@ -2,7 +2,7 @@ package game;
 
 import java.util.*;
 
-import game.Bullet;
+
 import game.GameStart;
 import game.LifePlane;
 import game.Ult;
@@ -23,7 +23,7 @@ public class Plane {
 	private boolean isDown;
 	private boolean isLeft;
 	private boolean isRight;
-	private int blood = 100;
+	
 	private int life = 5;
 	private boolean isFirst = true;
 	private boolean canL;
@@ -147,14 +147,14 @@ public class Plane {
 			case KeyEvent.VK_L:
 				if (this.alive&&this.canL) {
 					this.l.pressKey(this);
-					System.out.println("llllllllllllllllllllllllllllllll");
+					
 
 				}
 				break;
 			case KeyEvent.VK_K:
 				if (this.alive&&this.canK) {
 					this.k.pressKey(this);
-					System.out.println("kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk");
+					
 				}
 				break;
 			}

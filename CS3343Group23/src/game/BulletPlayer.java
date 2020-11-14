@@ -1,9 +1,8 @@
 package game;
 
 import java.awt.Graphics;
-import java.awt.Image;
 import java.awt.Rectangle;
-import java.util.Random;
+
 
 
 public class BulletPlayer extends Bullet {
@@ -15,7 +14,7 @@ public class BulletPlayer extends Bullet {
 	private boolean alive;
 	private int bType;
 	private double pi = Math.PI;
-	private java.util.Random ran = new Random();
+	//private Random ran = new Random();
 	private double delta;
 	private GameStart gs;
 
@@ -110,7 +109,7 @@ public class BulletPlayer extends Bullet {
 						delta = pi + Math.atan(fabs(deltay/deltax));
 					else
 						delta = 2*pi - Math.atan(fabs(deltay/deltax));
-					System.out.println("delta:"+delta);
+
 					x += speed * Math.cos(delta);
 					y += speed * Math.sin(delta);
 				}else {

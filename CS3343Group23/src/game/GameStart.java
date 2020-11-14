@@ -5,13 +5,13 @@ import java.awt.Font;
 import java.awt.Frame;
 import java.awt.Graphics;
 import java.awt.Image;
-import java.awt.Toolkit;
+
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
-import java.util.List;
+
 import java.util.Random;
 
 import javax.swing.JOptionPane;
@@ -21,21 +21,25 @@ import game.Enemy;
 import game.Explode;
 import game.Food;
 import game.GameStart;
-import game.GameStart.MyThread;
+
 
 
 
 public class GameStart extends Frame {
 
-	private Background gs;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
 	private int height = 700;
 	private int width = 600;
 	private int count = 0;
-	private int num = 0;
+
 	private int score = 0;
 	private int bossTime = 5; //?
 	private int level = 1;
-	private boolean isOver = false;
+	
 	private Random ran = new Random();
 	private GUISetUp ui=GUISetUp.getInstance();
 	private Plane plane = new Plane(250, 500, false, this);
@@ -89,7 +93,7 @@ public class GameStart extends Frame {
 				if (!plane.isAlive() &&e.getKeyCode()==KeyEvent.VK_ESCAPE)
 				{
 					int n = JOptionPane.showConfirmDialog(null, "Exit Game?", "Plane War",JOptionPane.YES_NO_OPTION);
-					System.out.println("n:"+n);
+
 					if (n==0) {
 						System.exit(0);
 					}

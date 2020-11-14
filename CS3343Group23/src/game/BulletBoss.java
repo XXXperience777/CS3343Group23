@@ -16,14 +16,14 @@ public class BulletBoss extends Bullet {
 	private int fx;
 	private boolean alive;
 	private GameStart gs;
-	private Boss boss;
+	
 	private Plane plane;
 	private Random random = new Random();
 	private int index = random.nextInt(10);
 
 	public BulletBoss(boolean alive, GameStart gs, Boss boss) {
 		super();
-		this.boss = boss;
+		
 		this.y = boss.getY()+50;
 		this.x = boss.getX();
 		this.alive = alive;
@@ -42,7 +42,7 @@ public class BulletBoss extends Bullet {
 				if (plane.isAlive()&&plane.getRectangle().intersects(getRectangle(fx,y,34,34))) {
 					alive = false;
 					plane.setLife(plane.getLife() - 1);
-					System.out.println("plane count:"+plane.getLife());
+
 					plane.setCanK(false);
 					if (plane.getLife()==0) {
 						gs.addExplode(new Explode(plane.getX(), plane.getY(), gs, true));
@@ -58,7 +58,7 @@ public class BulletBoss extends Bullet {
 				if (plane.isAlive()&&plane.getRectangle().intersects(getRectangle(fx,y+100,15,13))) {
 					alive = false;
 					plane.setLife(plane.getLife() - 1);
-					System.out.println("plane count:"+plane.getLife());
+
 					plane.setCanL(false);
 					if (plane.getLife()==0) {
 						gs.addExplode(new Explode(plane.getX(), plane.getY(), gs, true));

@@ -107,11 +107,11 @@ public class Boss {
 			switch (fireMode.getFireMode())
 			{
 				case "Normal":
-					if (random.nextInt(100) > 90) {
+					if (random.nextInt(100) > 92) {
 						fire();
 					}
 				case "Angry":
-					if (random.nextInt(100) > 85) {
+					if (random.nextInt(100) > 88) {
 						fire();
 					}
 				case "Crazy":

@@ -27,23 +27,23 @@ public class GUISetUp {
 	private Image[] foodImgs;
 	private Background bg = new Background(this);
 	private Toolkit toolkit = Toolkit.getDefaultToolkit();
-	
-	
+
+
 	private static GUISetUp Instance=new GUISetUp();
 	public static GUISetUp getInstance() {return Instance;}
     private GUISetUp() {
-		
+
 		bgImg = toolkit.getImage(GameStart.class.getResource("/imgs/bg1.jpg"));
-		
+
 	    planeImg_1 = toolkit.getImage(GameStart.class
 				.getResource("/imgs/7.png"));
-		
+
 	    planeImg_2 = toolkit.getImage(GameStart.class
 				.getResource("/imgs/7.png"));
-	
+
 		planeImg_3 = toolkit.getImage(GameStart.class
 				.getResource("/imgs/7.png"));
-		
+
 		boomImgs = new Image[] {
 				toolkit.getImage(GameStart.class.getResource("/imgs/b1.gif")),
 				toolkit.getImage(GameStart.class.getResource("/imgs/b2.gif")),
@@ -87,25 +87,25 @@ public class GUISetUp {
 				.getResource("/imgs/GameStart.png"));
 	}
 
-	
+
 	public Image getbossImg() {
 		return this.bossImg;
 	}
-	
+
 	public Image[] getenemyImg() {
 		return this.enemyImgs;
 	}
-	
+
 	public Image[] getbulletImgs() {
 		return this.getBulletImgs();
 	}
-	
+
 	public Image[] getbulletBossImgs() {
 		return this.getBulletBossImgs();
 	}
-	
-	
-	
+
+
+
 	public Image getBgImg() {
 		return bgImg;
 	}

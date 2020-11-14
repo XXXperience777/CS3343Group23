@@ -6,14 +6,14 @@ import game.GameStart;
 
 public class Background {
 
-	
+
 	private int x = 0;
 	private int y = 0;
 	private int y1 = 700;
 	private GUISetUp gs;
 
 	/**
-	 * 
+	 *
 	 * @param gs
 	 */
 	public Background(GUISetUp gs) {

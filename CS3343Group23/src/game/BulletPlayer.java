@@ -20,7 +20,7 @@ public class BulletPlayer extends Bullet {
 	private GameStart gs;
 
 	/**
-	 * 
+	 *
 	 * @param alive
 	 * @param gs
 	 */
@@ -33,7 +33,7 @@ public class BulletPlayer extends Bullet {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param x
 	 * @param y
 	 * @param alive
@@ -50,7 +50,7 @@ public class BulletPlayer extends Bullet {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param g
 	 */
 	public void drawMe(Graphics g) {
@@ -84,30 +84,30 @@ public class BulletPlayer extends Bullet {
 	}
 
 	private void traceMove() {
-	
+
 				int eSize = gs.getEnemies().size();
 				if (eSize > 0) {
 					Enemy enemy = gs.getEnemies().get(0);
 					double deltax = enemy.getX() - x;
 					double deltay = enemy.getY() - y;
 					if (deltax == 0) {
-						if (enemy.getY()>=y ) 
+						if (enemy.getY()>=y )
 							deltax = 0.0000001;
 						else
 							deltax = -0.0000001;
 					}
 					if (deltay == 0) {
-						if (enemy.getX()>=x) 
+						if (enemy.getX()>=x)
 							deltay = 0.0000001;
 						else
 							deltay = -0.0000001;
 					}
 					if( deltax>0 && deltay>0 )
-						delta = Math.atan(fabs(deltay / deltax)); 
+						delta = Math.atan(fabs(deltay / deltax));
 					else if( deltax<0 && deltay>0 )
-						delta = pi - Math.atan(fabs(deltay / deltax)); 
-					else if( deltax<0 && deltay<0 )  
-						delta = pi + Math.atan(fabs(deltay/deltax)); 
+						delta = pi - Math.atan(fabs(deltay / deltax));
+					else if( deltax<0 && deltay<0 )
+						delta = pi + Math.atan(fabs(deltay/deltax));
 					else
 						delta = 2*pi - Math.atan(fabs(deltay/deltax));
 					System.out.println("delta:"+delta);
@@ -119,7 +119,7 @@ public class BulletPlayer extends Bullet {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param d
 	 */
 	private double fabs(double d) {
@@ -140,7 +140,7 @@ public class BulletPlayer extends Bullet {
 	public void setAlive(boolean alive) {
 		this.alive = alive;
 	}
-	
+
 
 
 }

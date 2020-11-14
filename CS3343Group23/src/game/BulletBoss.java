@@ -32,7 +32,7 @@ public class BulletBoss extends Bullet {
 	}
 
 	public void drawMe(Graphics g) {
-		
+
 		if (alive) {
 			if(index >= 9){
 				fx=x+20;
@@ -41,10 +41,10 @@ public class BulletBoss extends Bullet {
 				y += 8;
 				if (plane.isAlive()&&plane.getRectangle().intersects(getRectangle(fx,y,34,34))) {
 					alive = false;
-					plane.setCount(plane.getCount() - 1);
-					System.out.println("plane count:"+plane.getCount());
+					plane.setLife(plane.getLife() - 1);
+					System.out.println("plane count:"+plane.getLife());
 					plane.setCanK(false);
-					if (plane.getCount()==0) {
+					if (plane.getLife()==0) {
 						gs.addExplode(new Explode(plane.getX(), plane.getY(), gs, true));
 						plane.setAlive(false);
 					}
@@ -57,10 +57,10 @@ public class BulletBoss extends Bullet {
 				move();
 				if (plane.isAlive()&&plane.getRectangle().intersects(getRectangle(fx,y+100,15,13))) {
 					alive = false;
-					plane.setCount(plane.getCount() - 1);
-					System.out.println("plane count:"+plane.getCount());
+					plane.setLife(plane.getLife() - 1);
+					System.out.println("plane count:"+plane.getLife());
 					plane.setCanL(false);
-					if (plane.getCount()==0) {
+					if (plane.getLife()==0) {
 						gs.addExplode(new Explode(plane.getX(), plane.getY(), gs, true));
 						plane.setAlive(false);
 					}
@@ -71,8 +71,8 @@ public class BulletBoss extends Bullet {
 	}
 
 	public void isHitted() {
-		
-		
+
+
 	}
 
 	public void move() {
@@ -81,7 +81,7 @@ public class BulletBoss extends Bullet {
 			alive = false;
 		}
 	}
-	
+
 	public boolean getAlive() {
 		return alive;
 	}

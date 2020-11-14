@@ -8,8 +8,8 @@ public class U implements Command {
 
 	@Override
 	public void releaseKey(Plane plane) {
-		
-		
+
+
 	}
 
 }

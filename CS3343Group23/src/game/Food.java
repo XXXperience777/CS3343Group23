@@ -21,7 +21,7 @@ public class Food {
 	private GameStart gs;
 
 	/**
-	 * 
+	 *
 	 * @param x
 	 * @param y
 	 * @param gs
@@ -38,13 +38,12 @@ public class Food {
 		index=random.nextInt(2);
 	}
 	public void drawMe(Graphics g){
-		
+
 		g.drawImage(gs.getUi().getFoodImgs()[index], x, y, width, height, null);
 		move();
 		isEaten();
 	}
 	public void move() {
-		// TODO Auto-generated method stub
 		if(x<fx1||x>fx2)k=-k;
 		x+=5*k;
 		y+=6;

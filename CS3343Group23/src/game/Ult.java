@@ -15,7 +15,7 @@ public class Ult {
 	GameStart gs;
 
 	/**
-	 * 
+	 *
 	 * @param gs
 	 * @param alive
 	 */

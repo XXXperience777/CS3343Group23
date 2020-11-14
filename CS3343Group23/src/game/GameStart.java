@@ -48,8 +48,8 @@ public class GameStart extends Frame {
 	private ArrayList<Food> foods = new ArrayList<Food>();
 	private Background bg ;
 	private Image img;
-	
-	public GameStart() 
+
+	public GameStart()
 	{
 		this.setTitle("Plane War");
 		this.setSize(width, height);
@@ -57,36 +57,36 @@ public class GameStart extends Frame {
 		this.setResizable(false);
 		this.setVisible(true);
 		this.setFont(new Font("Arial", Font.PLAIN, 16));
-		
+
 		//this.ui=GUISetUp.getInstance();
 		this.bg=new Background(this.ui);
 		this.boss = new Boss(30, 50, this, true);
-		
-		this.addWindowListener(new WindowAdapter() 
+
+		this.addWindowListener(new WindowAdapter()
 		{
 			@Override
-			public void windowClosing(WindowEvent e) 
+			public void windowClosing(WindowEvent e)
 			{
-				
+
 				System.exit(0);
 			}
 		});
-		this.addKeyListener(new KeyAdapter() 
+		this.addKeyListener(new KeyAdapter()
 		{
 			@Override
-			public void keyPressed(KeyEvent e) 
+			public void keyPressed(KeyEvent e)
 			{
-		
+
 				plane.keyPressed(e);
-				if (!plane.isAlive()&& e.getKeyCode() == KeyEvent.VK_ENTER) 
+				if (!plane.isAlive()&& e.getKeyCode() == KeyEvent.VK_ENTER)
 				{
 					plane.setAlive(true);
 					plane.setFirst(false);
-					plane.setCount(5);
+					plane.setLife(5);
 					plane.setX(250);
 					plane.setY(500);
 				}
-				if (!plane.isAlive() &&e.getKeyCode()==KeyEvent.VK_ESCAPE) 
+				if (!plane.isAlive() &&e.getKeyCode()==KeyEvent.VK_ESCAPE)
 				{
 					int n = JOptionPane.showConfirmDialog(null, "Exit Game?", "Plane War",JOptionPane.YES_NO_OPTION);
 					System.out.println("n:"+n);
@@ -106,7 +106,7 @@ public class GameStart extends Frame {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param g
 	 */
 	@Override
@@ -125,9 +125,9 @@ public class GameStart extends Frame {
 	{
 		explodes.add(explode);
 	}
-	
-	
-	
+
+
+
 	public Plane getPlane() {
 		return this.plane;
 	}
@@ -135,76 +135,76 @@ public class GameStart extends Frame {
 	public int getScore() {
 		return this.score;
 	}
-	
+
 	public void addScore(int points) {
 		this.score += points;
 	}
-	
+
 	public int addBossTime() {
 		return this.bossTime+=10;
 	}
-	
+
 	public void levelUp() {
 		this.level ++;
 		this.plane.recover();
 	}
-	
+
 	public void addCount() {
 		this.count ++;
 	}
-	
+
 	public void clearCount() {
 		this.count=0;
 	}
-	
+
 	public ArrayList<Explode> getExplodes() {
 		return this.explodes;
 	}
-	
+
 	public ArrayList<Enemy> getEnemies() {
 		return this.enemies;
 	}
-	
+
 	public ArrayList<BulletEm> getBulletEm() {
 		return this.bulletEms;
 	}
-	
+
 	public void addBulletEm(boolean alive, Enemy thisEm) {
 		bulletEms.add(new BulletEm(alive, this, thisEm));
 	}
-	
+
 	public ArrayList<BulletBoss> getBulletBoss() {
 		return this.bulletBs;
 	}
-	
+
 	public void addBulletBoss(boolean alive) {
 		bulletBs.add(new BulletBoss(alive, this, this.boss));
 	}
-	
+
 	public ArrayList<BulletPlayer> getBulletPl() {
 		return this.bulletPl;
 	}
-	
-	public void addBulletPl(boolean alive) {
-		bulletPl.add(new BulletPlayer(alive, this));
+
+	public void addBulletPl(BulletPlayer bullet) {
+		bulletPl.add(bullet);
 	}
 
 	public ArrayList<Ult> getPlaneults() {
 		return plane.getults();
 	}
-	
-	
+
+
 
 	/**
-	 * 
+	 *
 	 * @param g
 	 */
 	@Override
 	public void paint(Graphics g) {
-		
+
 		if (!plane.isFirst()) {
 			bg.drawMe(g);
-			System.out.println(count);
+
 			if (ran.nextInt(100) > 97) {
 				enemies.add(new Enemy(ran.nextInt(500) + 10, 0, true,
 						GameStart.this));
@@ -246,7 +246,7 @@ public class GameStart extends Frame {
 					foods.remove(food);
 				}
 			}
-		
+
 			if (count >= bossTime) {
 				boss.setAlive(true);
 				boss.drawMe(g);
@@ -261,7 +261,7 @@ public class GameStart extends Frame {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param args
 	 */
 	public static void main(String[] args) {
@@ -281,14 +281,14 @@ public class GameStart extends Frame {
 	class MyThread extends Thread {
 		@Override
 		public void run() {
-		
+
 			while (true) {
 				try {
 					sleep(30);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
-				
+
 				repaint();
 			}
 		}

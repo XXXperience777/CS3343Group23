@@ -17,7 +17,7 @@ public class Explode {
 	private GameStart gs;
 
 	/**
-	 * 
+	 *
 	 * @param x
 	 * @param y
 	 * @param gs
@@ -32,7 +32,7 @@ public class Explode {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param x
 	 * @param y
 	 * @param gs
@@ -49,7 +49,7 @@ public class Explode {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param g
 	 */
 	public void drawMe(Graphics g) {
@@ -61,10 +61,10 @@ public class Explode {
 		}else {
 			g.drawImage(images[index], x, y, width, height, null);
 		}
-		
+
 		index++;
-		
-		
+
+
 	}
 
 	public boolean isAlive() {

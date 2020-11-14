@@ -10,7 +10,7 @@ import game.Plane;
 
 
 public class BulletEm extends Bullet {
-	
+
 	private int x;
 	private int y;
 	private int width=18;
@@ -19,7 +19,7 @@ public class BulletEm extends Bullet {
 	private GameStart gs;
 	private Enemy enemy;
 	private Graphics g;
-	
+
 	public BulletEm(boolean alive,GameStart gs,Enemy enemy) {
 		super();
 		this.enemy=enemy;
@@ -27,11 +27,11 @@ public class BulletEm extends Bullet {
 		this.x=enemy.getX()+34;
 		this.setAlive(alive);
 		this.gs = gs;
-		
+
 	}
 
 	/**
-	 * 
+	 *
 	 * @param g
 	 */
 	public void drawMe(Graphics g) {
@@ -46,14 +46,14 @@ public class BulletEm extends Bullet {
 		Plane plane=gs.getPlane();
 		if (plane.isAlive()&&plane.getRectangle().intersects(getRectangle())) {
 			setAlive(false);
-			plane.setCount(plane.getCount() - 1);
+			plane.setLife(plane.getLife() - 1);
 			plane.setCanK(false);
 			plane.setCanL(false);
-			if (plane.getCount()==0) {
+			if (plane.getLife()==0) {
 				gs.addExplode(new Explode(plane.getX(), plane.getY(), gs,true));
 				plane.setAlive(false);
 			}
-			
+
 		}
 	}
 
@@ -64,7 +64,7 @@ public class BulletEm extends Bullet {
 		}
 	}
 	public void ult(){
-		
+
 	}
 	public Rectangle getRectangle(){
 		return new Rectangle(x, y, width, height);
@@ -78,6 +78,6 @@ public class BulletEm extends Bullet {
 		this.alive = alive;
 	}
 
-	
+
 
 }

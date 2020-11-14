@@ -9,7 +9,7 @@ public class W implements Command {
 	@Override
 	public void releaseKey(Plane plane) {
 		plane.setUp(false);
-		
+
 	}
 
 }

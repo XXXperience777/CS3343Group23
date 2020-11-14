@@ -8,7 +8,7 @@ public class A implements Command {
 
 	@Override
 	public void releaseKey(Plane plane) {
-		
+
 		plane.setLeft(false);
 	}
 

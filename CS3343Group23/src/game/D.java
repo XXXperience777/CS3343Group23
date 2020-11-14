@@ -9,7 +9,7 @@ public class D implements Command {
 	@Override
 	public void releaseKey(Plane plane) {
 		plane.setRight(false);
-		
+
 	}
 
 }

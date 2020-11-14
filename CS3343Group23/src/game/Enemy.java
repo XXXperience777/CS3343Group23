@@ -20,14 +20,14 @@ public class Enemy {
 	private GUISetUp ui;
 
 	/**
-	 * 
+	 *
 	 * @param x
 	 * @param y
 	 * @param alive
 	 * @param gs
 	 */
 	public Enemy(int x, int y, boolean alive, GameStart gs) {
-		
+
 		this.setX(x);
 		this.setY(y);
 		this.fx=x;
@@ -35,15 +35,15 @@ public class Enemy {
 		this.gs = gs;
 		this.ui = gs.getUi();
 		this.enemyImg=ui.getenemyImg()[random.nextInt(4)];
-		
+
 	}
 
 	/**
-	 * 
+	 *
 	 * @param g
 	 */
-	public void drawMe(java.awt.Graphics g) {
-	
+	public void drawMe(Graphics g) {
+
 		isHitted();
 		if(isAlive()){
 			g.drawImage(enemyImg, getX(), getY(), width, height, null);
@@ -53,25 +53,25 @@ public class Enemy {
 			gs.addScore(100);
 			gs.getEnemies().remove(this);
 		}
-	
+
 		move();
 		if(random.nextInt(100)>98)
 			fire();
-		
+
 	}
 
 	public void fire() {
-	
+
 		gs.addBulletEm(this.alive, this);
-		
+
 	}
 
 	public void isHitted() {
-	
-		System.out.println(gs.getBulletPl().size());
+
+
 		for (int j = 0; j < gs.getBulletPl().size(); j++) {
 			BulletPlayer pBullet=gs.getBulletPl().get(j);
-			System.out.println(pBullet.getRectangle().intersects(this.getRectangle()));
+
 			if (pBullet.getRectangle().intersects(this.getRectangle())) {
 				setAlive(false);
 				pBullet.setAlive(false);
@@ -81,30 +81,30 @@ public class Enemy {
 			Ult ult=gs.getPlaneults().get(j);
 			if (ult.getRectangle().intersects(getRectangle())) {
 				setAlive(false);
-				
+
 			}
 		}
 		Plane plane=gs.getPlane();
 		if(plane.isAlive() && plane.getRectangle().intersects(getRectangle())){
 			setAlive(false);
-			plane.setCount(plane.getCount()-1);
-			if (plane.getCount()==0) {
+			plane.setLife(plane.getLife()-1);
+			if (plane.getLife()==0) {
 				plane.setAlive(false);
 			}
-			
+
 		}
-	
+
 	}
 
 	public Rectangle getRectangle() {
-		
+
 		return new Rectangle(x, y, width, height);
-		
-	
+
+
 	}
 
 	public void move() {
-	
+
 		if(fx>=500){
 			setX(getX() - 3);
 		}else if (fx<=100){
@@ -112,7 +112,7 @@ public class Enemy {
 		}
 		setY(getY() + 5);
 		if(getY()>700)setAlive(false);
-	
+
 	}
 
 	public boolean isAlive() {

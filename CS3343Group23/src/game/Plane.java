@@ -24,7 +24,7 @@ public class Plane {
 	private boolean isLeft;
 	private boolean isRight;
 	private int blood = 100;
-	private int count = 5;
+	private int life = 5;
 	private boolean isFirst = true;
 	private boolean canL;
 	private boolean canK;
@@ -40,14 +40,14 @@ public class Plane {
 	private Command k=new K();
 	private Command l=new L();
 	private Command u=new U();
-	
+
 	public Plane(int x, int y, boolean alive, GameStart gs) {
 		super();
 		this.setX(x);
 		this.setY(y);
 		this.setAlive(alive);
 		this.gs = gs;
-		
+
 	}
 	public Plane(boolean alive) {
 		super();
@@ -58,8 +58,8 @@ public class Plane {
 		GUISetUp ui=this.gs.getUi();
 		if (isAlive()) {
 			int index=0;
-			System.out.println("count:"+getCount());
-			for (int i = 0; i < getCount(); i++) {
+
+			for (int i = 0; i < getLife(); i++) {
 				lives[i]=new LifePlane(index, 40, ui, true);
 				index+=30;
 			}
@@ -81,8 +81,8 @@ public class Plane {
 				planeImg = ui.getPlaneImg_3();
 			}
 			g.drawImage(planeImg, getX(), getY(), width, height, null);
-			
-			
+
+
 		}else {
 			if(isFirst()){
 				g.drawImage(ui.getStartImg(), 0, 0, 600, 700, null);
@@ -90,8 +90,8 @@ public class Plane {
 			}
 			g.drawImage(ui.getContinueImg(), 150,250, 300, 200, null);
 		}
-		
-	
+
+
 		for (int i = 0; i < gs.getBulletPl().size(); i++) {
 			BulletPlayer bullet = gs.getBulletPl().get(i);
 			if (bullet.isAlive()&&isAlive()) {
@@ -109,7 +109,7 @@ public class Plane {
 				ults.remove(i);
 			}
 		}
-		for (int i = 0; i < getCount(); i++) {
+		for (int i = 0; i < getLife(); i++) {
 			LifePlane life=lives[i];
 			if (isAlive()) {
 				life.drawMe(g);
@@ -119,7 +119,7 @@ public class Plane {
 	}
 
 	public void keyPressed(KeyEvent e) {
-	
+
 		if (isAlive()) {
 			switch (e.getKeyCode()) {
 			case KeyEvent.VK_W:
@@ -135,24 +135,26 @@ public class Plane {
 				this.d.pressKey(this);
 				break;
 			case KeyEvent.VK_J:
-				if (isAlive())
+				if (this.alive)
 					this.j.pressKey(this);
 				break;
 			case KeyEvent.VK_U:
-				if(isAlive()&&isCanK()&&isCanL()){
-					
+				if(this.alive&&this.canK&&this.canL){
+
 					this.u.pressKey(this);
 				}
 				break;
 			case KeyEvent.VK_L:
-				if (isAlive()&&isCanL()) {
+				if (this.alive&&this.canL) {
 					this.l.pressKey(this);
+					System.out.println("llllllllllllllllllllllllllllllll");
+
 				}
 				break;
 			case KeyEvent.VK_K:
-				if (isAlive()&&isCanK()) {
+				if (this.alive&&this.canK) {
 					this.k.pressKey(this);
-					
+					System.out.println("kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk");
 				}
 				break;
 			}
@@ -161,24 +163,46 @@ public class Plane {
 
 
 	}
-	
+
 	public void addBullet(BulletPlayer bullet)
 	{
-		gs.addBulletPl(this.alive);
+		gs.addBulletPl(bullet);
 	}
-	
-	public  void ult() {
-		
+	public void grapeShot()
+	{
+
+		this.addBullet(new BulletPlayer(this.x+22, this.y-20, true, this.getGs(), 1));
+		this.addBullet(new BulletPlayer(this.x+12, this.y-20, true, this.getGs(), 1));
+		this.addBullet(new BulletPlayer(this.x+40, this.y-20, true, this.getGs(), 2));
+		this.addBullet(new BulletPlayer(this.x+50, this.y-20, true, this.getGs(), 2));
+		this.addBullet(new BulletPlayer(this.x+66, this.y-20, true, this.getGs(), 3));
+		this.addBullet(new BulletPlayer(this.x+76, this.y-20, true, this.getGs(), 3));
+		this.canK=false;
+	}
+	public void traceShot()
+	{
+
+			this.addBullet(new BulletPlayer(this.x+44, this.y-20, true, this.gs,4) );
+			this.addBullet(new BulletPlayer(this.x+44, this.y-20, true, this.gs,4) );
+			this.addBullet(new BulletPlayer(this.x+44, this.y-20, true, this.gs,4) );
+			this.addBullet(new BulletPlayer(this.x+44, this.y-20, true, this.gs,4) );
+			this.addBullet(new BulletPlayer(this.x+44, this.y-20, true, this.gs,4) );
+			this.addBullet(new BulletPlayer(this.x+44, this.y-20, true, this.gs,4) );
+			this.canL=false;
+	}
+	public void ult() {
+
 		ults.add(new Ult(getGs(), true));
-		setCanL(setCanK(false));
+		this.canL=false;
+		this.canK=false;
 	}
-	
+
 	public ArrayList<Ult> getults() {
 		return this.ults;
 	}
-	
+
 	public void keyReleased(KeyEvent e) {
-		
+
 		switch (e.getKeyCode()) {
 
 		case KeyEvent.VK_W:
@@ -195,25 +219,20 @@ public class Plane {
 			this.d.releaseKey(this);
 			break;
 		case KeyEvent.VK_J:
-			if (isAlive())
-				this.j.releaseKey(this);
+			this.j.releaseKey(this);
 			break;
 		case KeyEvent.VK_U:
-			if(isAlive()&&isCanK()&&isCanL()){
-				
-				this.u.releaseKey(this);
-			}
+			this.u.releaseKey(this);
+
 			break;
 		case KeyEvent.VK_L:
-			if (isAlive()&&isCanL()) {
-				this.l.releaseKey(this);
-			}
+			this.l.releaseKey(this);
+
 			break;
 		case KeyEvent.VK_K:
-			if (isAlive()&&isCanK()) {
-				this.k.releaseKey(this);
-				
-			}
+			this.k.releaseKey(this);
+
+
 			break;
 		}
 	}
@@ -277,9 +296,9 @@ public class Plane {
 			}
 		}
 	}
-   public void recover() {this.count=5;}
-	
-	
+   public void recover() {this.life=5;}
+
+
 	public Rectangle getRectangle() {
 		return new Rectangle(getX(), getY(), width, height);
 	}
@@ -295,11 +314,11 @@ public class Plane {
 	public void setFirst(boolean isFirst) {
 		this.isFirst = isFirst;
 	}
-	public int getCount() {
-		return count;
+	public int getLife() {
+		return life;
 	}
-	public void setCount(int count) {
-		this.count = count;
+	public void setLife(int count) {
+		this.life = count;
 	}
 	public int getX() {
 		return x;
@@ -335,17 +354,17 @@ public class Plane {
 		this.isUp = isUp;
 	}
 	public boolean isCanL() {
-		return canL;
+		return this.canL;
 	}
 	public boolean isCanK() {
-		return canK;
+		return this.canK;
 	}
 	public void setCanL(boolean canL) {
 		this.canL = canL;
 	}
-	public boolean setCanK(boolean canK) {
+	public void setCanK(boolean canK) {
 		this.canK = canK;
-		return canK;
+
 	}
 
 }

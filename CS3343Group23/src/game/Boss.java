@@ -23,14 +23,13 @@ public class Boss {
 	//private ArrayList<BulletBoss> myBullets;
 
 	/**
-	 * 
+	 *
 	 * @param x
 	 * @param y
 	 * @param gs
 	 * @param alive
 	 */
 	public Boss(int x, int y, GameStart gs, boolean alive) {
-		// TODO - implement Boss.Boss
 		this.x = x;
 		this.fx = x;
 		this.y = y;
@@ -38,25 +37,25 @@ public class Boss {
 		this.ui=gs.getUi();
 		this.setAlive(alive);
 		this.fireMode=new Normal();
-	
+
 	}
-	
+
 	public int getX() {
 		return x;
 	}
-	
+
 	public int getY() {
 		return y;
 	}
 
 	public void isHitted() {
-		
+
 		for (int j = 0; j < gs.getBulletPl().size(); j++) {
 			BulletPlayer pBullet = gs.getBulletPl().get(j);
 			if (isAlive() && pBullet.getRectangle().intersects(getRectangle())) {
-				
+
 				blood-=3;
-				
+
 				checkDead();
 				pBullet.setAlive(false);
 			}
@@ -69,34 +68,34 @@ public class Boss {
 				checkDead();
 			}
 		}
-		
+
 	}
 
 	public void checkDead() {
-	
+
 		if (blood <= 0 && isAlive()) {
 			setAlive(false);
 			gs.addScore(1000);
 			gs.getExplodes().add(new Explode(x+212, y+64,gs,true,true));
 			gs.clearCount();
 			gs.levelUp();
-			gs.addBossTime(); 
-			
-			
-			gs.getPlane().setCount(gs.getPlane().getCount() + 1);
-			if (gs.getPlane().getCount()>5) {
-				gs.getPlane().setCount(5);
+			gs.addBossTime();
+
+
+			gs.getPlane().setLife(gs.getPlane().getLife() + 1);
+			if (gs.getPlane().getLife()>5) {
+				gs.getPlane().setLife(5);
 			}
 		}
-		
+
 	}
 
 	/**
-	 * 
+	 *
 	 * @param g
 	 */
 	public void drawMe(Graphics g) {
-	
+
 		isHitted();
 		if (isAlive()) {
 			g.setColor(Color.WHITE);
@@ -108,15 +107,15 @@ public class Boss {
 
 			switch (fireMode.getFireMode())
 			{
-				case "Normal": 
+				case "Normal":
 					if (random.nextInt(100) > 90) {
 						fire();
 					}
-				case "Angry": 
+				case "Angry":
 					if (random.nextInt(100) > 85) {
 						fire();
 					}
-				case "Crazy": 
+				case "Crazy":
 					if (random.nextInt(100) > 75) {
 						fire();
 					}
@@ -128,7 +127,7 @@ public class Boss {
 		}else {
 			blood=200;
 		}
-		System.out.println("boss bullets:" + gs.getBulletBoss().size());
+
 		for (int i = 0; i < gs.getBulletBoss().size(); i++) {
 			BulletBoss bulletBoss = gs.getBulletBoss().get(i);
 			if (bulletBoss.getAlive()) {
@@ -137,17 +136,17 @@ public class Boss {
 				gs.getBulletBoss().remove(i);
 			}
 		}
-		
+
 	}
-	
+
 	private void fire() {
-	
-		
+
+
 		gs.addBulletBoss(alive);
 	}
 
 	private void move() {
-	
+
 		if (x > 400 || x < -200)
 			k = -k;
 		x += 5 * k;
@@ -155,9 +154,9 @@ public class Boss {
 	}
 
 	public Rectangle getRectangle() {
-	
+
 		return new Rectangle(x, y, width, height);
-	
+
 	}
 
 	public boolean isAlive() {

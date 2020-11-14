@@ -12,7 +12,7 @@ public class LifePlane {
 	public GUISetUp ui;
 
 	/**
-	 * 
+	 *
 	 * @param x
 	 * @param y
 	 * @param gs
@@ -27,7 +27,7 @@ public class LifePlane {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param g
 	 */
 	public void drawMe(Graphics g) {

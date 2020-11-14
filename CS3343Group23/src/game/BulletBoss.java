@@ -35,7 +35,7 @@ public class BulletBoss extends Bullet {
 	public void drawMe(Graphics g) {
 
 		if (alive) {
-			if(index >= 9){
+			if(index >= 8){
 				fx=x+20;
 				height=width=25;
 				g.drawImage(gs.getUi().getBulletBossImgs()[1], fx, y, width, height, null);
@@ -54,7 +54,7 @@ public class BulletBoss extends Bullet {
 						plane.setAlive(false);
 					}
 				}
-			}else if(index<=3){
+			}else if(index<=2){
 				height=10;
 				width=15;
 				fx=x+400;

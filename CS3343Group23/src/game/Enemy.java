@@ -54,7 +54,7 @@ public class Enemy {
 		}
 
 		move();
-		if(random.nextInt(100)>96)
+		if(random.nextInt(100)>97)
 			fire();
 
 	}

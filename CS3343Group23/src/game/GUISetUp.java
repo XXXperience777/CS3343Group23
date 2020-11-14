@@ -32,7 +32,7 @@ public class GUISetUp {
 	public static GUISetUp Instance=new GUISetUp();
     private GUISetUp() {
 		
-		bgImg = toolkit.getImage(GameStart.class.getResource("/imgs/bg01.jpg"));
+		bgImg = toolkit.getImage(GameStart.class.getResource("/imgs/bg1.jpg"));
 		
 	    planeImg_1 = toolkit.getImage(GameStart.class
 				.getResource("/imgs/7.png"));

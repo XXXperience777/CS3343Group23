@@ -55,8 +55,8 @@ public class BulletBoss extends Bullet {
 					}
 				}
 			}else if(index<=2){
-				height=10;
-				width=15;
+				height=20;
+				width=25;
 				fx=x+400;
 				a[0]=fx;
 				a[1]=y+100;

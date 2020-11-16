@@ -37,7 +37,7 @@ public class GameStart extends Frame {
 	private int count = 0;
 
 	private int score = 0;
-	private int bossTime = 5; //?
+	private int bossTime = 10; 
 	private int level = 1;
 	
 	private Random ran = new Random();

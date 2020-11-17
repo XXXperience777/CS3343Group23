@@ -3,10 +3,6 @@ package game;
 import java.util.*;
 
 
-import game.GameStart;
-import game.LifePlane;
-import game.Ult;
-
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Rectangle;
@@ -118,10 +114,10 @@ public class Plane {
 		move();
 	}
 
-	public void keyPressed(KeyEvent e) {
+	public void keyPressed(int event) {
 
 		if (isAlive()) {
-			switch (e.getKeyCode()) {
+			switch (event) {
 			case KeyEvent.VK_W:
 				this.w.pressKey(this);
 				break;
@@ -131,7 +127,7 @@ public class Plane {
 			case KeyEvent.VK_A:
 				this.a.pressKey(this);
 				break;
-			case KeyEvent.VK_D:
+			case KeyEvent.VK_D: 
 				this.d.pressKey(this);
 				break;
 			case KeyEvent.VK_J:
@@ -201,9 +197,9 @@ public class Plane {
 		return this.ults;
 	}
 
-	public void keyReleased(KeyEvent e) {
+	public void keyReleased(int event) {
 
-		switch (e.getKeyCode()) {
+		switch (event) {
 
 		case KeyEvent.VK_W:
 			this.w.releaseKey(this);

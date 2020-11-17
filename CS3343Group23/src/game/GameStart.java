@@ -16,10 +16,7 @@ import java.util.Random;
 
 import javax.swing.JOptionPane;
 
-import game.BulletEm;
-import game.Enemy;
-import game.Explode;
-import game.Food;
+
 import game.GameStart;
 
 
@@ -81,7 +78,7 @@ public class GameStart extends Frame {
 			public void keyPressed(KeyEvent e)
 			{
 
-				plane.keyPressed(e);
+				plane.keyPressed(e.getKeyCode());
 				if (!plane.isAlive()&& e.getKeyCode() == KeyEvent.VK_ENTER)
 				{
 					plane.setAlive(true);
@@ -102,7 +99,7 @@ public class GameStart extends Frame {
 
 			@Override
 			public void keyReleased(KeyEvent e) {
-				plane.keyReleased(e);
+				plane.keyReleased(e.getKeyCode());
 
 			}
 		});

@@ -53,7 +53,7 @@ public class Boss {
 			BulletPlayer pBullet = gs.getBulletPl().get(j);
 			if (isAlive() && pBullet.getRectangle().intersects(getRectangle())) {
 
-				blood-=3;
+				blood-=5;
 
 				checkDead();
 				pBullet.setAlive(false);
@@ -63,7 +63,7 @@ public class Boss {
 		for (int j = 0; j < gs.getPlaneults().size(); j++) {
 			Ult ult = gs.getPlaneults().get(j);
 			if (isAlive() && ult.getRectangle().intersects(getRectangle())) {
-				blood -= 20;
+				blood -= 10;
 				checkDead();
 			}
 		}
@@ -81,10 +81,10 @@ public class Boss {
 			gs.addBossTime();
 
 
-			gs.getPlane().setLife(gs.getPlane().getLife() + 1);
-			if (gs.getPlane().getLife()>5) {
-				gs.getPlane().setLife(5);
-			}
+//			gs.getPlane().setLife(gs.getPlane().getLife() + 1);
+//			if (gs.getPlane().getLife()>5) {
+//				gs.getPlane().setLife(5);
+//			}
 		}
 
 	}

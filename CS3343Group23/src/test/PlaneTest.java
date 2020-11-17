@@ -65,8 +65,8 @@ public class PlaneTest {
 		plane.setAlive(true);
 		plane.setFirst(false);
 		plane.setLife(5);
-	    plane.setCanK(false);
-	    plane.keyPressed(KeyEvent.VK_M);
+	    plane.setCanK(true);
+	    plane.keyPressed(KeyEvent.VK_K);
 		assertEquals("GrapeShot", plane.getLastCommand());
 		assertEquals(false, plane.isCanK());
 		plane.keyPressed(KeyEvent.VK_K);

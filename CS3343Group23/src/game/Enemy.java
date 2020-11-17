@@ -41,6 +41,10 @@ public class Enemy {
 	 *
 	 * @param g
 	 */
+	private boolean checkShoot() {
+		   return random.nextInt(100) > 97;
+	}
+	
 	public void drawMe(Graphics g) {
 
 		isHitted();
@@ -54,7 +58,7 @@ public class Enemy {
 		}
 
 		move();
-		if(random.nextInt(100)>97)
+		if(checkShoot())
 			fire();
 
 	}

@@ -49,6 +49,7 @@ public class Boss {
 
 	public void isHitted() {
 
+		//get hit by player bullets
 		for (int j = 0; j < gs.getBulletPl().size(); j++) {
 			BulletPlayer pBullet = gs.getBulletPl().get(j);
 			if (isAlive() && pBullet.getRectangle().intersects(getRectangle())) {
@@ -59,7 +60,7 @@ public class Boss {
 				pBullet.setAlive(false);
 			}
 		}
-		//get hit by player plane
+		//get hit by player bonus bullets
 		for (int j = 0; j < gs.getPlaneults().size(); j++) {
 			Ult ult = gs.getPlaneults().get(j);
 			if (isAlive() && ult.getRectangle().intersects(getRectangle())) {
@@ -89,10 +90,16 @@ public class Boss {
 
 	}
 
-	/**
-	 *
-	 * @param g
-	 */
+	private boolean checkNormal() {
+		   return random.nextInt(100) > 92;
+	}
+	private boolean checkAngry() {
+		   return random.nextInt(100) > 88;
+	}
+	private boolean checkCrazy() {
+		   return random.nextInt(100) > 75;
+	}
+	
 	public void drawMe(Graphics g) {
 
 		isHitted();
@@ -107,19 +114,19 @@ public class Boss {
 			switch (fireMode.getFireMode())
 			{
 				case "Normal":
-					if (random.nextInt(100) > 92) {
+					if (checkNormal()) {
 						fire();
 					}
 				case "Angry":
-					if (random.nextInt(100) > 88) {
+					if (checkAngry()) {
 						fire();
 					}
 				case "Crazy":
-					if (random.nextInt(100) > 75) {
+					if (checkCrazy()) {
 						fire();
 					}
 				default:
-					if (random.nextInt(100) > 90) {
+					if (checkNormal()) {
 						fire();
 					}
 			}

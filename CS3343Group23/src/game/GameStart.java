@@ -202,7 +202,9 @@ public class GameStart extends Frame {
 	 */
 	@Override
 	public void paint(Graphics g) {
-
+		Font f = new Font("Airial",Font.BOLD,17);
+		g.setFont(f);
+		
 		if (!plane.isFirst()) {
 			bg.drawMe(g);
 

@@ -57,7 +57,7 @@ public class GameStart extends Frame {
 		this.setLocationRelativeTo(null);
 		this.setResizable(false);
 		this.setVisible(true);
-		this.setFont(new Font("Arial", Font.PLAIN, 16));
+		this.setFont(new Font("Airial",Font.BOLD,17));
 
 		//this.ui=GUISetUp.getInstance();
 		this.bg=new Background(this.ui);
@@ -202,8 +202,7 @@ public class GameStart extends Frame {
 	 */
 	@Override
 	public void paint(Graphics g) {
-		Font f = new Font("Airial",Font.BOLD,17);
-		g.setFont(f);
+		
 		
 		if (!plane.isFirst()) {
 			bg.drawMe(g);

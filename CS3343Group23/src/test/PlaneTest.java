@@ -3,6 +3,8 @@ package test;
 import static org.junit.Assert.*;
 import java.awt.event.KeyEvent;
 import org.junit.Test;
+
+import game.GameStart;
 import game.Plane;
 
 public class PlaneTest {
@@ -11,69 +13,15 @@ public class PlaneTest {
     //Test Press K after eaten K
     public void test_EatenK_PressK()throws Exception 
 	{
-		
-		
-		class StubPlane extends Plane
-		{
-           private String key="Null";
-			public StubPlane(boolean alive) 
-			{
-				super(alive);
-				
-			}
-			@Override
-			public void keyPressed(int event) {
-				
-				key="Null";
-				switch (event) 
-				{
-				case KeyEvent.VK_W:
-					key="W";
-					break;
-				case KeyEvent.VK_S:
-					key="S";
-					break;
-				case KeyEvent.VK_A:
-					key="A";
-					break;
-				case KeyEvent.VK_D:
-					key="D";
-					break;
-				case KeyEvent.VK_J:
-					if (this.isAlive())
-						key="J";
-					break;
-				case KeyEvent.VK_U:
-					if(this.isAlive()&&this.isCanK()&&this.isCanL())
-					{
 
-						key="U";
-						this.setCanK(false);
-						this.setCanL(false);
-					}
-					break;
-				case KeyEvent.VK_L:
-					if (this.isAlive()&&this.isCanL()) 
-					{
-						key="L";
-						this.setCanL(false);
-					}
-					break;
-				case KeyEvent.VK_K:
-					if (this.isAlive()&&this.isCanK()) 
-					{
-						key="K";
-						this.setCanK(false);
-					}
-					break;
-				}
-			}
-		  public String getKey() {return key;}
-		}
-		StubPlane plane=new StubPlane(true);
+		GameStart gs=new GameStart();
+		Plane plane=gs.getPlane();
+		plane.setAlive(true);
+		plane.setFirst(false);
+		plane.setLife(5);
 	    plane.setCanK(true);
 		plane.keyPressed(KeyEvent.VK_K);
-		assertEquals("K", plane.getKey());
+		assertEquals("GrapeShot", plane.getLastCommand());
     }
 	
 	@Test
@@ -82,133 +30,29 @@ public class PlaneTest {
 	{
 		
 		
-		class StubPlane extends Plane
-		{
-	           private String key="Null";
-				public StubPlane(boolean alive) 
-				{
-					super(alive);
-					
-				}
-				@Override
-				public void keyPressed(int event) 
-				{
-					key="Null";
-					switch (event) {
-					case KeyEvent.VK_W:
-						key="W";
-						break;
-					case KeyEvent.VK_S:
-						key="S";
-						break;
-					case KeyEvent.VK_A:
-						key="A";
-						break;
-					case KeyEvent.VK_D:
-						key="D";
-						break;
-					case KeyEvent.VK_J:
-						if (this.isAlive())
-							key="J";
-						break;
-					case KeyEvent.VK_U:
-						if(this.isAlive()&&this.isCanK()&&this.isCanL())
-						{
-
-							key="U";
-							this.setCanK(false);
-							this.setCanL(false);
-						}
-						break;
-					case KeyEvent.VK_L:
-						if (this.isAlive()&&this.isCanL()) 
-						{
-							key="L";
-							this.setCanL(false);
-						}
-						break;
-					case KeyEvent.VK_K:
-						if (this.isAlive()&&this.isCanK()) 
-						{
-							key="K";
-							this.setCanK(false);
-						}
-						break;
-					}
-				}
-			  public String getKey() {return key;}
-			}
-		StubPlane plane=new StubPlane(true);
+		GameStart gs=new GameStart();
+		Plane plane=gs.getPlane();
+		plane.setAlive(true);
+		plane.setFirst(false);
+		plane.setLife(5);
 	    plane.setCanK(false);
 		plane.keyPressed(KeyEvent.VK_K);
-		assertEquals("Null", plane.getKey());
+		assertEquals("PressK", plane.getLastCommand());
     }
 	
 	@Test
 	//Test Press M when have eaten K
     public void test_EatenK_PressM()throws Exception 
 	{
-		
-		
-		class StubPlane extends Plane{
-	           private String key="Null";
-				public StubPlane(boolean alive) 
-				{
-					super(alive);
-					
-				}
-				@Override
-				public void keyPressed(int event) 
-				{
-					key="Null";
-					switch (event) {
-					case KeyEvent.VK_W:
-						key="W";
-						break;
-					case KeyEvent.VK_S:
-						key="S";
-						break;
-					case KeyEvent.VK_A:
-						key="A";
-						break;
-					case KeyEvent.VK_D:
-						key="D";
-						break;
-					case KeyEvent.VK_J:
-						if (this.isAlive())
-							key="J";
-						break;
-					case KeyEvent.VK_U:
-						if(this.isAlive()&&this.isCanK()&&this.isCanL())
-						{
-
-							key="U";
-							this.setCanK(false);
-							this.setCanL(false);
-						}
-						break;
-					case KeyEvent.VK_L:
-						if (this.isAlive()&&this.isCanL()) 
-						{
-							key="L";
-							this.setCanL(false);
-						}
-						break;
-					case KeyEvent.VK_K:
-						if (this.isAlive()&&this.isCanK()) 
-						{
-							key="K";
-							this.setCanK(false);
-						}
-						break;
-					}
-				}
-			  public String getKey() {return key;}
-			}
-		StubPlane plane=new StubPlane(true);
+		GameStart gs=new GameStart();
+		Plane plane=gs.getPlane();
+		plane.setAlive(true);
+		plane.setFirst(false);
+		plane.setLife(5);
 	    plane.setCanK(false);
-		plane.keyPressed(KeyEvent.VK_M);
-		assertEquals("Null", plane.getKey());
+	    plane.keyPressed(KeyEvent.VK_M);
+		assertEquals("Unknown", plane.getLastCommand());
+		
     }
 	
 	@Test
@@ -216,75 +60,27 @@ public class PlaneTest {
     public void test_EatenK_PressK_Continuously()throws Exception 
 	{
 		
-		
-	class StubPlane extends Plane
-	{
-        private String key="Null";
-			public StubPlane(boolean alive) 
-			{
-				super(alive);
-				
-			}
-			@Override
-			public void keyPressed(int event) 
-			{
-				key="Null";
-				switch (event) {
-				case KeyEvent.VK_W:
-					key="W";
-					break;
-				case KeyEvent.VK_S:
-					key="S";
-					break;
-				case KeyEvent.VK_A:
-					key="A";
-					break;
-				case KeyEvent.VK_D:
-					key="D";
-					break;
-				case KeyEvent.VK_J:
-					if (this.isAlive())
-						key="J";
-					break;
-				case KeyEvent.VK_U:
-					if(this.isAlive()&&this.isCanK()&&this.isCanL())
-					{
-
-						key="U";
-						this.setCanK(false);
-						this.setCanL(false);
-					}
-					break;
-				case KeyEvent.VK_L:
-					if (this.isAlive()&&this.isCanL()) 
-					{
-						key="L";
-						this.setCanL(false);
-					}
-					break;
-				case KeyEvent.VK_K:
-					if (this.isAlive()&&this.isCanK()) 
-					{
-						key="K";
-						this.setCanK(false);
-					}
-					break;
-				}
-			}
-		  public String getKey() {return key;}
-		}
-		StubPlane plane=new StubPlane(true);
-	    plane.setCanK(true);
-		plane.keyPressed(KeyEvent.VK_K);
-		assertEquals("K", plane.getKey());
+		GameStart gs=new GameStart();
+		Plane plane=gs.getPlane();
+		plane.setAlive(true);
+		plane.setFirst(false);
+		plane.setLife(5);
+	    plane.setCanK(false);
+	    plane.keyPressed(KeyEvent.VK_M);
+		assertEquals("GrapeShot", plane.getLastCommand());
 		assertEquals(false, plane.isCanK());
 		plane.keyPressed(KeyEvent.VK_K);
-		assertEquals("Null", plane.getKey());
+		assertEquals("PressK", plane.getLastCommand());
 		plane.keyPressed(KeyEvent.VK_K);
-		assertEquals("Null", plane.getKey());
+		assertEquals("PressK", plane.getLastCommand());
 		plane.keyPressed(KeyEvent.VK_K);
-		assertEquals("Null", plane.getKey());
+		assertEquals("PressK", plane.getLastCommand());
 		plane.keyPressed(KeyEvent.VK_K);
-		assertEquals("Null", plane.getKey());
+		assertEquals("PressK", plane.getLastCommand());
+		plane.keyPressed(KeyEvent.VK_K);
+		assertEquals("PressK", plane.getLastCommand());
+		
+	
+	  
     }
 }

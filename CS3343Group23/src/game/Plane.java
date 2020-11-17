@@ -27,7 +27,8 @@ public class Plane {
 	private GameStart gs;
 	private LifePlane[] lives = new LifePlane[10];
 	private ArrayList<Ult> ults = new ArrayList<Ult>();
-
+    private String lastCommand="Unknown";
+	
 	private Command a=new A();
 	private Command w=new W();
 	private Command s=new S();
@@ -115,7 +116,7 @@ public class Plane {
 	}
 
 	public void keyPressed(int event) {
-
+		lastCommand="Unknown";
 		if (isAlive()) {
 			switch (event) {
 			case KeyEvent.VK_W:
@@ -135,22 +136,26 @@ public class Plane {
 					this.j.pressKey(this);
 				break;
 			case KeyEvent.VK_U:
-				if(this.alive&&this.canK&&this.canL){
+				if(this.alive&&this.canK&&this.canL)
+				{
 
 					this.u.pressKey(this);
 				}
 				break;
 			case KeyEvent.VK_L:
-				if (this.alive&&this.canL) {
+				if (this.alive&&this.canL) 
+				{
 					this.l.pressKey(this);
 					
 
 				}
 				break;
 			case KeyEvent.VK_K:
-				if (this.alive&&this.canK) {
+				lastCommand="PressK";
+				if (this.alive&&this.canK) 
+				{
 					this.k.pressKey(this);
-					
+					lastCommand="GrapeShot";
 				}
 				break;
 			}
@@ -178,12 +183,12 @@ public class Plane {
 	public void traceShot()
 	{
 
-			this.addBullet(new BulletPlayer(this.x+44, this.y-20, true, this.gs,4) );
-			this.addBullet(new BulletPlayer(this.x+44, this.y-20, true, this.gs,4) );
-			this.addBullet(new BulletPlayer(this.x+44, this.y-20, true, this.gs,4) );
-			this.addBullet(new BulletPlayer(this.x+44, this.y-20, true, this.gs,4) );
-			this.addBullet(new BulletPlayer(this.x+44, this.y-20, true, this.gs,4) );
-			this.addBullet(new BulletPlayer(this.x+44, this.y-20, true, this.gs,4) );
+			this.addBullet(new BulletPlayer(this.x+44, this.y-20, true, this.gs,4));
+			this.addBullet(new BulletPlayer(this.x+44, this.y-35, true, this.gs,4));
+			this.addBullet(new BulletPlayer(this.x+44, this.y-40, true, this.gs,4));
+			this.addBullet(new BulletPlayer(this.x+44, this.y-45, true, this.gs,4));
+			this.addBullet(new BulletPlayer(this.x+44, this.y-50, true, this.gs,4));
+			this.addBullet(new BulletPlayer(this.x+44, this.y-55, true, this.gs,4));
 			this.canL=false;
 	}
 	public void ult() {
@@ -198,7 +203,7 @@ public class Plane {
 	}
 
 	public void keyReleased(int event) {
-
+		lastCommand="Unknown";
 		switch (event) {
 
 		case KeyEvent.VK_W:
@@ -361,6 +366,9 @@ public class Plane {
 	public void setCanK(boolean canK) {
 		this.canK = canK;
 
+	}
+	public String getLastCommand() {
+		return lastCommand;
 	}
 
 }

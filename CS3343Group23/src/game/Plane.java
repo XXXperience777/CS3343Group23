@@ -85,7 +85,7 @@ public class Plane {
 				g.drawImage(ui.getStartImg(), 0, 0, 600, 700, null);
 				return;
 			}
-			g.drawImage(ui.getContinueImg(), 150,250, 300, 200, null);
+			g.drawImage(ui.getContinueImg(), 150,250, 350, 200, null);
 		}
 
 

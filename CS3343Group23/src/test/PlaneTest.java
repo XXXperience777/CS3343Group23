@@ -1,30 +1,32 @@
 package test;
 
 import static org.junit.Assert.*;
-
 import java.awt.event.KeyEvent;
-
 import org.junit.Test;
-
 import game.Plane;
 
 public class PlaneTest {
 	
 	@Test
     //Test Press K after eaten K
-    public void test_EatenK_PressK()throws Exception {
+    public void test_EatenK_PressK()throws Exception 
+	{
 		
 		
-		class StubPlane extends Plane{
+		class StubPlane extends Plane
+		{
            private String key="Null";
-			public StubPlane(boolean alive) {
+			public StubPlane(boolean alive) 
+			{
 				super(alive);
 				
 			}
 			@Override
 			public void keyPressed(int event) {
+				
 				key="Null";
-				switch (event) {
+				switch (event) 
+				{
 				case KeyEvent.VK_W:
 					key="W";
 					break;
@@ -42,7 +44,8 @@ public class PlaneTest {
 						key="J";
 					break;
 				case KeyEvent.VK_U:
-					if(this.isAlive()&&this.isCanK()&&this.isCanL()){
+					if(this.isAlive()&&this.isCanK()&&this.isCanL())
+					{
 
 						key="U";
 						this.setCanK(false);
@@ -50,13 +53,15 @@ public class PlaneTest {
 					}
 					break;
 				case KeyEvent.VK_L:
-					if (this.isAlive()&&this.isCanL()) {
+					if (this.isAlive()&&this.isCanL()) 
+					{
 						key="L";
 						this.setCanL(false);
 					}
 					break;
 				case KeyEvent.VK_K:
-					if (this.isAlive()&&this.isCanK()) {
+					if (this.isAlive()&&this.isCanK()) 
+					{
 						key="K";
 						this.setCanK(false);
 					}
@@ -73,17 +78,21 @@ public class PlaneTest {
 	
 	@Test
 	//Test Press K when have not eaten K
-    public void test_Not_EatenK_PressK()throws Exception {
+    public void test_Not_EatenK_PressK()throws Exception 
+	{
 		
 		
-		class StubPlane extends Plane{
+		class StubPlane extends Plane
+		{
 	           private String key="Null";
-				public StubPlane(boolean alive) {
+				public StubPlane(boolean alive) 
+				{
 					super(alive);
 					
 				}
 				@Override
-				public void keyPressed(int event) {
+				public void keyPressed(int event) 
+				{
 					key="Null";
 					switch (event) {
 					case KeyEvent.VK_W:
@@ -103,7 +112,8 @@ public class PlaneTest {
 							key="J";
 						break;
 					case KeyEvent.VK_U:
-						if(this.isAlive()&&this.isCanK()&&this.isCanL()){
+						if(this.isAlive()&&this.isCanK()&&this.isCanL())
+						{
 
 							key="U";
 							this.setCanK(false);
@@ -111,13 +121,15 @@ public class PlaneTest {
 						}
 						break;
 					case KeyEvent.VK_L:
-						if (this.isAlive()&&this.isCanL()) {
+						if (this.isAlive()&&this.isCanL()) 
+						{
 							key="L";
 							this.setCanL(false);
 						}
 						break;
 					case KeyEvent.VK_K:
-						if (this.isAlive()&&this.isCanK()) {
+						if (this.isAlive()&&this.isCanK()) 
+						{
 							key="K";
 							this.setCanK(false);
 						}
@@ -134,17 +146,20 @@ public class PlaneTest {
 	
 	@Test
 	//Test Press M when have eaten K
-    public void test_EatenK_PressM()throws Exception {
+    public void test_EatenK_PressM()throws Exception 
+	{
 		
 		
 		class StubPlane extends Plane{
 	           private String key="Null";
-				public StubPlane(boolean alive) {
+				public StubPlane(boolean alive) 
+				{
 					super(alive);
 					
 				}
 				@Override
-				public void keyPressed(int event) {
+				public void keyPressed(int event) 
+				{
 					key="Null";
 					switch (event) {
 					case KeyEvent.VK_W:
@@ -164,7 +179,8 @@ public class PlaneTest {
 							key="J";
 						break;
 					case KeyEvent.VK_U:
-						if(this.isAlive()&&this.isCanK()&&this.isCanL()){
+						if(this.isAlive()&&this.isCanK()&&this.isCanL())
+						{
 
 							key="U";
 							this.setCanK(false);
@@ -172,13 +188,15 @@ public class PlaneTest {
 						}
 						break;
 					case KeyEvent.VK_L:
-						if (this.isAlive()&&this.isCanL()) {
+						if (this.isAlive()&&this.isCanL()) 
+						{
 							key="L";
 							this.setCanL(false);
 						}
 						break;
 					case KeyEvent.VK_K:
-						if (this.isAlive()&&this.isCanK()) {
+						if (this.isAlive()&&this.isCanK()) 
+						{
 							key="K";
 							this.setCanK(false);
 						}
@@ -195,17 +213,21 @@ public class PlaneTest {
 	
 	@Test
 	//Test Press K continuously while eaten one K
-    public void test_EatenK_PressK_Continuously()throws Exception {
+    public void test_EatenK_PressK_Continuously()throws Exception 
+	{
 		
 		
-	class StubPlane extends Plane{
+	class StubPlane extends Plane
+	{
         private String key="Null";
-			public StubPlane(boolean alive) {
+			public StubPlane(boolean alive) 
+			{
 				super(alive);
 				
 			}
 			@Override
-			public void keyPressed(int event) {
+			public void keyPressed(int event) 
+			{
 				key="Null";
 				switch (event) {
 				case KeyEvent.VK_W:
@@ -225,7 +247,8 @@ public class PlaneTest {
 						key="J";
 					break;
 				case KeyEvent.VK_U:
-					if(this.isAlive()&&this.isCanK()&&this.isCanL()){
+					if(this.isAlive()&&this.isCanK()&&this.isCanL())
+					{
 
 						key="U";
 						this.setCanK(false);
@@ -233,13 +256,15 @@ public class PlaneTest {
 					}
 					break;
 				case KeyEvent.VK_L:
-					if (this.isAlive()&&this.isCanL()) {
+					if (this.isAlive()&&this.isCanL()) 
+					{
 						key="L";
 						this.setCanL(false);
 					}
 					break;
 				case KeyEvent.VK_K:
-					if (this.isAlive()&&this.isCanK()) {
+					if (this.isAlive()&&this.isCanK()) 
+					{
 						key="K";
 						this.setCanK(false);
 					}

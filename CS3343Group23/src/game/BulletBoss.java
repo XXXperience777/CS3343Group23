@@ -45,7 +45,7 @@ public class BulletBoss extends Bullet {
 				a[2]=height;
 				a[3]=width;
 				if (plane.isAlive()&&plane.getRectangle().intersects(getRectangle())) {
-					alive = false;
+					/*alive = false;
 					plane.setLife(plane.getLife() - 1);
 
 					plane.setCanK(false);
@@ -53,6 +53,8 @@ public class BulletBoss extends Bullet {
 						gs.addExplode(new Explode(plane.getX(), plane.getY(), gs, true));
 						plane.setAlive(false);
 					}
+					*/
+					isHitted();
 				}
 			}else if(index<=2){
 				height=20;
@@ -65,7 +67,7 @@ public class BulletBoss extends Bullet {
 				g.drawImage(gs.getUi().getBulletBossImgs()[0], x+400, y+100, height, width, null);
 				move();
 				if (plane.isAlive()&&plane.getRectangle().intersects(getRectangle())) {
-					alive = false;
+/*					alive = false;
 					plane.setLife(plane.getLife() - 1);
 
 					plane.setCanL(false);
@@ -73,6 +75,8 @@ public class BulletBoss extends Bullet {
 						gs.addExplode(new Explode(plane.getX(), plane.getY(), gs, true));
 						plane.setAlive(false);
 					}
+					*/
+					isHitted();
 				}
 			}
 		}
@@ -80,6 +84,17 @@ public class BulletBoss extends Bullet {
 	}
 
 	public void isHitted() {
+		alive = false;
+		plane.setLife(plane.getLife() - 1);
+         if (index>=8) {
+		plane.setCanL(false);}
+         else if(index<=2) {
+        plane.setCanK(false);	 
+         }
+		if (plane.getLife()==0) {
+			gs.addExplode(new Explode(plane.getX(), plane.getY(), gs, true));
+			plane.setAlive(false);
+		}
 
 
 	}

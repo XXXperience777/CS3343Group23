@@ -120,34 +120,40 @@ public class Plane {
 		if (isAlive()) {
 			switch (event) {
 			case KeyEvent.VK_W:
+				lastCommand="PressW";
 				this.w.pressKey(this);
 				break;
 			case KeyEvent.VK_S:
+				lastCommand="PressS";
 				this.s.pressKey(this);
 				break;
 			case KeyEvent.VK_A:
+				lastCommand="PressA";
 				this.a.pressKey(this);
 				break;
 			case KeyEvent.VK_D: 
+				lastCommand="PressD";
 				this.d.pressKey(this);
 				break;
 			case KeyEvent.VK_J:
+				lastCommand="PressJ";
 				if (this.alive)
 					this.j.pressKey(this);
 				break;
 			case KeyEvent.VK_U:
+				lastCommand="PressU";
 				if(this.alive&&this.canK&&this.canL)
 				{
-
 					this.u.pressKey(this);
+					lastCommand="Ultra Kill";
 				}
 				break;
 			case KeyEvent.VK_L:
+				lastCommand="PressL";
 				if (this.alive&&this.canL) 
 				{
 					this.l.pressKey(this);
-					
-
+				    lastCommand="Triple Shot";
 				}
 				break;
 			case KeyEvent.VK_K:
@@ -203,7 +209,7 @@ public class Plane {
 	}
 
 	public void keyReleased(int event) {
-		lastCommand="Unknown";
+		//lastCommand="Unknown";
 		switch (event) {
 
 		case KeyEvent.VK_W:

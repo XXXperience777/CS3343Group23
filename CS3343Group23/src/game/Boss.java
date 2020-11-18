@@ -68,7 +68,12 @@ public class Boss {
 				checkDead();
 			}
 		}
-
+		//get hit by player plane
+		Plane plane=gs.getPlane();
+		if(plane.isAlive() && plane.getRectangle().intersects(getRectangle())){
+			blood -= 50;
+			plane.setAlive(false);
+		}
 	}
 
 	public void checkDead() {

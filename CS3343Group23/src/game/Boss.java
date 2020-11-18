@@ -67,6 +67,7 @@ public class Boss {
 			if (isAlive() && ult.getRectangle().intersects(getRectangle())) {
 				blood -= 10;
 				checkDead();
+				checkMode();
 			}
 		}
 		//get hit by player plane
@@ -75,6 +76,7 @@ public class Boss {
 			gs.getPlane().setAlive(false);
 			gs.getPlane().setLife(0);
 			checkDead();
+			checkMode();
 		}
 	}
 
@@ -108,7 +110,7 @@ public class Boss {
 	}
 
 	private boolean checkNormal() {
-		   return random.nextInt(100) > 92;
+		   return random.nextInt(100) > 95;
 	}
 	private boolean checkAngry() {
 		   return random.nextInt(100) > 88;

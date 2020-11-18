@@ -57,7 +57,7 @@ public class GameStart extends Frame {
 		this.setLocationRelativeTo(null);
 		this.setResizable(false);
 		this.setVisible(true);
-		this.setFont(new Font("Airial",Font.BOLD,17));
+		this.setFont(new Font("Airial",Font.BOLD,15));
 
 		//this.ui=GUISetUp.getInstance();
 		this.bg=new Background(this.ui);

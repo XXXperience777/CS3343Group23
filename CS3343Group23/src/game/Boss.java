@@ -53,6 +53,7 @@ public class Boss {
 		if(isHittedByPlane) {
 			blood-=5;
 			checkDead();
+			checkMode();
 		for (int j = 0; j < gs.getBulletPl().size(); j++) {
 			BulletPlayer pBullet = gs.getBulletPl().get(j);
 			if (isAlive() && pBullet.getRectangle().intersects(getRectangle())) {
@@ -86,13 +87,24 @@ public class Boss {
 			gs.levelUp();
 			gs.addBossTime();
 
-
 //			gs.getPlane().setLife(gs.getPlane().getLife() + 1);
 //			if (gs.getPlane().getLife()>5) {
 //				gs.getPlane().setLife(5);
 //			}
 		}
 
+	}
+
+	public void checkMode() {
+		if (blood >= 60 && isAlive()) {
+			fireMode=new Normal();
+		}
+		else if (blood >= 20) {
+			fireMode=new Angry();
+		}
+		else if (blood >0 && isAlive()) {
+			fireMode=new Crazy();
+		}
 	}
 
 	private boolean checkNormal() {

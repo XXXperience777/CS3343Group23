@@ -46,21 +46,34 @@ public class Enemy {
 	}
 	
 	public void drawMe(Graphics g) {
+		Plane plane=gs.getPlane();
+		boolean isHittedByPlane=false;
+		for (int j = 0; j < gs.getBulletPl().size(); j++) {
+			BulletPlayer pBullet=gs.getBulletPl().get(j);
 
-		isHitted();
+			if (pBullet.getRectangle().intersects(this.getRectangle())) {
+				isHittedByPlane=true;
+			}
+		}
+		boolean isCrashed=plane.isAlive() && plane.getRectangle().intersects(getRectangle());
+		isHitted(isHittedByPlane,isCrashed);
 		if(isAlive()){
 			g.drawImage(enemyImg, getX(), getY(), width, height, null);
 		}else {
-			gs.getExplodes().add(new Explode(getX(), getY(), gs,true));
-			gs.addCount();
-			gs.addScore(100);
-			gs.getEnemies().remove(this);
+			isDead();
 		}
 
 		move();
 		if(checkShoot())
 			fire();
 
+	}
+	
+	public void isDead() {
+			gs.getExplodes().add(new Explode(getX(), getY(), gs,true));
+			gs.addCount();
+			gs.addScore(100);
+			gs.getEnemies().remove(this);
 	}
 
 	public void fire() {
@@ -69,30 +82,33 @@ public class Enemy {
 
 	}
 
-	public void isHitted() {
-
-
+	public void isHitted(boolean isHittedByPlane,boolean isCrashed) {
+      if(isHittedByPlane) {
+	   setAlive(false);
+	   isDead();
 		for (int j = 0; j < gs.getBulletPl().size(); j++) {
 			BulletPlayer pBullet=gs.getBulletPl().get(j);
 
 			if (pBullet.getRectangle().intersects(this.getRectangle())) {
 				setAlive(false);
+				isDead();
 				pBullet.setAlive(false);
 			}
 		}
+}
 		for (int j = 0; j < gs.getPlaneults().size(); j++) {
 			Ult ult=gs.getPlaneults().get(j);
 			if (ult.getRectangle().intersects(getRectangle())) {
 				setAlive(false);
-
+                isDead();
 			}
 		}
-		Plane plane=gs.getPlane();
-		if(plane.isAlive() && plane.getRectangle().intersects(getRectangle())){
+		if(isCrashed){
 			setAlive(false);
-			plane.setLife(plane.getLife()-1);
-			if (plane.getLife()==0) {
-				plane.setAlive(false);
+			isDead();
+			gs.getPlane().setLife(gs.getPlane().getLife()-1);
+			if (gs.getPlane().getLife()==0) {
+				gs.getPlane().setAlive(false);
 			}
 
 		}

@@ -500,5 +500,24 @@ public class PlaneTest {
 	    plane.keyReleased(KeyEvent.VK_U);
 		assertEquals("PressU", plane.getLastCommand());
 	}
+	
+	@Test
+	//test if plane is not hitted
+	public void test_Not_Hitted() throws Exception{
+		GameStart gs=new GameStart();
+		Plane plane=gs.getPlane();
+		plane.setAlive(true);
+		plane.setFirst(false);
+		plane.setLife(5);
+		plane.setCanK(false);
+		plane.setCanL(true);
+		assertEquals(plane.isAlive(),true);
+		assertEquals(plane.getLife(),5);
+		assertEquals(plane.isFirst(),false);
+	    assertEquals(plane.isCanK(),false);
+	    assertEquals(plane.isCanL(),true);
+	}
+	
+	
 }
 

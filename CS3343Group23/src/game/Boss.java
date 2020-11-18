@@ -47,18 +47,18 @@ public class Boss {
 		return y;
 	}
 
-	public void isHitted() {
+	public void isHitted(boolean isHittedByPlane,boolean isCrashed) {
 
 		//get hit by player bullets
+		if(isHittedByPlane) {
+			blood-=5;
+			checkDead();
 		for (int j = 0; j < gs.getBulletPl().size(); j++) {
 			BulletPlayer pBullet = gs.getBulletPl().get(j);
 			if (isAlive() && pBullet.getRectangle().intersects(getRectangle())) {
-
-				blood-=5;
-
-				checkDead();
 				pBullet.setAlive(false);
 			}
+		}
 		}
 		//get hit by player bonus bullets
 		for (int j = 0; j < gs.getPlaneults().size(); j++) {
@@ -69,15 +69,15 @@ public class Boss {
 			}
 		}
 		//get hit by player plane
-		Plane plane=gs.getPlane();
-		if(plane.isAlive() && plane.getRectangle().intersects(getRectangle())){
+		if(isCrashed){
 			blood -= 50;
-			plane.setAlive(false);
+			gs.getPlane().setAlive(false);
+			gs.getPlane().setLife(0);
+			checkDead();
 		}
 	}
 
 	public void checkDead() {
-
 		if (blood <= 0 && isAlive()) {
 			setAlive(false);
 			gs.addScore(1000);
@@ -106,8 +106,16 @@ public class Boss {
 	}
 	
 	public void drawMe(Graphics g) {
-
-		isHitted();
+		Plane plane=gs.getPlane();
+		boolean isCrashed=plane.isAlive() && plane.getRectangle().intersects(getRectangle());
+		boolean isHittedByPlane=false;
+		for (int j = 0; j < gs.getBulletPl().size(); j++) {
+			BulletPlayer pBullet = gs.getBulletPl().get(j);
+			if (isAlive() && pBullet.getRectangle().intersects(getRectangle())) {
+             isHittedByPlane=true;
+			}
+		}
+		isHitted(isHittedByPlane,isCrashed);
 		if (isAlive()) {
 			g.setColor(Color.WHITE);
 			g.drawRect(x + 117, y - 17, 200, 11);
@@ -178,4 +186,11 @@ public class Boss {
 		this.alive = alive;
 	}
 
+	public void setBlood(int blood) {
+		this.blood=blood;
+	}
+
+	public int getBlood() {
+		return blood;
+	}
 }

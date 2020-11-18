@@ -37,8 +37,6 @@ public class GameStart extends Frame {
 	private int bossTime = 10; 
 	private int level = 1;
 	
-	private boolean factoryEnemy=false;
-	
 	private Random ran = new Random();
 	private GUISetUp ui=GUISetUp.getInstance();
 	private Plane plane = new Plane(250, 500, false, this);
@@ -59,7 +57,7 @@ public class GameStart extends Frame {
 		this.setLocationRelativeTo(null);
 		this.setResizable(false);
 		this.setVisible(true);
-		this.setFont(new Font("Airial",Font.BOLD,15));
+		this.setFont(new Font("Airial",Font.BOLD,17));
 
 		//this.ui=GUISetUp.getInstance();
 		this.bg=new Background(this.ui);
@@ -149,7 +147,9 @@ public class GameStart extends Frame {
 
 	public void levelUp() {
 		this.level ++;
+		if(this.plane.isAlive()) {
 		this.plane.recover();
+		}
 	}
 
 	public void addCount() {
@@ -181,7 +181,7 @@ public class GameStart extends Frame {
 	}
 
 	public void addBulletBoss(boolean alive) {
-		bulletBs.add(new BulletBoss(alive, this, this.getBoss()));
+		bulletBs.add(new BulletBoss(alive, this, this.boss));
 	}
 
 	public ArrayList<BulletPlayer> getBulletPl() {
@@ -195,17 +195,8 @@ public class GameStart extends Frame {
 	public ArrayList<Ult> getPlaneults() {
 		return plane.getults();
 	}
-   private void factoryEnemy()
-   {
-	   EnemyFactory EnFactory=new ConcreteEnemyFactory(this);
-		enemies.add(EnFactory.factoryEnemy());
-		this.setFactoryEnemy(false);
-   }
 
-   private boolean checkFactory()
-   {
-	   return ran.nextInt(100) > 97;
-   }
+
 
 	/**
 	 *
@@ -218,9 +209,9 @@ public class GameStart extends Frame {
 		if (!plane.isFirst()) {
 			bg.drawMe(g);
 
-			this.setFactoryEnemy(checkFactory());
-			if (this.factoryEnemy) {
-				 factoryEnemy();
+			if (ran.nextInt(100) > 97) {
+				EnemyFactory EnFactory=new ConcreteEnemyFactory(this);
+				enemies.add(EnFactory.factoryEnemy());
 
 			}
 			if (foods.size() <3&&count==5) {
@@ -262,8 +253,8 @@ public class GameStart extends Frame {
 			}
 
 			if (count >= bossTime) {
-				getBoss().setAlive(true);
-				getBoss().drawMe(g);
+				boss.setAlive(true);
+				boss.drawMe(g);
 			}else if (bossTime-count<=3) {
 				g.setColor(Color.RED);
 				g.drawString("WARNNING", 250, 100);
@@ -289,23 +280,17 @@ public class GameStart extends Frame {
 		return ui;
 	}
 
-
-
-
-	public void setFactoryEnemy(boolean factoryEnemy) {
-		this.factoryEnemy = factoryEnemy;
-	}
-
-
-
-
 	public Boss getBoss() {
 		return boss;
 	}
 
-
-
-
+	public int getBossTime() {
+		return bossTime;
+	}
+	
+	public int getLevel() {
+		return level;
+	}
 	class MyThread extends Thread {
 		@Override
 		public void run() {

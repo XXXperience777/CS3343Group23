@@ -88,11 +88,10 @@ public class Boss {
 			gs.clearCount();
 			gs.levelUp();
 			gs.addBossTime();
+			
+			//test 
+			System.out.println("bossTime: "+gs.getBossTime());
 
-//			gs.getPlane().setLife(gs.getPlane().getLife() + 1);
-//			if (gs.getPlane().getLife()>5) {
-//				gs.getPlane().setLife(5);
-//			}
 		}
 
 	}
@@ -113,10 +112,10 @@ public class Boss {
 		   return random.nextInt(100) > 95;
 	}
 	private boolean checkAngry() {
-		   return random.nextInt(100) > 88;
+		   return random.nextInt(100) > 92;
 	}
 	private boolean checkCrazy() {
-		   return random.nextInt(100) > 75;
+		   return random.nextInt(100) > 88;
 	}
 	
 	public void drawMe(Graphics g) {

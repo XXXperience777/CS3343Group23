@@ -59,9 +59,10 @@ public class Enemy {
 		isHitted(isHittedByPlane,isCrashed);
 		if(isAlive()){
 			g.drawImage(enemyImg, getX(), getY(), width, height, null);
-		}else {
-			isDead();
 		}
+//		else {
+//			isDead();
+//		}
 
 		move();
 		if(checkShoot())
@@ -86,15 +87,15 @@ public class Enemy {
       if(isHittedByPlane) {
 	   setAlive(false);
 	   isDead();
-		for (int j = 0; j < gs.getBulletPl().size(); j++) {
-			BulletPlayer pBullet=gs.getBulletPl().get(j);
-
-			if (pBullet.getRectangle().intersects(this.getRectangle())) {
-				setAlive(false);
-				isDead();
-				pBullet.setAlive(false);
-			}
-		}
+//		for (int j = 0; j < gs.getBulletPl().size(); j++) {
+//			BulletPlayer pBullet=gs.getBulletPl().get(j);
+//
+//			if (pBullet.getRectangle().intersects(this.getRectangle())) {
+//				setAlive(false);
+//				isDead();
+//				pBullet.setAlive(false);
+//			}
+//		}
 }
 		for (int j = 0; j < gs.getPlaneults().size(); j++) {
 			Ult ult=gs.getPlaneults().get(j);
@@ -103,6 +104,7 @@ public class Enemy {
                 isDead();
 			}
 		}
+		
 		if(isCrashed){
 			setAlive(false);
 			isDead();
@@ -110,7 +112,6 @@ public class Enemy {
 			if (gs.getPlane().getLife()==0) {
 				gs.getPlane().setAlive(false);
 			}
-
 		}
 
 	}

@@ -288,6 +288,10 @@ public class GameStart extends Frame {
 		return bossTime;
 	}
 	
+	public int getCount() {
+		return count;
+	}
+	
 	public int getLevel() {
 		return level;
 	}
@@ -306,5 +310,6 @@ public class GameStart extends Frame {
 			}
 		}
 	}
+	
 
 }

@@ -47,7 +47,7 @@ public class Boss {
 		return y;
 	}
 
-	public void isHitted(boolean isHittedByPlane,boolean isCrashed) {
+	public void isHitted(boolean isHittedByPlane,boolean isHittedByUlt,boolean isCrashed) {
 
 		//get hit by player bullets
 		if(isHittedByPlane) {
@@ -62,13 +62,10 @@ public class Boss {
 		}
 		}
 		//get hit by player bonus bullets
-		for (int j = 0; j < gs.getPlaneults().size(); j++) {
-			Ult ult = gs.getPlaneults().get(j);
-			if (isAlive() && ult.getRectangle().intersects(getRectangle())) {
-				blood -= 10;
-				checkDead();
-				checkMode();
-			}
+		if(isHittedByUlt) {
+			blood -= 10;
+			checkDead();
+			checkMode();
 		}
 		//get hit by player plane
 		if(isCrashed){
@@ -128,7 +125,14 @@ public class Boss {
              isHittedByPlane=true;
 			}
 		}
-		isHitted(isHittedByPlane,isCrashed);
+		boolean isHittedByUlt=false;
+		for (int j = 0; j < gs.getPlaneults().size(); j++) {
+			Ult ult = gs.getPlaneults().get(j);
+			if (isAlive() && ult.getRectangle().intersects(getRectangle())) {
+				isHittedByUlt=true;
+			}
+		}
+		isHitted(isHittedByPlane,isHittedByUlt,isCrashed);
 		if (isAlive()) {
 			g.setColor(Color.WHITE);
 			g.drawRect(x + 117, y - 17, 200, 11);
@@ -184,7 +188,11 @@ public class Boss {
 		x += 5 * k;
 
 	}
-
+    
+	public fireAbstract getFireMode() {
+		return fireMode;
+	}
+	
 	public Rectangle getRectangle() {
 
 		return new Rectangle(x, y, width, height);

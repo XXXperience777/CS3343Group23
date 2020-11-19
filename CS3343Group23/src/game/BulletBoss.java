@@ -105,6 +105,10 @@ public class BulletBoss extends Bullet {
 			alive = false;
 		}
 	}
+	
+	public void setIndex(int index) {
+		this.index=index;
+	}
 
 	public boolean getAlive() {
 		return alive;

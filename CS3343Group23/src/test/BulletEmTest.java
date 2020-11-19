@@ -2,6 +2,8 @@ package test;
 
 import static org.junit.Assert.assertEquals;
 
+import java.awt.event.KeyEvent;
+
 import org.junit.Test;
 
 import game.BulletEm;
@@ -24,7 +26,6 @@ public class BulletEmTest {
 		plane.setLife(4);
 		Enemy enemy=new Enemy(0, 0, true, gs);
 		BulletEm bullet=new BulletEm (true,gs,enemy);
-	
 		bullet.hit(true);
 		assertEquals(3, plane.getLife());
 		assertEquals(false, plane.isCanK());

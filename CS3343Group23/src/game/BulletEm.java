@@ -34,7 +34,12 @@ public class BulletEm extends Bullet {
 	 * @param g
 	 */
 	public void drawMe(Graphics g) {
-		hit(checkIsHitted());
+		boolean isHitted=false;
+		Plane plane=gs.getPlane();
+		if(plane.getRectangle().intersects(getRectangle())) {
+			isHitted=true;
+		}
+		hit(isHitted);
 		if (isAlive()) {
 			g.drawImage(gs.getUi().getBulletEm1Img(), x,y, width, height, null);
 		}
@@ -55,11 +60,6 @@ public class BulletEm extends Bullet {
 			}
 
 		}
-	}
-	private boolean checkIsHitted() 
-	{
-		Plane plane=gs.getPlane();
-		return plane.getRectangle().intersects(getRectangle());
 	}
 
 	public void move(){

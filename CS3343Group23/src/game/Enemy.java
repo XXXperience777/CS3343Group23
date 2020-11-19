@@ -55,8 +55,15 @@ public class Enemy {
 				isHittedByPlane=true;
 			}
 		}
+		boolean isHittedByUlt=false;
+		for (int j = 0; j < gs.getPlaneults().size(); j++) {
+			Ult ult=gs.getPlaneults().get(j);
+			if (ult.getRectangle().intersects(getRectangle())) {
+				isHittedByUlt=true;
+			}
+		}
 		boolean isCrashed=plane.isAlive() && plane.getRectangle().intersects(getRectangle());
-		isHitted(isHittedByPlane,isCrashed);
+		isHitted(isHittedByPlane,isHittedByUlt,isCrashed);
 		if(isAlive()){
 			g.drawImage(enemyImg, getX(), getY(), width, height, null);
 		}
@@ -83,7 +90,7 @@ public class Enemy {
 
 	}
 
-	public void isHitted(boolean isHittedByPlane,boolean isCrashed) {
+	public void isHitted(boolean isHittedByPlane,boolean isHittedByUlt,boolean isCrashed) {
       if(isHittedByPlane) {
 	   setAlive(false);
 	   isDead();
@@ -97,18 +104,17 @@ public class Enemy {
 //			}
 //		}
 }
-		for (int j = 0; j < gs.getPlaneults().size(); j++) {
-			Ult ult=gs.getPlaneults().get(j);
-			if (ult.getRectangle().intersects(getRectangle())) {
-				setAlive(false);
-                isDead();
-			}
+		if(isHittedByUlt) {
+			setAlive(false);
+            isDead();
 		}
 		
 		if(isCrashed){
 			setAlive(false);
 			isDead();
 			gs.getPlane().setLife(gs.getPlane().getLife()-1);
+			gs.getPlane().setCanK(false);
+			gs.getPlane().setCanL(false);
 			if (gs.getPlane().getLife()==0) {
 				gs.getPlane().setAlive(false);
 			}

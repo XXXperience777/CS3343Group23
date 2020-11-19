@@ -38,10 +38,10 @@ public class Food {
 		index=random.nextInt(2);
 	}
 	public void drawMe(Graphics g){
-
+		boolean isEaten=gs.getPlane().getRectangle().intersects(getRectangle());
 		g.drawImage(gs.getUi().getFoodImgs()[index], x, y, width, height, null);
 		move();
-		isEaten();
+		isEaten(isEaten);
 	}
 	public void move() {
 		if(x<fx1||x>fx2)k=-k;
@@ -51,8 +51,8 @@ public class Food {
 			setAlive(false);
 		}
 	}
-	public void isEaten(){
-		if(gs.getPlane().getRectangle().intersects(getRectangle())){
+	public void isEaten(boolean isEaten){
+		if(isEaten){
 			setAlive(false);
 			if(index==0){
 				gs.getPlane().setCanL(true);
@@ -70,5 +70,7 @@ public class Food {
 	public void setAlive(boolean alive) {
 		this.alive = alive;
 	}
-
+    public void setIndex(int index) {
+    	this.index=index;
+    }
 }

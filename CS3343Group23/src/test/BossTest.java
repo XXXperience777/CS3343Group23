@@ -21,7 +21,7 @@ public class BossTest {
 	    plane.setFirst(false);
 	    Boss boss=new Boss(0,0,gs,true);
 	    boss.setBlood(100);
-	    boss.isHitted(false,true);
+	    boss.isHitted(false,false,true);
 	    assertEquals(plane.getLife(),0);
 	    assertEquals(boss.getBlood(),50);
 	    assertEquals(plane.isAlive(),false);
@@ -37,7 +37,7 @@ public class BossTest {
 	    plane.setFirst(false);
 	    Boss boss=new Boss(0,0,gs,true);
 	    boss.setBlood(40);
-	    boss.isHitted(false,true);
+	    boss.isHitted(false,false,true);
 	    assertEquals(plane.getLife(),0);
 	    assertEquals(boss.isAlive(),false);
 	    assertEquals(plane.isAlive(),false);
@@ -53,7 +53,7 @@ public class BossTest {
 	    plane.setFirst(false);
 	    Boss boss=new Boss(0,0,gs,true);
 	    boss.setBlood(10);
-	    boss.isHitted(true,false);
+	    boss.isHitted(true,false,false);
 	    assertEquals(boss.getBlood(),5);
 	}
 	
@@ -67,7 +67,35 @@ public class BossTest {
 	    plane.setFirst(false);
 	    Boss boss=new Boss(0,0,gs,true);
 	    boss.setBlood(4);
-	    boss.isHitted(true,false);
+	    boss.isHitted(true,false,false);
+	    assertEquals(boss.isAlive(),false);
+	    assertEquals(score+1000,gs.getScore());
+	}
+	
+	@Test
+	//hit by plane ult when boss life >10
+	public void test_Hitted_By_PlaneUlt1() throws Exception{
+		GameStart gs=new GameStart();
+		Plane plane=gs.getPlane();
+		plane.setAlive(true);
+	    plane.setFirst(false);
+	    Boss boss=new Boss(0,0,gs,true);
+	    boss.setBlood(20);
+	    boss.isHitted(false,true,false);
+	    assertEquals(boss.getBlood(),10);
+	}
+	
+	@Test 
+	//hit by plane ult when boss life <10
+	public void test_Hitted_By_PlaneUlt2() throws Exception{
+		GameStart gs=new GameStart();
+		int score=gs.getScore();
+		Plane plane=gs.getPlane();
+		plane.setAlive(true);
+	    plane.setFirst(false);
+	    Boss boss=new Boss(0,0,gs,true);
+	    boss.setBlood(8);
+	    boss.isHitted(false,true,false);
 	    assertEquals(boss.isAlive(),false);
 	    assertEquals(score+1000,gs.getScore());
 	}
@@ -79,9 +107,9 @@ public class BossTest {
 		int score=gs.getScore();
 		Plane plane=gs.getPlane();
 		plane.setAlive(true);
-		plane.setFirst(true);
+		plane.setFirst(false);
 		Boss boss=new Boss(0,0,gs,true);
-	    boss.isHitted(false, false);
+	    boss.isHitted(false, false,false);
 		assertEquals(boss.isAlive(),true);
 		assertEquals(score,gs.getScore());
 	}
@@ -95,7 +123,7 @@ public class BossTest {
 		int level=gs.getLevel();
 		Plane plane=gs.getPlane();
 		plane.setAlive(true);
-		plane.setFirst(true);
+		plane.setFirst(false);
 		plane.setLife(3);
 		Boss boss=new Boss(0,0,gs,true);
 		boss.setBlood(-2);
@@ -104,5 +132,44 @@ public class BossTest {
 		assertEquals(score+1000,gs.getScore());
 		assertEquals(level+1,gs.getLevel());
 		assertEquals(plane.getLife(),5);
+	}
+	
+	@Test
+	//Normal mode
+	public void test_Normal_Mode() throws Exception{
+		GameStart gs=new GameStart();
+		Plane plane=gs.getPlane();
+		plane.setAlive(true);
+		plane.setFirst(false);
+		Boss boss=new Boss(0,0,gs,true);
+		boss.setBlood(80);
+		boss.checkMode();
+		assertEquals("Normal", boss.getFireMode().getFireMode());
+	}
+	
+	@Test
+	//Angry mode
+	public void test_Angry_Mode() throws Exception{
+		GameStart gs=new GameStart();
+		Plane plane=gs.getPlane();
+		plane.setAlive(true);
+		plane.setFirst(false);
+		Boss boss=new Boss(0,0,gs,true);
+		boss.setBlood(40);
+		boss.checkMode();
+		assertEquals("Angry", boss.getFireMode().getFireMode());
+	}
+	
+	@Test
+	//Crazy mode
+	public void test_Crazy_Mode() throws Exception{
+		GameStart gs=new GameStart();
+		Plane plane=gs.getPlane();
+		plane.setAlive(true);
+		plane.setFirst(false);
+		Boss boss=new Boss(0,0,gs,true);
+		boss.setBlood(10);
+		boss.checkMode();
+		assertEquals("Crazy", boss.getFireMode().getFireMode());
 	}
 }

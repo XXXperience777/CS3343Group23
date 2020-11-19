@@ -30,6 +30,10 @@ public class LifePlane {
 	 *
 	 * @param g
 	 */
+	public boolean isAlive() {
+		return alive;
+	}
+	
 	public void drawMe(Graphics g) {
 		g.drawImage(ui.getLifePlaneImg(), x, y, width, height, null);
 	}

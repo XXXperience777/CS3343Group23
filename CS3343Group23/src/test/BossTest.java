@@ -172,4 +172,17 @@ public class BossTest {
 		boss.checkMode();
 		assertEquals("Crazy", boss.getFireMode().getFireMode());
 	}
+	
+	@Test
+	//test fire
+	public void test_Fire() {
+		GameStart gs=new GameStart();
+		Plane plane=gs.getPlane();
+		plane.setAlive(true);
+		plane.setFirst(false);
+		int bulletBossnum=gs.getBulletBoss().size();
+		Boss boss=new Boss(0,0,gs,true);
+		boss.fire();
+		assertEquals(bulletBossnum+1,gs.getBulletBoss().size());
+	}
 }

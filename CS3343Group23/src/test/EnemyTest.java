@@ -105,4 +105,17 @@ public class EnemyTest {
 		enemy.move();
 		assertEquals(enemy.isAlive(),false);
 	}
+	
+	@Test 
+	//test enemy fire
+	public void test_Fire() throws Exception{
+		GameStart gs=new GameStart();
+		Plane plane=gs.getPlane();
+		plane.setAlive(true);
+		plane.setFirst(true);
+		int bulletEmnum=gs.getBulletEm().size();
+		Enemy enemy=new Enemy(0,0,true,gs);
+		enemy.fire();
+		assertEquals(bulletEmnum+1,gs.getBulletEm().size());
+	}
 }

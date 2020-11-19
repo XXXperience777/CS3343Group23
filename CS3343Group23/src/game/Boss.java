@@ -175,7 +175,7 @@ public class Boss {
 
 	}
 
-	private void fire() {
+	public void fire() {
 
 
 		gs.addBulletBoss(alive);

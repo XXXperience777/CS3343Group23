@@ -474,6 +474,19 @@ public class PlaneTest {
     }
 	
 	@Test
+	//test ult
+	public void test_ult() throws Exception{
+		GameStart gs=new GameStart();
+		Plane plane=gs.getPlane();
+		plane.setAlive(true);
+		plane.setFirst(false);
+		int ultnum=plane.getults().size();
+		plane.ult();
+		assertEquals(ultnum+1, plane.getults().size());
+		
+	}
+	
+	@Test
 	//Test Press U when have eaten L
 	public void test_EatenL_PressU() throws Exception{
 		GameStart gs=new GameStart();

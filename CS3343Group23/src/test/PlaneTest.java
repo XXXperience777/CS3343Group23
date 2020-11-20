@@ -32,15 +32,14 @@ public class PlaneTest {
 	plane.setAlive(true);
 	plane.setFirst(false);
 	plane.setLife(5);
-	int x = plane.getX(), newx = 0;
+	int x = plane.getX();
 	while (x > 0) {
 		x = plane.getX();
 		plane.keyPressed(KeyEvent.VK_A);
 		plane.move();
-		newx = plane.getX();
 	}
+	boolean result = plane.isLeft();
 	plane.keyReleased(KeyEvent.VK_A);
-	boolean result = (x == newx);
 	assertEquals(result, true);
 }
 	
@@ -80,15 +79,14 @@ public class PlaneTest {
 		plane.setAlive(true);
 		plane.setFirst(false);
 		plane.setLife(5);
-		int x = plane.getX(), newx = 0;
+		int x = plane.getX();
 		while (x < 512) {
 			x = plane.getX();
 			plane.keyPressed(KeyEvent.VK_D);
 			plane.move();
-			newx = plane.getX();
 		}
+		boolean result = plane.isRight();
 		plane.keyReleased(KeyEvent.VK_D);
-		boolean result = (x == newx);
 		assertEquals(result, true);
 	}
 	
@@ -118,8 +116,8 @@ public class PlaneTest {
 	plane.move();
 	newx = plane.getX();
 	newy = plane.getY();
+	boolean result = plane.isUp();
 	plane.keyReleased(KeyEvent.VK_W);
-	boolean result = (newy < 500) && (newx == 250);
 	assertEquals(result, true);
 }
 	
@@ -131,15 +129,14 @@ public class PlaneTest {
 	plane.setAlive(true);
 	plane.setFirst(false);
 	plane.setLife(5);
-	int y = plane.getY(), newy = 0;
+	int y = plane.getY();
 	while (y > 25) {
 		y = plane.getY();
 		plane.keyPressed(KeyEvent.VK_W);
 		plane.move();
-		newy = plane.getY();
 	}
+	boolean result = plane.isUp();
 	plane.keyReleased(KeyEvent.VK_W);
-	boolean result = (y == newy);
 	assertEquals(result, true);
 }
 
@@ -160,17 +157,14 @@ public class PlaneTest {
 	//Test press S
 	public void test_PressS() throws Exception {
 	GameStart gs = new GameStart();
-	int newx, newy;
 	Plane plane = gs.getPlane();
 	plane.setAlive(true);
 	plane.setFirst(false);
 	plane.setLife(5);
     plane.keyPressed(KeyEvent.VK_S);
 	plane.move();
-	newx = plane.getX();
-	newy = plane.getY();
+	boolean result = plane.isDown();
 	plane.keyReleased(KeyEvent.VK_S);
-	boolean result = (newy > 500) && (newx == 250);
 	assertEquals(result, true);
 }
 	
@@ -182,15 +176,14 @@ public class PlaneTest {
 	plane.setAlive(true);
 	plane.setFirst(false);
 	plane.setLife(5);
-	int y = plane.getY(), newy = 0;
+	int y = plane.getY();
 	while (y < 600) {
 		y = plane.getY();
 		plane.keyPressed(KeyEvent.VK_S);
 		plane.move();
-		newy = plane.getY();
 	}
+	boolean result = plane.isDown();;
 	plane.keyReleased(KeyEvent.VK_S);
-	boolean result = (y == newy);
 	assertEquals(result, true);
 }
 	

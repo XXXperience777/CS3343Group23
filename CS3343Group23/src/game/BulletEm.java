@@ -68,9 +68,9 @@ public class BulletEm extends Bullet {
 			setAlive(false);
 		}
 	}
-	public void ult(){
-
-	}
+//	public void ult(){
+//
+//	}
 	public Rectangle getRectangle(){
 		return new Rectangle(x, y, width, height);
 	}

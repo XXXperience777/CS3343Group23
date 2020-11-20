@@ -245,27 +245,27 @@ public class Plane {
 	}
 
 	public void move() {
-		if (isUp && !isDown && !isLeft() && !isRight()) {
+		if (isUp() && !isDown() && !isLeft() && !isRight()) {
 			setY(getY() - 8);
 			if (getY() < 25) {
 				setY(25);
 			}
-		} else if (!isUp && isDown && !isLeft() && !isRight()) {
+		} else if (!isUp() && isDown() && !isLeft() && !isRight()) {
 			setY(getY() + 8);
 			if (getY() > 600) {
 				setY(600);
 			}
-		} else if (!isUp && !isDown && isLeft() && !isRight()) {
+		} else if (!isUp() && !isDown() && isLeft() && !isRight()) {
 			setX(getX() - 5);
 			if (getX() < 0) {
 				setX(0);
 			}
-		} else if (!isUp && !isDown && !isLeft() && isRight()) {
+		} else if (!isUp() && !isDown() && !isLeft() && isRight()) {
 			setX(getX() + 8);
 			if (getX() > 512) {
 				setX(512);
 			}
-		} else if (isUp && !isDown && isLeft() && !isRight()) {
+		} else if (isUp() && !isDown() && isLeft() && !isRight()) {
 			setX(getX() - 5);
 			setY(getY() - 8);
 			if (getX() < 0) {
@@ -274,7 +274,7 @@ public class Plane {
 			if (getY() < 25) {
 				setY(25);
 			}
-		} else if (isUp && !isDown && !isLeft() && isRight()) {
+		} else if (isUp() && !isDown() && !isLeft() && isRight()) {
 			setX(getX() + 5);
 			setY(getY() - 5);
 			if (getX() > 512) {
@@ -283,7 +283,7 @@ public class Plane {
 			if (getY() < 25) {
 				setY(25);
 			}
-		} else if (!isUp && isDown && isLeft() && !isRight()) {
+		} else if (!isUp() && isDown() && isLeft() && !isRight()) {
 			setX(getX() - 5);
 			setY(getY() + 8);
 			if (getX() < 0) {
@@ -292,7 +292,7 @@ public class Plane {
 			if (getY() > 600) {
 				setY(600);
 			}
-		} else if (!isUp && isDown && !isLeft() && isRight()) {
+		} else if (!isUp() && isDown() && !isLeft() && isRight()) {
 			setX(getX() + 5);
 			setY(getY() + 8);
 			if (getX() > 512) {
@@ -375,6 +375,12 @@ public class Plane {
 	}
 	public String getLastCommand() {
 		return lastCommand;
+	}
+	public boolean isDown() {
+		return isDown;
+	}
+	public boolean isUp() {
+		return isUp;
 	}
 
 }

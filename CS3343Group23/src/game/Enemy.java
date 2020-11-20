@@ -47,14 +47,6 @@ public class Enemy {
 	
 	public void drawMe(Graphics g) {
 		Plane plane=gs.getPlane();
-		boolean isHittedByPlane=false;
-		for (int j = 0; j < gs.getBulletPl().size(); j++) {
-			BulletPlayer pBullet=gs.getBulletPl().get(j);
-
-			if (pBullet.getRectangle().intersects(this.getRectangle())) {
-				isHittedByPlane=true;
-			}
-		}
 		boolean isHittedByUlt=false;
 		for (int j = 0; j < gs.getPlaneults().size(); j++) {
 			Ult ult=gs.getPlaneults().get(j);
@@ -63,7 +55,7 @@ public class Enemy {
 			}
 		}
 		boolean isCrashed=plane.isAlive() && plane.getRectangle().intersects(getRectangle());
-		isHitted(isHittedByPlane,isHittedByUlt,isCrashed);
+		isHitted(checkisHitted(),isHittedByUlt,isCrashed);
 		if(isAlive()){
 			g.drawImage(enemyImg, getX(), getY(), width, height, null);
 		}
@@ -74,8 +66,7 @@ public class Enemy {
 		move();
 		if(checkShoot())
 			fire();
-
-	}
+		}
 	
 	public void isDead() {
 			gs.getExplodes().add(new Explode(getX(), getY(), gs,true));
@@ -90,19 +81,23 @@ public class Enemy {
 
 	}
 
+	public boolean checkisHitted() {
+		boolean isHittedByPlane=false;
+		for (int j = 0; j < gs.getBulletPl().size(); j++) {
+			BulletPlayer pBullet=gs.getBulletPl().get(j);
+
+			if (pBullet.getRectangle().intersects(this.getRectangle())) {
+			    pBullet.setAlive(false);
+				isHittedByPlane=true;
+			}
+		}
+		return isHittedByPlane;
+	}
+	
 	public void isHitted(boolean isHittedByPlane,boolean isHittedByUlt,boolean isCrashed) {
       if(isHittedByPlane) {
 	   setAlive(false);
 	   isDead();
-//		for (int j = 0; j < gs.getBulletPl().size(); j++) {
-//			BulletPlayer pBullet=gs.getBulletPl().get(j);
-//
-//			if (pBullet.getRectangle().intersects(this.getRectangle())) {
-//				setAlive(false);
-//				isDead();
-//				pBullet.setAlive(false);
-//			}
-//		}
 }
 		if(isHittedByUlt) {
 			setAlive(false);
@@ -164,5 +159,5 @@ public class Enemy {
 	public void setX(int x) {
 		this.x = x;
 	}
-
+	
 }

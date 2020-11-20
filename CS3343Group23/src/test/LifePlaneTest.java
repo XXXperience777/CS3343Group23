@@ -1,13 +1,11 @@
 package test;
 
 import static org.junit.Assert.assertEquals;
-import java.util.*;
 import org.junit.Test;
 
 import game.LifePlane;
 import game.GUISetUp;
 import game.GameStart;
-import game.GUISetUp;
 
 public class LifePlaneTest {
 @Test

@@ -31,6 +31,31 @@ public class BulletBoss extends Bullet {
 		this.gs = gs;
 		this.plane = gs.getPlane();
 	}
+	
+	public boolean checkisHitted() {
+		boolean isHitted=false;
+	if(index>=8) {
+		fx=x+20;
+		height=width=25;
+		a[0]=fx;
+		a[1]=y+8;
+		a[2]=height;
+		a[3]=width;
+			}
+	else if(index<=2) {
+		height=20;
+		width=25;
+		fx=x+400;
+		a[0]=fx;
+		a[1]=y+100;
+		a[2]=height;
+		a[3]=width;
+	}
+	if(plane.isAlive()&&plane.getRectangle().intersects(getRectangle())) {
+	    isHitted=true;
+	}
+		return isHitted;
+	}
 
 	public void drawMe(Graphics g) {
 
@@ -39,23 +64,12 @@ public class BulletBoss extends Bullet {
 				fx=x+20;
 				height=width=25;
 				g.drawImage(gs.getUi().getBulletBossImgs()[1], fx, y, width, height, null);
-				y += 8;
+				y+=8;
 				a[0]=fx;
 				a[1]=y;
 				a[2]=height;
 				a[3]=width;
-				if (plane.isAlive()&&plane.getRectangle().intersects(getRectangle())) {
-					/*alive = false;
-					plane.setLife(plane.getLife() - 1);
-
-					plane.setCanK(false);
-					if (plane.getLife()==0) {
-						gs.addExplode(new Explode(plane.getX(), plane.getY(), gs, true));
-						plane.setAlive(false);
-					}
-					*/
-					isHitted();
-				}
+				isHitted(checkisHitted());
 			}else if(index<=2){
 				height=20;
 				width=25;
@@ -66,24 +80,14 @@ public class BulletBoss extends Bullet {
 				a[3]=width;
 				g.drawImage(gs.getUi().getBulletBossImgs()[0], x+400, y+100, height, width, null);
 				move();
-				if (plane.isAlive()&&plane.getRectangle().intersects(getRectangle())) {
-/*					alive = false;
-					plane.setLife(plane.getLife() - 1);
-
-					plane.setCanL(false);
-					if (plane.getLife()==0) {
-						gs.addExplode(new Explode(plane.getX(), plane.getY(), gs, true));
-						plane.setAlive(false);
-					}
-					*/
-					isHitted();
-				}
+					isHitted(checkisHitted());
 			}
 		}
 		move();
 	}
 
-	public void isHitted() {
+	public void isHitted(boolean isHitted) {
+		if(isHitted) {
 		alive = false;
 		plane.setLife(plane.getLife() - 1);
          if (index>=8) {
@@ -95,7 +99,7 @@ public class BulletBoss extends Bullet {
 			gs.addExplode(new Explode(plane.getX(), plane.getY(), gs, true));
 			plane.setAlive(false);
 		}
-
+		}
 
 	}
 

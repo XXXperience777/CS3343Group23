@@ -5,7 +5,6 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 import game.Food;
 import game.Plane;
-import game.Plane;
 import game.GameStart;
 
 public class FoodTest {

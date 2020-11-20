@@ -107,15 +107,12 @@ public class PlaneTest {
 	//Test press W 
 	public void test_PressW() throws Exception {
 	GameStart gs = new GameStart();
-	int newx, newy;
 	Plane plane = gs.getPlane();
 	plane.setAlive(true);
 	plane.setFirst(false);
 	plane.setLife(5);
 	plane.keyPressed(KeyEvent.VK_W);
 	plane.move();
-	newx = plane.getX();
-	newy = plane.getY();
 	boolean result = plane.isUp();
 	plane.keyReleased(KeyEvent.VK_W);
 	assertEquals(result, true);
@@ -436,7 +433,8 @@ public class PlaneTest {
 			     plane.setCanK(true);
 			     plane.keyPressed(KeyEvent.VK_U);
 			  assertEquals("Ultra Kill", plane.getLastCommand());
-			  assertEquals(false, plane.isCanL()||plane.isCanK());
+			  assertEquals(false, plane.isCanL());
+			  assertEquals(false, plane.isCanL());
 			  plane.keyPressed(KeyEvent.VK_U);
 			  assertEquals("PressU", plane.getLastCommand());
 			  plane.keyPressed(KeyEvent.VK_U);
@@ -524,6 +522,4 @@ public class PlaneTest {
 	    assertEquals(plane.isCanL(),true);
 	}
 	
-	
 }
-

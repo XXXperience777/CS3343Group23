@@ -6,11 +6,9 @@ import org.junit.Test;
 
 import game.BulletBoss;
 import game.Boss;
-import game.Explode;
 import game.GameStart;
 import game.Plane;
 
-import org.junit.Test;
 
 public class BulletBossTest {
 
@@ -27,7 +25,7 @@ public class BulletBossTest {
 		Boss boss=new Boss(0,0,gs,true);
 		BulletBoss bullet=new BulletBoss(true,gs,boss);
 		bullet.setIndex(9);
-		bullet.isHitted();
+		bullet.isHitted(true);
 		assertEquals(3, plane.getLife());
 		assertEquals(true, plane.isAlive());
 	    assertEquals(plane.isCanL(),false);
@@ -47,7 +45,7 @@ public class BulletBossTest {
 		Boss boss=new Boss(0,0,gs,true);
 		BulletBoss bullet=new BulletBoss(true,gs,boss);
 		bullet.setIndex(1);
-		bullet.isHitted();
+		bullet.isHitted(true);
 		assertEquals(3, plane.getLife());
 		assertEquals(true, plane.isAlive());
 	    assertEquals(plane.isCanL(),true);
@@ -65,8 +63,40 @@ public class BulletBossTest {
 		Boss boss=new Boss(0,0,gs,true);
 		BulletBoss bullet=new BulletBoss(true,gs,boss);
 		
-		bullet.isHitted();
+		bullet.isHitted(true);
 		assertEquals(0, plane.getLife());
 		assertEquals(false, plane.isAlive());
+	}
+	
+	@Test 
+	//bullet1 hit plane
+	public void test_Bullet1_Hit_Plane() {
+		 GameStart gs =new GameStart();
+			Plane plane=gs.getPlane();
+			plane.setAlive(true);
+			plane.setFirst(true);
+			plane.setX(250);
+			plane.setY(170);
+			Boss boss=new Boss(230,120, gs,true);
+			BulletBoss bboss=new BulletBoss(true,gs,boss);
+		    bboss.setIndex(9);
+			boolean result=bboss.checkisHitted();
+			assertEquals(result,true);	
+	}
+	
+	@Test 
+	//bullet2 hit plane
+	public void test_Bullet2_Hit_Plane() {
+		 GameStart gs =new GameStart();
+			Plane plane=gs.getPlane();
+			plane.setAlive(true);
+			plane.setFirst(true);
+			plane.setX(450);
+			plane.setY(170);
+			Boss boss=new Boss(50,20, gs,true);
+			BulletBoss bboss=new BulletBoss(true,gs,boss);
+		    bboss.setIndex(1);
+			boolean result=bboss.checkisHitted();
+			assertEquals(result,true);	
 	}
 }

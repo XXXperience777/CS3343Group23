@@ -2,12 +2,13 @@ package test;
 
 import static org.junit.Assert.assertEquals;
 
+import java.awt.event.KeyEvent;
+
 import org.junit.Test;
 
 import game.Enemy;
 import game.GameStart;
 import game.Plane;
-import game.Explode;
 
 public class EnemyTest {
 
@@ -117,5 +118,24 @@ public class EnemyTest {
 		Enemy enemy=new Enemy(0,0,true,gs);
 		enemy.fire();
 		assertEquals(bulletEmnum+1,gs.getBulletEm().size());
+	}
+	
+	@Test
+	//test bullet from player
+	public void test_Bullet_From_Plane()throws Exception{
+		GameStart gs=new GameStart();
+		Plane plane=gs.getPlane();
+		plane.setAlive(true);
+		plane.setFirst(false);
+		plane.setX(50);
+		plane.setY(50);
+		int origin=gs.getBulletPl().size();
+		plane.keyPressed(KeyEvent.VK_J);
+		int news=gs.getBulletPl().size();
+		Enemy enemy=new Enemy(94,40,true,gs);
+		boolean result=enemy.checkisHitted();
+		assertEquals(origin,0);
+		assertEquals(news,1);
+		assertEquals(result,true);
 	}
 }

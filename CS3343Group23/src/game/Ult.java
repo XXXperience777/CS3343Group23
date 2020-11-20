@@ -46,4 +46,7 @@ public class Ult {
 		this.alive = alive;
 	}
 
+	public void setY(int y) {
+		this.y=y;
+	}
 }
